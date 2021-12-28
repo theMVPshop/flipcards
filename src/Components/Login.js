@@ -43,9 +43,9 @@ export default function Login() {
             </Dropdown.Toggle>
 
         <Dropdown.Menu align='start'>
-            <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-            <Dropdown.Item href="#">Menu Item</Dropdown.Item>
-             <Dropdown.Item href="#">Menu Item</Dropdown.Item>
+            <Dropdown.Item href="#">Medical</Dropdown.Item>
+            <Dropdown.Item href="#">Dental</Dropdown.Item>
+             <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
      </Dropdown>
         <Button block size="lg" type="submit" disabled={!validateForm()}>
