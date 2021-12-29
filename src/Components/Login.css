@@ -1,18 +1,21 @@
-@media all and (min-width: 480px) {
-    .Login {
-      padding: 60px 0;
-    }
-  
-    .Login form {
-      margin: 0 auto;
-      max-width: 320px;
-    }
-  }
+.specialty-dropdown {
+  margin: 10px;
+}
 
-  /* .specialty-dropdown {
-      display: flex;
-      flex-direction: column;
-      margin: 0 auto;
-      max-width: 320px;
-      padding: 60px 0;
-  } */
+/* .bg-myBlack {
+  background-color: rgb(153, 66, 31);
+} */
+
+
+.loginButton {
+  display: grid;
+  align-items: center;
+}
+
+.login {
+  border: 2px black solid;
+ padding: 60px;
+margin-left: 250px;
+margin-right: 250px;  
+ height: 60vh;
+}

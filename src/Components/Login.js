@@ -18,7 +18,7 @@ export default function Login() {
   }
 
   return (
-    <div className="Login">
+    <div className="login">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
@@ -37,21 +37,24 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Dropdown className="specialty-dropdown" autoClose="inside">
+        <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
              Clickable Outside
             </Dropdown.Toggle>
 
-        <Dropdown.Menu align='start'>
+        <Dropdown.Menu size="sm" align='left'>
             <Dropdown.Item href="#">Medical</Dropdown.Item>
             <Dropdown.Item href="#">Dental</Dropdown.Item>
              <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
      </Dropdown>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button className="loginButton" class="btn btn-dark" align="center" block size="md" bg="myBlack" type="submit" disabled={!validateForm()}>
           Login
         </Button>
       </Form>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">New around here? Sign up</a>
+      <a class="dropdown-item" href="#">Forgot password?</a>
     </div>
   );
 }
