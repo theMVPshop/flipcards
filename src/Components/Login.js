@@ -39,7 +39,7 @@ export default function Login() {
         </Form.Group>
         <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
-             Clickable Outside
+             Course
             </Dropdown.Toggle>
 
         <Dropdown.Menu size="sm" align='left'>
