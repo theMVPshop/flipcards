@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import Login from './Components/Login'
+import App from './App'
 // import Details from './Containers/Details'
 import Dashboard from './Components/Dashboard'
 // import Listing from './Containers/Listing'

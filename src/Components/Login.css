@@ -13,9 +13,14 @@
 }
 
 .login {
+  /* display: grid;
+  justify-content: center;
+  align-items: center; */
   border: 2px black solid;
- padding: 60px;
-margin-left: 250px;
+ padding: 30px;
+/* margin-left: 250px;
 margin-right: 250px;  
- height: 60vh;
+ max-height: 60vh;
+ max-width: 40vw; */
+
 }
