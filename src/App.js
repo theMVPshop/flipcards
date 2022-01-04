@@ -4,6 +4,7 @@ import Login from './Components/Login';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Dashboard from './Components/Dashboard';
 import EditCard from './Components/EditCard';
+import CreateCards from './Components/CreateCards'
 
 
 function App() {
@@ -12,7 +13,8 @@ function App() {
       <NavbarHeader />
       {/* <Login /> */}
       {/* <Dashboard /> */}
-      <EditCard />
+      {/* <EditCard /> */}
+      <CreateCards />
     </div>
   );
 }

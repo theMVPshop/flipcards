@@ -1,0 +1,31 @@
+.imageButton {
+    margin-right: 40px
+}
+
+.createButton {
+    width: 150px;
+    height: 50px;
+}
+
+.align-items-center {
+    justify-content: center;
+}
+
+.align-items-left {
+    justify-content: left;
+ 
+}
+
+.createCard {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+.title {
+    display: grid;
+    margin-bottom: 10px;
+    justify-content: center;
+    font-size: 30px;
+    font-family: 'Roboto', sans-serif ;
+    font-weight: bold;
+    font-style: italic;
+}
