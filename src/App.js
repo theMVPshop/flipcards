@@ -10,11 +10,9 @@ import CreateCards from './Components/CreateCards'
 function App() {
   return (
     <div className="App">
-      <NavbarHeader />
-      {/* <Login /> */}
       {/* <Dashboard /> */}
       {/* <EditCard /> */}
-      <CreateCards />
+      {/* <CreateCards /> */}
     </div>
   );
 }
