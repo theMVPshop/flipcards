@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./Login.css";
+import logo from './logo.svg'
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -19,7 +20,10 @@ export default function Login() {
 
   return (
     <div className="login">
-      <Form onSubmit={handleSubmit}>
+      <div className='imgLogo'>
+        <img src={logo} className="logo" alt="logo" />
+      </div>
+      <Form className="loginForm" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -48,13 +52,13 @@ export default function Login() {
              <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
      </Dropdown>
-        <Button className="loginButton" class="btn btn-dark" align="center" block size="md" bg="myBlack" type="submit" disabled={!validateForm()}>
+     <Button className="loginButton" class="btn btn-primary" align="center" block size="md" bg="myBlack"     type="submit" disabled={!validateForm()}>
           Login
         </Button>
       </Form>
       <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">New around here? Sign up</a>
-      <a class="dropdown-item" href="#">Forgot password?</a>
+      <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
+      <a class="dropdown-item" className="password" href="#">Forgot password?</a>
     </div>
   );
 }

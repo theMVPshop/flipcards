@@ -10,7 +10,7 @@ export default function CreateCards() {
   //* if user click on "add Card" button. It will display another row of term and Definition.
 
   return (
-    <div>
+    <div className='card'>
       <div className='title'>
         <header className='createCardSet'>Create A New Study Set</header>
       </div>

@@ -1,0 +1,46 @@
+
+.specialty-dropdown {
+    margin: 10px;
+  }
+  
+  /* .bg-myBlack {
+    background-color: rgb(153, 66, 31);
+  } */
+  
+  
+  /* .update {
+    display: grid;
+    align-self: center;
+  } */
+  
+   .updateProfile { 
+    /* display: grid;
+    justify-content: center;
+    align-items: center; */
+    /* display: flex; */
+    border: 2px black solid;
+   padding: 30px;
+  margin-left: 250px;
+  margin-right: 250px;  
+   max-height: 60vh;
+   max-width: 40vw;
+  
+   };
+  
+
+  
+  /* .logo {
+    height: 15vh;
+    width: 15vw;
+    align-self: center;
+  } */
+  
+  /* .imglogo {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  } */
+  .profileTitle {
+    font-size: 25px;
+  }

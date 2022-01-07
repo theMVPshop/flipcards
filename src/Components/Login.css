@@ -1,3 +1,4 @@
+
 .specialty-dropdown {
   margin: 10px;
 }
@@ -9,13 +10,14 @@
 
 .loginButton {
   display: grid;
-  align-items: center;
+  align-self: center;
 }
 
 .login {
   /* display: grid;
   justify-content: center;
   align-items: center; */
+  /* display: flex; */
   border: 2px black solid;
  padding: 30px;
 /* margin-left: 250px;
@@ -23,4 +25,21 @@ margin-right: 250px;
  max-height: 60vh;
  max-width: 40vw; */
 
+}
+
+.dropdown-item {
+  color: white;
+}
+
+.logo {
+  height: 15vh;
+  width: 15vw;
+  align-self: center;
+}
+
+.imglogo {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }

@@ -1,5 +1,8 @@
 
-
+* {
+  background-color: #1a1d28;
+  color: white;
+}
 /* .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -42,4 +45,12 @@
   margin: auto;
   width: 400px;
   margin-top: 20px;
+}
+
+body {
+  font: 1rem/1.5 var(--bs-font-sans-serif);
+  background-color: #262626;
+}
+a {
+  color: #210639;
 }

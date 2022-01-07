@@ -8,7 +8,7 @@ import Nav  from 'react-bootstrap/Nav';
 
 export default function NavbarHeader() {
     return (
-     <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="dark" variant="dark">
+     <Navbar className='navbarHeader' collapseOnSelect expand="lg" variant="dark">
   <Container>
   <Navbar.Brand href="#home">Study Cards</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
