@@ -20,7 +20,7 @@ export default function Login() {
 
   return (
     <div className="login">
-      <div className='imgLogo'>
+      <div class="text-center" className='imgLogo'>
         <img src={logo} className="logo" alt="logo" />
       </div>
       <Form className="loginForm" onSubmit={handleSubmit}>
@@ -41,6 +41,8 @@ export default function Login() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
+        <br/>
+        <div class='text-center'>
         <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
              Course
@@ -52,13 +54,21 @@ export default function Login() {
              <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
      </Dropdown>
-     <Button className="loginButton" class="btn btn-primary" align="center" block size="md" bg="myBlack"     type="submit" disabled={!validateForm()}>
+     </div>
+     <br/>
+     <div class='text-center'>
+     <Button className="loginButton" class="btn btn-primary" align="center" block size="md" size="lg"     type="submit" disabled={!validateForm()}>
           Login
         </Button>
+        </div>
       </Form>
       <div class="dropdown-divider"></div>
+      <div class='text-center'>
       <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
+      </div>
+      <div class='text-center'>
       <a class="dropdown-item" className="password" href="#">Forgot password?</a>
+      </div>
     </div>
   );
 }

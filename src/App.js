@@ -13,12 +13,12 @@ function App() {
   return (
     <div className="App">
       <NavbarHeader />
-       {/* <Login />  */}
+       <Login /> 
       {/* <UpdateProfile /> */}
       {/* <Dashboard /> */}
       {/* <EditCard /> */}
       {/* <CreateCards /> */}
-      <ResetPassword />
+      {/* <ResetPassword /> */}
     </div>
   );
 }

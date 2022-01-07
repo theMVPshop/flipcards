@@ -25,9 +25,11 @@ function ResetPassword() {
     <Form.Label>Confirm New Password</Form.Label>
     <Form.Control type="password" />
   </Form.Group>
-          <Button variant="primary" align="center" type="submit">
-          Update
+        <div class="text-center">
+          <Button align='center' className='resetButton' variant="primary"  type="submit" size="lg">
+          Reset
         </Button>
+        </div>
   </Form>
         </div>
     )

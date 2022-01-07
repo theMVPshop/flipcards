@@ -2,7 +2,10 @@
 .specialty-dropdown {
     margin: 10px;
   }
-  
+
+  .profileTitle {
+    font-size: 100px;
+  }
   /* .bg-myBlack {
     background-color: rgb(153, 66, 31);
   } */
@@ -14,17 +17,9 @@
   } */
   
    .updateProfile { 
-    /* display: grid;
-    justify-content: center;
-    align-items: center; */
-    /* display: flex; */
-    border: 2px black solid;
-   padding: 30px;
-  margin-left: 250px;
-  margin-right: 250px;  
-   max-height: 60vh;
-   max-width: 40vw;
-  
+    width:  50vw; 
+    align-self: center;
+    margin: auto;
    };
   
 
@@ -41,6 +36,4 @@
     align-items: center;
     text-align: center;
   } */
-  .profileTitle {
-    font-size: 25px;
-  }
+ 

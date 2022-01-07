@@ -20,10 +20,15 @@ export default function Login() {
 
   return (
     <div className="updateProfile">
-
+      <div class="text-center">
       <img src={logo} className="logo" alt="logo" />
+      </div> 
+      <br />
       <Form>
-        <Form.Label className="profileTitle">Update Your Profile</Form.Label>
+      <div class="text-center">
+        <h1 className="profileTitle">Update Your Profile</h1>
+        </div>
+        <br />
         <Row className="align-items-center">
           <Form.Label column="lg" lg={2}>
             First Name
@@ -60,9 +65,11 @@ export default function Login() {
           </Col>
         </Row>
         <br />
+        <div class="text-center">
         <Button variant="primary" align="center" type="submit">
           Update
         </Button>
+        </div>
       </Form>
     </div>
   );
