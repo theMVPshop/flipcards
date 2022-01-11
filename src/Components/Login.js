@@ -4,7 +4,9 @@ import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./Login.css";
-import logo from './logo.svg'
+import logo from './logo.svg';
+// import { Link } from 'react-router-dom';
+
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -57,7 +59,7 @@ export default function Login() {
      </div>
      <br/>
      <div class='text-center'>
-     <Button className="loginButton" class="btn btn-primary" align="center" block size="md" size="lg"     type="submit" disabled={!validateForm()}>
+     <Button className="loginButton" class="btn btn-primary" align="center" block size="md"  type="submit" disabled={!validateForm()}>
           Login
         </Button>
         </div>
@@ -67,7 +69,8 @@ export default function Login() {
       <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
       </div>
       <div class='text-center'>
-      <a class="dropdown-item" className="password" href="#">Forgot password?</a>
+      {/* <Link to="/ResetPassword">Reset Password</Link> */}
+      {/* <a class="dropdown-item" className="password" href="#">Forgot password?</a> */}
       </div>
     </div>
   );

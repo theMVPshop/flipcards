@@ -1,32 +1,35 @@
 import React from 'react'
-import { Routes, Route, Redirect } from 'react-router'
+import { Routes, Route, Navigate } from 'react-router'
 import Login from './Components/Login'
 import App from './App'
 // import Details from './Containers/Details'
-import Dashboard from './Components/Dashboard'
+import Dashboard from './Components/Dashboard';
 // import Listing from './Containers/Listing'
-import { checkAuth } from './checkAuth'
+// import { checkAuth } from './checkAuth';
+import ResetPassword from './Components/ResetPassword';
 
 
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
-    return (
-        <Route 
-        {...rest}
-        render={(props) => 
-        checkAuth() ? <Component {...props} /> : <Redirect to="/Login" />
-        }
-        />
-    )
-}
+
+// const ProtectedRoute = ({ component: Component, ...rest }) => {
+//     return (
+//         <Route 
+//         {...rest}
+//         render={(props) => 
+//         checkAuth() ? <Component {...props} /> : <Navigate to="/Login" />
+//         }
+//         />
+//     )
+// }
 
 const Router = () => {
     return (
         <Routes>
-            <Route exact path="/" element={<App />} />
+            <Route path="/" element={<App />} />
             <Route path="/Login" element={<Login />} />
+            <Route path="/ResetPassword" element={<ResetPassword />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
-            <ProtectedRoute path="/Dashboard" element={<Dashboard />} />
+            {/* <ProtectedRoute path="/Dashboard" element={<Dashboard />} /> */}
         </Routes>
     );
 };
