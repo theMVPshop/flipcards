@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router'
+import { Routes, Route, Redirect } from 'react-router'
 import Login from './Components/Login'
 import App from './App'
 // import Details from './Containers/Details'
@@ -22,12 +22,12 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
 const Router = () => {
     return (
-        <Switch>
-            <Route exact path="/" component={App} />
-            <Route path="/Login" component={Login} />
+        <Routes>
+            <Route exact path="/" element={<App />} />
+            <Route path="/Login" element={<Login />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
-            <ProtectedRoute path="/Dashboard" component={Dashboard} />
-        </Switch>
+            <ProtectedRoute path="/Dashboard" element={<Dashboard />} />
+        </Routes>
     );
 };
 

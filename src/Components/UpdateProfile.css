@@ -4,7 +4,8 @@
   }
 
   .profileTitle {
-    font-size: 100px;
+    font-size: 50px;
+    margin-bottom: 40px;
   }
   /* .bg-myBlack {
     background-color: rgb(153, 66, 31);
@@ -22,7 +23,11 @@
     margin: auto;
    };
   
-
+.text-center {
+    width:  50vw; 
+    align-self: center;
+    margin: auto;
+}
   
   /* .logo {
     height: 15vh;

@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-// import "./UpdateProfile.css";
+import "./UpdateProfile.css";
 import logo from './logo.svg';
 
 export default function Login() {
@@ -24,7 +24,7 @@ export default function Login() {
       <img src={logo} className="logo" alt="logo" />
       </div> 
       <br />
-      <Form>
+      <Form className='align-items-center'>
       <div class="text-center">
         <h1 className="profileTitle">Update Your Profile</h1>
         </div>
@@ -40,7 +40,7 @@ export default function Login() {
         <br />
         <Row>
           <Form.Label column="lg" lg={2}>
-            First Name
+            Last Name
           </Form.Label>
           <Col>
             <Form.Control type="lastName" placeholder="Last Name" />
@@ -49,7 +49,7 @@ export default function Login() {
         <br />
         <Row>
           <Form.Label column="lg" lg={2}>
-            Last Name
+            Email
           </Form.Label>
           <Col>
             <Form.Control type="email" placeholder="Email" />
@@ -58,7 +58,7 @@ export default function Login() {
         <br />
         <Row>
           <Form.Label column="lg" lg={2}>
-            First Name
+            Password
           </Form.Label>
           <Col>
             <Form.Control type="password" placeholder="password" />

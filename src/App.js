@@ -13,8 +13,8 @@ function App() {
   return (
     <div className="App">
       <NavbarHeader />
-       <Login /> 
-      {/* <UpdateProfile /> */}
+       {/* <Login />  */}
+      <UpdateProfile />
       {/* <Dashboard /> */}
       {/* <EditCard /> */}
       {/* <CreateCards /> */}
