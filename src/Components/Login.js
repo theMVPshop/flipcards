@@ -69,7 +69,6 @@ export default function Login() {
       <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
       </div>
       <div class='text-center'>
-      {/* <Link to="/ResetPassword">Reset Password</Link> */}
       <a class="dropdown-item" className="password" href="#">Forgot password?</a>
       </div>
     </div>
