@@ -70,7 +70,7 @@ export default function Login() {
       </div>
       <div class='text-center'>
       {/* <Link to="/ResetPassword">Reset Password</Link> */}
-      {/* <a class="dropdown-item" className="password" href="#">Forgot password?</a> */}
+      <a class="dropdown-item" className="password" href="#">Forgot password?</a>
       </div>
     </div>
   );

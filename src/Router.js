@@ -5,22 +5,22 @@ import App from './App'
 // import Details from './Containers/Details'
 import Dashboard from './Components/Dashboard';
 // import Listing from './Containers/Listing'
-// import { checkAuth } from './checkAuth';
+import { checkAuth } from './checkAuth';
 import ResetPassword from './Components/ResetPassword';
 
 
 
 
-// const ProtectedRoute = ({ component: Component, ...rest }) => {
-//     return (
-//         <Route 
-//         {...rest}
-//         render={(props) => 
-//         checkAuth() ? <Component {...props} /> : <Navigate to="/Login" />
-//         }
-//         />
-//     )
-// }
+const ProtectedRoute = ({ component: Component, ...rest }) => {
+    return (
+        <Route 
+        {...rest}
+        render={(props) => 
+        checkAuth() ? <Component {...props} /> : <Navigate to="/Login" />
+        }
+        />
+    )
+}
 
 const Router = () => {
     return (
