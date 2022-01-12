@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Dropdown from 'react-bootstrap/Dropdown';
 import "./Login.css";
 import logo from './logo.svg';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 
 export default function Login() {
@@ -69,7 +69,7 @@ export default function Login() {
       <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
       </div>
       <div class='text-center'>
-      <a class="dropdown-item" className="password" href="#">Forgot password?</a>
+      <Link to="/resetpassword">Forgot Password?</Link>
       </div>
     </div>
   );
