@@ -32,7 +32,7 @@ export default function EditCard() {
           <Button variant="secondary" onClick={handleClose}>
           <i class="bi bi-trash"></i>
           </Button>
-          <Button variant="primary">Save</Button>
+          <Button variant="primary">Close</Button>
         </Modal.Footer>
       </Modal>
         </div>

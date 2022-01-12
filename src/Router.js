@@ -7,6 +7,7 @@ import Dashboard from './Components/Dashboard';
 // import Listing from './Containers/Listing'
 // import { checkAuth } from './checkAuth';
 import ResetPassword from './Components/ResetPassword';
+import SignUp from './Components/SignUp';
 
 
 
@@ -28,6 +29,7 @@ const Router = () => {
             <Route path="/" element={<Login />} />
             {/* <Route path="/Login" element={<Login />} /> */}
             <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/signup" element={<SignUp />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
             {/* <ProtectedRoute path="/Dashboard" element={<Dashboard />} /> */}
         </Routes>

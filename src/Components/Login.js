@@ -66,7 +66,7 @@ export default function Login() {
       </Form>
       <div class="dropdown-divider"></div>
       <div class='text-center'>
-      <a class="dropdown-item" className="signUp" href="#">New around here? Sign up</a>
+     <Link to="/signup">New around here? Sign up</Link>
       </div>
       <div class='text-center'>
       <Link to="/resetpassword">Forgot Password?</Link>
