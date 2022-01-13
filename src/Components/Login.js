@@ -6,26 +6,35 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import "./Login.css";
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 
-export default function Login() {
+ const Login = (props) => {
+  const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
-  function validateForm() {
-    return email.length > 0 && password.length > 0;
-  }
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+      document.cookie = "loggedIn=true";
+      props.userLogin(user)
+    }
 
-  function handleSubmit(event) {
-    event.preventDefault();
+    setValidated(true);
+    navigate('/dashboard')
   }
 
   return (
     <div className="login">
-      <div class="text-center" className='imgLogo'>
+      <div class="text-center">
         <img src={logo} className="logo" alt="logo" />
       </div>
-      <Form className="loginForm" onSubmit={handleSubmit}>
+      <Form noValidate validated={validated} className="loginForm" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
@@ -45,7 +54,27 @@ export default function Login() {
         </Form.Group>
         <br/>
         <div class='text-center'>
-        <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
+        <Form.Label className='specialty'>Choose your specialty:</Form.Label>
+        {['radio'].map((type) => (
+    <div key={`default-${type}`} className="mb-3">
+      <Form.Check 
+        type={type}
+        id={`medical`}
+        label={`Medical`}
+      />
+        <Form.Check 
+        type={type}
+        id={`dental`}
+        label={`Dental`}
+      />
+        <Form.Check 
+        type={type}
+        id={`coding`}
+        label={`Coding`}
+      />
+    </div>
+  ))}
+        {/* <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
              Course
             </Dropdown.Toggle>
@@ -55,11 +84,11 @@ export default function Login() {
             <Dropdown.Item href="#">Dental</Dropdown.Item>
              <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
-     </Dropdown>
+     </Dropdown> */}
      </div>
      <br/>
      <div class='text-center'>
-     <Button className="loginButton" class="btn btn-primary" align="center" block size="md"  type="submit" disabled={!validateForm()}>
+     <Button className="loginButton" class="btn btn-primary" block size="md"  type="submit" >
           Login
         </Button>
         </div>
@@ -74,3 +103,5 @@ export default function Login() {
     </div>
   );
 };
+
+export default Login
