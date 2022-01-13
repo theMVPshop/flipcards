@@ -4,6 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import './NavbarHeader.css'
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav  from 'react-bootstrap/Nav';
+import {Link} from 'react-router-dom';
 
 
 export default function NavbarHeader() {
@@ -19,12 +20,12 @@ export default function NavbarHeader() {
     </Nav>
         {/* Appears after logged in, else Sign In appears */}
     <Nav>
-    <NavDropdown title="Admin User" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="#action/3.1">Profile</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.2">Progress</NavDropdown.Item>
-        <NavDropdown.Item href="#action/3.3">Settings</NavDropdown.Item>
+    <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
+        <NavDropdown.Item href="/">Profile</NavDropdown.Item>
+        <NavDropdown.Item href="/">Progress</NavDropdown.Item>
+        <NavDropdown.Item href="/">Settings</NavDropdown.Item>
         <NavDropdown.Divider />
-        <NavDropdown.Item href="#action/3.4">Logout</NavDropdown.Item>
+        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
       </NavDropdown>
     </Nav>
   </Navbar.Collapse>

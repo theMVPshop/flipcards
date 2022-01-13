@@ -1,14 +1,28 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './ResetPassword.css';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import { useNavigate } from 'react-router-dom';
 
 
 
-function ResetPassword() {
+const ResetPassword = () => {
+  const [validated, setValidated] = useState(false);
+  let navigate = useNavigate();
+
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    setValidated(true);
+    navigate('/')
+  };
     return (
         <div className="resetPassword">
-            <Form className='align-items-center'>
+            <Form noValidate validated={validated} className='align-items-center' onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="formGroupEmail">
     <Form.Label>Email address</Form.Label>
     <Form.Control type="email"  />

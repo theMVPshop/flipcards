@@ -3,8 +3,12 @@
     background-color: #282e3e !important;
   }
 
-  .me-auto {
-  }
-  #responsive-navbar-nav {
+   .text-link {
+    color: black;
+    text-decoration: inherit;
 
-  }
+} ;
+
+.adminUser {
+  background-color: white !important;
+}
