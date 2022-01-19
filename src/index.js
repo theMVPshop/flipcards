@@ -11,7 +11,7 @@ import Router from './Router'
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <NavbarHeader />
+    {/* <NavbarHeader /> */}
       <Router />
     </BrowserRouter>
   </React.StrictMode>,

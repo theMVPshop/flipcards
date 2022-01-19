@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from 'react-bootstrap/Button';
 // import Dropdown from 'react-bootstrap/Dropdown';
-// import Dropdown from 'react-bootstrap/Dropdown';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import "./Login.css";
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
@@ -54,27 +55,7 @@ import { useNavigate } from "react-router-dom";
         </Form.Group>
         <br/>
         <div class='text-center'>
-        <Form.Label className='specialty'>Choose your specialty:</Form.Label>
-        {['radio'].map((type) => (
-    <div key={`default-${type}`} className="mb-3">
-      <Form.Check 
-        type={type}
-        id={`medical`}
-        label={`Medical`}
-      />
-        <Form.Check 
-        type={type}
-        id={`dental`}
-        label={`Dental`}
-      />
-        <Form.Check 
-        type={type}
-        id={`coding`}
-        label={`Coding`}
-      />
-    </div>
-  ))}
-        {/* <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
+        <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
              Course
             </Dropdown.Toggle>
@@ -84,7 +65,7 @@ import { useNavigate } from "react-router-dom";
             <Dropdown.Item href="#">Dental</Dropdown.Item>
              <Dropdown.Item href="#">Coding</Dropdown.Item>
         </Dropdown.Menu>
-     </Dropdown> */}
+     </Dropdown>
      </div>
      <br/>
      <div class='text-center'>

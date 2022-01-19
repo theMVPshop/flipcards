@@ -9,8 +9,8 @@ import {Link} from 'react-router-dom';
 
 export default function NavbarHeader() {
     return (
-     <Navbar className='navbarHeader' collapseOnSelect expand="lg" variant="dark">
-  <Container>
+     <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="dark" variant="dark">
+  <Container className="nav">
   <Navbar.Brand href="#home">Study Cards</Navbar.Brand>
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">

@@ -3,17 +3,10 @@
   margin: 10px;
 }
 
-/* .bg-myBlack {
-  background-color: rgb(153, 66, 31);
-} */
-
-
-/* .loginButton {
-  display: grid;
-  align-self: center;
-} */
-
 .login {
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: fit-content;
   /* width:  50vw;  */
   align-self: center;
   margin: auto;
@@ -22,7 +15,7 @@
   align-items: center; */
   /* display: flex; */
   border: 2px white solid;
- padding: 30px;
+ padding: 50px;
 /* margin-left: 250px;
 margin-right: 250px;  
  max-height: 60vh;
