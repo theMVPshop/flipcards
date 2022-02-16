@@ -31,7 +31,7 @@ const Router = () => {
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/signup" element={<SignUp />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
-            {/* <ProtectedRoute path="/Dashboard" element={<Dashboard />} /> */}
+            <Route path="/dashboard" element={<Dashboard />} />
         </Routes>
     );
 };
