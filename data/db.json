@@ -1,0 +1,136 @@
+{
+    "card sets": [
+        {
+            "id": 1,
+            "course": "Dental",
+            "title": "Teeth Extractions",
+            "description": "Terminology for teeth extractions",
+            "cards": [
+                {
+                    "id": 1,
+                    "term": "tooth",
+                    "definition": "Pommy ipsum smeg head whizz "
+                },
+                {
+                    "id": 2,
+                    "term": "molar",
+                    "definition": "morris dancers come hither"
+                },
+                {
+                    "id": 3,
+                    "term": "cavity",
+                    "definition": "bugger codswallop gob"
+                },
+                {
+                    "id": 4,
+                    "term": "x-ray",
+                    "definition": "Taking the mick "
+                },
+                {
+                    "id": 5,
+                    "term": "drill",
+                    "definition": "middle class bog roll"
+                },
+                {
+                    "id": 6,
+                    "term": "root canal",
+                    "definition": "bow ties are cool"
+                },
+                {
+                    "id": 7,
+                    "term": "bridge",
+                    "definition": "posh nosh off t'shop"
+                },
+                { 
+                    "id": 8,
+                    "term": "extraction",
+                    "definition": "anorak mince pies tosser"
+                }
+                ]},
+        {
+            "id": 2,
+            "course": "Medical",
+            "title": "Surgery",
+            "description": "Terminology for operations",
+            "cards": [
+                {
+                    "id": 1,
+                    "term": "scalpel",
+                    "definition": "Pommy ipsum tad football twiglets"
+                },
+                {
+                    "id": 2,
+                    "term": "incision",
+                    "definition": "we'll be 'avin less of that"
+                },
+                {
+                    "id": 3,
+                    "term": "stitch",
+                    "definition": "lass I'm off to Bedfordshire"
+                },
+                {
+                    "id": 4,
+                    "term": "cpr",
+                    "definition": "bobby bit of a Jack the lad"
+                },
+                {
+                    "id": 5,
+                    "term": "TOD",
+                    "definition": "don't get your knickers in a twist"
+                },
+                {
+                    "id": 6,
+                    "term": "operation",
+                    "definition": "bow ties are cool"
+                },
+                {
+                    "id": 7,
+                    "term": "neurology",
+                    "definition": "Elementary my dear Watson"
+                }
+            ]},
+        {
+            "id": 1,
+            "course": "Coding",
+            "title": "Coding basics",
+            "description": "Different coding languages",
+            "cards": [
+                {
+                    "id": 1,
+                    "term": "JavaScript",
+                    "definition": "Danish fontina cheese and wine ricotta"
+                },
+                {
+                    "id": 2,
+                    "term": "React",
+                    "definition": "Stinking bishop cottage cheese"
+                },
+                {
+                    "id": 3,
+                    "term": "Java",
+                    "definition": "melted cheese roquefort"
+                },
+                {
+                    "id": 4,
+                    "term": "HTML",
+                    "definition": "Manchego cheese strings"
+                },
+                {
+                    "id": 5,
+                    "term": "CSS",
+                    "definition": "camembert de normandie pecorino"
+                },
+                {
+                    "id": 6,
+                    "term": "Python",
+                    "definition": "cow cheese on toast"
+                },
+                {
+                    "id": 7,
+                    "term": "C++",
+                    "definition": "Parmesan fromage lancashire babybel croque monsieur"
+                }
+            ]   
+        }
+    ]
+}
