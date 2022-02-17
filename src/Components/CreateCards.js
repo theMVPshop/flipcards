@@ -10,7 +10,7 @@ export default function CreateCards() {
   //* if user click on "add Card" button. It will display another row of term and Definition.
 
   return (
-    <div className='card'>
+    <div className='card' variant="dark">
       <div className='title'>
         <header className='createCardSet'>Create A New Study Set</header>
       </div>
@@ -38,8 +38,8 @@ export default function CreateCards() {
             <Form.Control placeholder="Definition" />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridButtons">
-            <Button className='imageButton'> <i class="bi bi-image"> Add Image</i></Button>
-            <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button>
+          <Button className='imageButton'> Add Image</Button>
+          <Button className='deleteButton' variant='secondary'>Delete</Button>
           </Form.Group>
         </Row>
         <br />
@@ -52,8 +52,8 @@ export default function CreateCards() {
             <Form.Control placeholder="Definition" />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridButtons">
-            <Button className='imageButton'> <i class="bi bi-image"> Add Image</i></Button>
-            <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button>
+          <Button className='imageButton'> Add Image</Button>
+          <Button className='deleteButton' variant='secondary'>Delete</Button>
           </Form.Group>
         </Row>
         <br />
@@ -66,8 +66,8 @@ export default function CreateCards() {
             <Form.Control placeholder="Definition" />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridButtons">
-            <Button className='imageButton'> <i class="bi bi-image"> Add Image</i></Button>
-            <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button>
+          <Button className='imageButton'> Add Image</Button>
+          <Button className='deleteButton' variant='secondary'>Delete</Button>
           </Form.Group>
         </Row>
         <br />
@@ -80,8 +80,8 @@ export default function CreateCards() {
             <Form.Control placeholder="Definition" />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridButtons">
-            <Button className='imageButton'> <i class="bi bi-image"> Add Image</i></Button>
-            <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button>
+            <Button className='imageButton'> Add Image</Button>
+            <Button className='deleteButton' variant='secondary'>Delete</Button>
           </Form.Group>
         </Row>
         <br />
@@ -94,13 +94,13 @@ export default function CreateCards() {
             <Form.Control placeholder="Definition" />
           </Form.Group>
           <Form.Group as={Col} controlId="formGridButtons">
-            <Button className='imageButton'> <i class="bi bi-image"> Add Image</i></Button>
-            <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button>
+          <Button className='imageButton'> Add Image</Button>
+          <Button className='deleteButton' variant='secondary'>Delete</Button>
           </Form.Group>
         </Row>
         <br />
         <Form.Group as={Col} controlId='addCard'>
-        <Button><i class="bi bi-plus-square"> Add Card</i></Button>
+        <Button className="addCard"> + Add Card</Button>
         </Form.Group>
         {/* <Row className="align-items-left">
           <Col>
@@ -108,10 +108,14 @@ export default function CreateCards() {
           </Col>
         </Row> */}
         <Row className="align-items-center">
-          <Button className='createButton' variant='dark'>Create</Button>
+          <Button className='createButton'>Create</Button>
         </Row>
       </Form>
     </div>
   )
 
 }
+
+{/* <i class="bi bi-image" variant='primary'>  */}
+
+{/* <Button className='deleteButton' variant='secondary'> <i class="bi bi-trash"></i></Button> */}
