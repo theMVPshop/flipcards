@@ -1,5 +1,5 @@
 {
-    "card sets": [
+    "cardSets": [
         {
             "id": 1,
             "course": "Dental",
@@ -41,12 +41,13 @@
                     "term": "bridge",
                     "definition": "posh nosh off t'shop"
                 },
-                { 
+                {
                     "id": 8,
                     "term": "extraction",
                     "definition": "anorak mince pies tosser"
                 }
-                ]},
+            ]
+        },
         {
             "id": 2,
             "course": "Medical",
@@ -88,7 +89,8 @@
                     "term": "neurology",
                     "definition": "Elementary my dear Watson"
                 }
-            ]},
+            ]
+        },
         {
             "id": 1,
             "course": "Coding",
@@ -130,7 +132,7 @@
                     "term": "C++",
                     "definition": "Parmesan fromage lancashire babybel croque monsieur"
                 }
-            ]   
+            ]
         }
     ]
 }

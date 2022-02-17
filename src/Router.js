@@ -8,6 +8,7 @@ import Dashboard from './Components/Dashboard';
 // import { checkAuth } from './checkAuth';
 import ResetPassword from './Components/ResetPassword';
 import SignUp from './Components/SignUp';
+import Flashcards from './Components/Flashcards';
 
 
 
@@ -32,6 +33,8 @@ const Router = () => {
             <Route path="/signup" element={<SignUp />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
+
+            <Route path="/flashcards/:id" element={<Flashcards />} />
         </Routes>
     );
 };
