@@ -6,17 +6,17 @@
  .imageButton {
     margin-right: 40px;
     background-color: #22559c;
-    border: none;
+    border: white solid 1px;
 }
 
 .deleteButton {
     background-color: rgb(206, 49, 80);
-    border: none;
+    border: white solid 1px;
 }
 
 .addCard {
     background-color: goldenrod;
-    border: none;
+    border: white solid 1px;
     color: white;
 }
 
