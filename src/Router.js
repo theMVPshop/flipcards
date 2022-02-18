@@ -8,7 +8,8 @@ import Dashboard from './Components/Dashboard';
 // import { checkAuth } from './checkAuth';
 import ResetPassword from './Components/ResetPassword';
 import SignUp from './Components/SignUp';
-import CreateCards from './Components/CreateCards'
+import CreateCards from './Components/CreateCards';
+import EditCard from './Components/EditCard';
 
 
 
@@ -34,6 +35,7 @@ const Router = () => {
             {/* <Route path="/Details/:id" component={Details} /> */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/createcards" element={<CreateCards />} />
+            <Route path="/editcard" element={<EditCard />} />
         </Routes>
     );
 };
