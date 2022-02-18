@@ -1,5 +1,11 @@
-.study-set .card,
-.study-set .card-body,
-.study-set .card-title {
-    background: #282e3e;
+.card-footer {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0.5rem;
+    background-color: #282e3e !important;
+    padding: 1rem !important;
+}
+
+.card-footer button {
+    display: block;
 }

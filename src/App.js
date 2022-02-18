@@ -36,11 +36,11 @@ class App extends Component {
       <div classname="login">
         <Router>
           {/* <CreateCards /> */}
-        <NavbarHeader />
-        <Login />
+          <NavbarHeader />
+          <Login />
         </Router>
         {/* <Card /> */}
-        </div>
+      </div>
       // </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
+import data from '../data/db.json';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,17 +11,19 @@ export default function Dashboard() {
     const [studySets, setStudySets] = useState([]);
 
     useEffect(() => {
-        // pull in all study sets from db
-        console.log('working');
+        // @todo - switch to fetch call to get study sets from db
+        setStudySets(data);
     })
 
     return (
         <Container>
+            <h1>Recent</h1>
             <Row>
-                {/* Foreach studyset create a studyset component and pass it's data to that component */}
-                <Col md={6} lg={4}>
-                    <StudySet title='Temp Title' />
-                </Col>
+                {studySets.cardSets && studySets.cardSets.map((set, index) => (
+                    <Col key={index} md={6} lg={4}>
+                        <StudySet setInfo={set} />
+                    </Col>
+                ))}
             </Row>
         </Container>
     )
