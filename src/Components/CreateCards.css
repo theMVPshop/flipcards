@@ -1,13 +1,30 @@
-/* .card {
-    background-color: #262626;
-} */
-.imageButton {
-    margin-right: 40px
+ .card {
+    background-color: #1a1d28;
+    margin-top: 10px
+}
+
+ .imageButton {
+    margin-right: 40px;
+    background-color: #22559c;
+    border: white solid 1px;
+}
+
+.deleteButton {
+    background-color: rgb(206, 49, 80);
+    border: white solid 1px;
+}
+
+.addCard {
+    background-color: goldenrod;
+    border: white solid 1px;
+    color: white;
 }
 
 .createButton {
     width: 150px;
     height: 50px;
+    background-color: #552e5a;
+    border: 1px white solid;
 }
 
 .align-items-center {
@@ -32,6 +49,6 @@
     font-weight: bold;
     font-style: italic;
 }
-.createCardSet {
+/* .createCardSet {
     color: white;
-}
+}  */

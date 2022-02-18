@@ -1,7 +1,7 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router'
+import { Routes, Route } from 'react-router'
 import Login from './Components/Login'
-import App from './App'
+// import App from './App'
 // import Details from './Containers/Details'
 import Dashboard from './Components/Dashboard';
 // import Listing from './Containers/Listing'
