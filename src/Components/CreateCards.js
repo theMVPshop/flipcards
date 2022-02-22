@@ -1,171 +1,3 @@
-// import React from 'react';
-// import './CreateCards.css';
-// import Form from 'react-bootstrap/Form';
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
-// import Button from 'react-bootstrap/Button';
-// import { useState } from 'react'
-
-
-// export default function CreateCards() {
-
-//   //* if user click on "add Card" button. It will display another row of term and Definition.
-//   const [title, setTitle] = useState('');
-//   const [school, setSchool] = useState('');
-//   const [course, setCourse] = useState('');
-//   const [cards, setCards] = useState([]);
-//     const [term1, setTerm1] = useState('');
-//   const [term2, setTerm2] = useState('');
-//   const [term3, setTerm3] = useState('');
-//   const [term4, setTerm4] = useState('');
-//   const [term5, setTerm5] = useState('');
-//   const [definition1, setDefinition1] = useState('');
-//   const [definition2, setDefinition2] = useState('');
-//   const [definition3, setDefinition3] = useState('');
-//   const [definition4, setDefinition4] = useState('');
-//   const [definition5, setDefinition5] = useState('');
-//   const [inputList, setInputList] = useState({
-//     term: "", definition: ""
-//   })
-//   const [isClicked, setIsClicked] = useState(false);
-//   const [image, setImage] = useState({});
-
-//   const handleChange = (e) => {
-//     const { input, value } = e.target;
-//     setInputList({
-//       ...inputList, 
-//       [input]: value
-//     });
-//   }
-
-//   const handleDelete = (id) => {
-//      const newCards = cards.filter(card => card.id !== id);
-//     setCards(newCards)
-//   }
-
-//   const addCard = () => {
-//     setIsClicked(true)
-//   }
-//   return (
-//     <div className='card' variant="dark">
-//       <div className='title'>
-//         <header className='createCardSet'>Create A New Study Set</header>
-//       </div>
-//       <br />
-//       <Form className="createCard">
-//         <Row className="mb-3">
-//           <Form.Group as={Col} controlId="formGridTitle">
-//             <Form.Control placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
-//           </Form.Group>
-//           <Form.Group as={Col} controlId="formGridSchool">
-//             <Form.Control placeholder="School" value={school} onChange={(e) => setSchool(e.target.value)} />
-//           </Form.Group>
-//           <Form.Group as={Col} controlId="formGridCourse">
-//             <Form.Control placeholder="Course" value={course} onChange={(e) => setCourse(e.target.value)} />
-//           </Form.Group>
-//         </Row>
-//         <br />
-//         <br />
-//     <Row>
-//     <Form.Label>1</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" id='1' value={inputList.term} onChange={handleChange} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" id='1' value={inputList.definition} onChange={handleChange} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-// <Button className='imageButton'> Add Image</Button>
-// <Button className='deleteButton' variant='secondary' onClick>Delete</Button>
-// </Form.Group>
-// </Row>
-// <br />
-// <Row>
-// <Form.Label>2</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" value={term2} onChange={(e) => setTerm2(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" value={definition2} onChange={(e) => setDefinition2(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-// <Button className='imageButton'> Add Image</Button>
-// <Button className='deleteButton' variant='secondary'>Delete</Button>
-// </Form.Group>
-// </Row>
-// <br />
-// <Row>
-// <Form.Label>3</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" value={term3} onChange={(e) => setTerm3(e.target.value)}/>
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" value={definition3} onChange={(e) => setDefinition3(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-// <Button className='imageButton'> Add Image</Button>
-// <Button className='deleteButton' variant='secondary'>Delete</Button>
-// </Form.Group>
-// </Row>
-// <br />
-// <Row>
-// <Form.Label>4</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" value={term4} onChange={(e) => setTerm4(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" value={definition4} onChange={(e) => setDefinition4(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-//   <Button className='imageButton'> Add Image</Button>
-//   <Button className='deleteButton' variant='secondary'>Delete</Button>
-// </Form.Group>
-// </Row>
-// <br />
-// <Row>
-// <Form.Label>5</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" value={term5} onChange={(e) => setTerm5(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" value={definition5} onChange={(e) => setDefinition5(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-// <Button className='imageButton'> Add Image</Button>
-// <Button className='deleteButton' variant='secondary'>Delete</Button>
-// </Form.Group>
-// </Row>
-// {isClicked &&   <Row>
-// <Form.Label>5</Form.Label>
-// <Form.Group as={Col} controlId="formGridTerm">
-//   <Form.Control placeholder="Term" value={term5} onChange={(e) => setTerm5(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridDefinition">
-//   <Form.Control placeholder="Definition" value={definition5} onChange={(e) => setDefinition5(e.target.value)} />
-// </Form.Group>
-// <Form.Group as={Col} controlId="formGridButtons">
-// <Button className='imageButton'> Add Image</Button>
-// <Button className='deleteButton' variant='secondary'>Delete</Button>
-// </Form.Group>
-// </Row> }
-// <br />
-// <Form.Group as={Col} controlId='addCard'>
-// <Button className="addCard" onClick={() => addCard()}> + Add Card</Button>
-// </Form.Group>
-//  <Row className="align-items-left">
-// <Col>
-// <Button><i class="bi bi-plus-square"> Add Card</i></Button>
-// </Col>
-// </Row> 
-//  <Row className="align-items-center">
-// <Button className='createButton'>Create</Button>
-// </Row>
-// </Form>
-//     </div>
-//   )
-
-// }
-
 import React from 'react';
 import './CreateCards.css';
 import Form from 'react-bootstrap/Form';
@@ -173,58 +5,48 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useState } from 'react'
+import Container from 'react-bootstrap/esm/Container';
 
 
-export default function CreateCards() {
+const CreateCards = () => {
 
-  //* if user click on "add Card" button. It will display another row of term and Definition.
+  const [fields, setFields] = useState([{
+    id: 1,
+    term: "",
+    definition: ""
+  }])
   const [title, setTitle] = useState('');
   const [school, setSchool] = useState('');
   const [course, setCourse] = useState('');
-  //   const [term1, setTerm1] = useState('');
-  // const [term2, setTerm2] = useState('');
-  // const [term3, setTerm3] = useState('');
-  // const [term4, setTerm4] = useState('');
-  // const [term5, setTerm5] = useState('');
-  // const [definition1, setDefinition1] = useState('');
-  // const [definition2, setDefinition2] = useState('');
-  // const [definition3, setDefinition3] = useState('');
-  // const [definition4, setDefinition4] = useState('');
-  // const [definition5, setDefinition5] = useState('');
-  const [inputList, setInputList] = useState({
-    term: "", definition: ""
-  })
-  // const [isClicked, setIsClicked] = useState(false);
-  // const [image, setImage] = useState({});
 
   const handleChange = (id, e) => {
-    const values = [...inputList];
+  
+    const values = [...fields]
     values[id][e.target.name] = e.target.value
-    setInputList(values);
-  }
-
-  const handleDelete = (id) => {
-     const values = [...inputList];
-     values.splice(id, 1);
-     setInputList(values)
+    setFields(values)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
   }
 
-  const addCard = (e) => {
-    setInputList([...inputList, {term: '', definition: ''}])
-    // setIsClicked(true)
+  const addCard = (id) => {
+    setFields([...fields, { id: id + 1, firstName: '', lastName: '' }])
   }
+
+  const handleDelete = (id) => {
+    const values = [...fields]
+    values.splice(id, 1)
+    setFields([...values])
+  }
+
   return (
-    <div className='card' variant="dark">
-      <div className='title'>
-        <header className='createCardSet'>Create A New Study Set</header>
-      </div>
+    <div className='card'>
+      <header className='createCardSet'>Create A New Study Set</header>
       <br />
-      <Form className="createCard" onSubmit={handleSubmit}>
-        <Row className="mb-3">
+      <Container>
+      <Form>   
+      <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridTitle">
             <Form.Control placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
           </Form.Group>
@@ -237,38 +59,41 @@ export default function CreateCards() {
         </Row>
         <br />
         <br />
-        <div>
-          { inputList.map((input, id) => (
-                <Row key={id}>
-                <Form.Label>1</Form.Label>
+        <Row>
+            <Form.Group className="mb-3" controlId="formCard">
+            {fields.map((field, id) => (
+                <div key={field.id}>
+                  <Row className="mt-5">
+                    <Form.Label>{id}</Form.Label>
             <Form.Group as={Col} controlId="formGridTerm">
-              <Form.Control placeholder="Term" id='1' value={inputList.term} onChange={e => handleChange(id, e)} />
+              <Form.Control placeholder="Term" id={id} value={field.term} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridDefinition">
-              <Form.Control placeholder="Definition" id='1' value={inputList.definition} onChange={e => handleChange(id, e)} />
+                    <Form.Group as={Col} controlId="formGridDefinition">
+              <Form.Control placeholder="Definition" id={id} value={field.definition} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
-            <Form.Group as={Col} controlId="formGridButtons">
+                    <Form.Group as={Col} controlId="formGridButtons">
             <Button className='imageButton'> Add Image</Button>
             <Button className='deleteButton' variant='secondary' onClick={() => handleDelete(id)}>Delete</Button>
             </Form.Group>
             </Row>
-          ))}
-  
-</div>
-<br />
-<Form.Group as={Col} controlId='addCard'>
+                </div>
+                     ))}
+                </Form.Group>
+           
+      </Row>
+            <Form.Group as={Col} controlId='addCard'>
 <Button className="addCard" onClick={() => addCard()}> + Add Card</Button>
 </Form.Group>
  <Row className="align-items-left">
-<Col>
-<Button><i class="bi bi-plus-square"> Add Card</i></Button>
-</Col>
 </Row> 
- <Row className="align-items-center">
+
+<Row className="align-items-center">
 <Button className='createButton' onClick={handleSubmit}>Create</Button>
 </Row>
-</Form>
+        </Form>
+      </Container>
     </div>
   )
-
 }
+
+export default CreateCards
