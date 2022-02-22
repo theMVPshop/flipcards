@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router'
 import Login from './Components/Login'
-import App from './App'
+// import App from './App'
 // import Details from './Containers/Details'
 import Dashboard from './Components/Dashboard';
 // import Listing from './Containers/Listing'
@@ -9,6 +9,8 @@ import Dashboard from './Components/Dashboard';
 import ResetPassword from './Components/ResetPassword';
 import SignUp from './Components/SignUp';
 import Flashcards from './Components/Flashcards';
+import CreateCards from './Components/CreateCards';
+import EditCard from './Components/EditCard';
 
 
 
