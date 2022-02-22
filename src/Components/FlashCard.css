@@ -20,9 +20,9 @@
     transition: transform 0.8s;
     transform-style: preserve-3d;
   }
-  
-  .flashcard:hover .flashcardInner {
-    /* transform: rotateY(180deg); */
+
+  .flashcardInner.showBack {
+    transform: rotateY(-180deg);
   }
   
   .flashcardFront, .flashcardBack {

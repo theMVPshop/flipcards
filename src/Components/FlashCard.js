@@ -1,21 +1,34 @@
 import React from 'react';
+import { useState } from 'react';
 
-import styles from './FlashCard.module.css';
+import './FlashCard.css';
 
 const FlashCard = ({
     card
 }) => {
+
+    const [flipped, setFlipped] = useState(false);
+
+    const flipCard = () => setFlipped(!flipped);
+
     return (
-        <button className={styles.flashcard}>
-            <div className={styles.flashcardInner}>
-                <div className={styles.flashcardFront}>
-                    <p>Term: {card.term}</p>
-                </div>
-                <div className={styles.flashcardBack}>
-                    <p>Definition: {card.definition}</p>
-                </div>
-            </div>
-        </button>
+        <>
+            {card.isVisible && (
+                <button
+                    onClick={flipCard}
+                    className="flashcard"
+                >
+                    <div className={`flashcardInner ${flipped ? 'showBack' : 'showFront'}`}>
+                        <div className="flashcardFront">
+                            <p>Term: {card.term}</p>
+                        </div>
+                        <div className="flashcardBack">
+                            <p>Definition: {card.definition}</p>
+                        </div>
+                    </div>
+                </button>
+            )}
+        </>
     )
 }
 
