@@ -20,7 +20,6 @@ const CreateCards = () => {
   const [course, setCourse] = useState('');
 
   const handleChange = (id, e) => {
-  
     const values = [...fields]
     values[id][e.target.name] = e.target.value
     setFields(values)
@@ -45,7 +44,7 @@ const CreateCards = () => {
       <header className='createCardSet'>Create A New Study Set</header>
       <br />
       <Container>
-      <Form>   
+      <Form onSubmit={handleSubmit}>   
       <Row className="mb-3">
           <Form.Group as={Col} controlId="formGridTitle">
             <Form.Control placeholder="Title" value={title} onChange={(e) => setTitle(e.target.value)}/>
@@ -64,12 +63,12 @@ const CreateCards = () => {
             {fields.map((field, id) => (
                 <div key={field.id}>
                   <Row className="mt-5">
-                    <Form.Label>{id}</Form.Label>
+                    <Form.Label>{Number(field.id)}</Form.Label>
             <Form.Group as={Col} controlId="formGridTerm">
-              <Form.Control placeholder="Term" id={id} value={field.term} onChange={(e) => handleChange(id, e)} />
+              <Form.Control placeholder="Term" id={field.id} value={field.term} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
                     <Form.Group as={Col} controlId="formGridDefinition">
-              <Form.Control placeholder="Definition" id={id} value={field.definition} onChange={(e) => handleChange(id, e)} />
+              <Form.Control placeholder="Definition" id={field.id} value={field.definition} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
                     <Form.Group as={Col} controlId="formGridButtons">
             <Button className='imageButton'> Add Image</Button>

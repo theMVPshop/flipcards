@@ -8,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 
 const ResetPassword = () => {
   const [validated, setValidated] = useState(false);
+  // const [newPassword, setNewPassword] = useState('');
+  // const [oldPassword, setOldPassword] = useState('');
   let navigate = useNavigate();
 
   const handleSubmit = (event) => {
