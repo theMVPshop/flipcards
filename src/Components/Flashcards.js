@@ -63,7 +63,7 @@ const Flashcards = () => {
                     onClick={() => changeCard('previous')}
                     disabled={currentCardIdx === 0}
                 >
-                    Prev
+                    <i class="bi bi-arrow-left-circle-fill"></i>
                 </Button>
                 <p className='counter'>
                     {currentCardIdx + 1} / {cards.length}
@@ -72,7 +72,7 @@ const Flashcards = () => {
                     onClick={() => changeCard('next')}
                     disabled={currentCardIdx === cards.length - 1}
                 >
-                    Next
+                    <i class="bi bi-arrow-right-circle-fill"></i>
                 </Button>
             </nav>
         </Container>
