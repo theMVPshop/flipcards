@@ -4,7 +4,8 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import { useState } from 'react'
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 
 
@@ -19,6 +20,8 @@ const CreateCards = () => {
   const [school, setSchool] = useState('');
   const [course, setCourse] = useState('');
 
+  let navigate = useNavigate();
+
   const handleChange = (id, e) => {
     const values = [...fields]
     values[id][e.target.name] = e.target.value
@@ -26,7 +29,8 @@ const CreateCards = () => {
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    navigate('/dashboard')
   }
 
   const addCard = (id) => {
@@ -63,12 +67,12 @@ const CreateCards = () => {
             {fields.map((field, id) => (
                 <div key={field.id}>
                   <Row className="mt-5">
-                    <Form.Label>{Number(field.id)}</Form.Label>
+                    <Form.Label>{id + 1}</Form.Label>
             <Form.Group as={Col} controlId="formGridTerm">
-              <Form.Control placeholder="Term" id={field.id} value={field.term} onChange={(e) => handleChange(id, e)} />
+              <Form.Control placeholder="Term" id={field.id} defaultValue={field.term} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
                     <Form.Group as={Col} controlId="formGridDefinition">
-              <Form.Control placeholder="Definition" id={field.id} value={field.definition} onChange={(e) => handleChange(id, e)} />
+              <Form.Control placeholder="Definition" id={field.id} defaultValue={field.definition} onChange={(e) => handleChange(id, e)} />
             </Form.Group>
                     <Form.Group as={Col} controlId="formGridButtons">
             <Button className='imageButton'> Add Image</Button>
@@ -87,7 +91,7 @@ const CreateCards = () => {
 </Row> 
 
 <Row className="align-items-center">
-<Button className='createButton' onClick={handleSubmit}>Create</Button>
+<Button className='createButton' type='submit'>Create</Button>
 </Row>
         </Form>
       </Container>

@@ -1,30 +1,30 @@
  .card {
-    background-color: #1a1d28;
+    background-color: #1a1d28 !important;
     margin-top: 10px
 }
 
  .imageButton {
     margin-right: 40px;
-    background-color: #22559c;
-    border: white solid 1px;
+    background-color: #22559c !important;
+    border: white solid 1px !important;
 }
 
 .deleteButton {
-    background-color: rgb(206, 49, 80);
-    border: white solid 1px;
+    background-color: rgb(206, 49, 80) !important;
+    border: white solid 1px !important;
 }
 
 .addCard {
-    background-color: goldenrod;
-    border: white solid 1px;
+    background-color: goldenrod !important;
+    border: white solid 1px !important;
     color: white;
 }
 
 .createButton {
-    width: 150px;
+    width: 150px !important;
     height: 50px;
-    background-color: #552e5a;
-    border: 1px white solid;
+    background-color: #552e5a !important;
+    border: 1px white solid !important;
 }
 
 .align-items-center {
