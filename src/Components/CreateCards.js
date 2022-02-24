@@ -56,9 +56,9 @@ const CreateCards = () => {
           <Form.Group as={Col} controlId="formGridSchool">
             <Form.Control placeholder="School" value={school} onChange={(e) => setSchool(e.target.value)} />
           </Form.Group>
-          <Form.Group as={Col} controlId="formGridCourse">
+          {/* <Form.Group as={Col} controlId="formGridCourse">
             <Form.Control placeholder="Course" value={course} onChange={(e) => setCourse(e.target.value)} />
-          </Form.Group>
+          </Form.Group> */}
         </Row>
         <br />
         <br />

@@ -25,11 +25,15 @@ const passVerificationError = {
   confirmPass: false,
 };
 
+const emailVerificationError = {
+  hasSymbols: false,
+}
 
 const SignUp = (props) => {
     const [validated, setValidated] = useState(false);
     const [newUser, setNewUser] = useState(initialState);
     const [passwordError, setPasswordError] = useState(passVerificationError);
+    const [emailError, setEmailError] = useState(emailVerificationError);
     let navigate = useNavigate();
     useEffect(() => {}, [newUser])
     // const navigate = useNavigate();
@@ -48,6 +52,15 @@ const SignUp = (props) => {
   const handleChange = (e) => {
     const {name, value} = e.target;
     setNewUser({...newUser, [name]: value});
+
+    if(name === "email") {
+      const hasSymbols = /[@,.]/.test(value);
+
+      setEmailError({
+        ...emailError, 
+        hasSymbols
+      })
+    }
 
     if (name === "password") {
       const isLenthy = value.length > 8;
@@ -89,12 +102,11 @@ const SignUp = (props) => {
       address,
       password,
     };
-    // const form = event.currentTarget;
-    // const { firstName, lastName,  email, password } = newUser;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    // }
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     setValidated(true);
     navigate('/')
@@ -123,9 +135,12 @@ const SignUp = (props) => {
                     <Form.Group className="mb-3" controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
                         <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
-                        <Form.Control.Feedback type="invalid">
-              Please enter your email.
-            </Form.Control.Feedback>
+                        <ul className="mb-4">
+                   <li
+                className={
+                  emailError.hasSymbols ? "text-success" : "text-danger"
+                }
+              >Please enter a valid email</li> </ul>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formGridPassword">
@@ -147,7 +162,7 @@ const SignUp = (props) => {
               Please enter your password.
             </Form.Control.Feedback>
                     </Form.Group>
-                    {/* <ul className="mb-4">
+                   <ul className="mb-4">
               <li
                 className={
                   passwordError.isLenthy ? "text-success" : "text-danger"
@@ -175,7 +190,7 @@ const SignUp = (props) => {
                 }
               >
                 At least one number
-              </li>
+              </li> 
               <li
                 className={
                   passwordError.hasSpclChr ? "text-success" : "text-danger"
@@ -183,7 +198,7 @@ const SignUp = (props) => {
               >
                 At least on of the special characters i.e @ # $ % &{" "}
               </li>
-            </ul> */}
+            </ul> 
                     <div class="text-center">
                         {/* <Link class="btn btn-info" role="button">Link Button</Link> */}
                     <Button className="mt-5" variant="primary" type="submit" >
