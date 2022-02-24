@@ -1,11 +1,51 @@
+a {
+    text-decoration: none !important;
+}
+
+.card {
+    color: #000;
+}
+
+.card-body {
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 .card-footer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 0.5rem;
-    background-color: #282e3e !important;
+    background-color: #fff;
     padding: 1rem !important;
 }
 
 .card-footer button {
     display: block;
+    border: none;
+}
+
+.card-footer .btn-edit {
+    background-color: goldenrod;
+    color: #fff;
+}
+
+.card-footer .btn-edit:hover,
+.card-footer .btn-edit:active,
+.card-footer .btn-edit:focus {
+    background-color: #1a1d28;
+    color: #fff;
+}
+
+.card-footer .btn-delete {
+    background-color: rgb(206, 49, 80);
+    color: #fff;
+}
+
+.card-footer .btn-delete:hover,
+.card-footer .btn-delete:active,
+.card-footer .btn-delete:focus {
+    background-color: #1a1d28;
+    color: #fff;
 }

@@ -5,13 +5,13 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-// import NavbarHeader from './Components/NavbarHeader';
+import NavbarHeader from './Components/NavbarHeader';
 import Router from './Router'
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      {/* <NavbarHeader /> */}
+      <NavbarHeader />
       <Router />
     </BrowserRouter>
   </React.StrictMode>,

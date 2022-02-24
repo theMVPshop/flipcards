@@ -1,5 +1,8 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router'
+
+import cookie from 'cookie';
+
 import Login from './Components/Login'
 import App from './App'
 // import Details from './Containers/Details'
@@ -11,6 +14,10 @@ import SignUp from './Components/SignUp';
 import Flashcards from './Components/Flashcards';
 
 
+const ProtectedRoute = ({ children }) => {
+    const cookies = cookie.parse(document.cookie);
+    return cookies['loggedIn'] ? children : <Navigate to="/" />;
+}
 
 
 // const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -32,9 +39,24 @@ const Router = () => {
             <Route path="/resetpassword" element={<ResetPassword />} />
             <Route path="/signup" element={<SignUp />} />
             {/* <Route path="/Details/:id" component={Details} /> */}
+
             <Route path="/dashboard" element={<Dashboard />} />
+            {/* <Route
+                path="/dashboard"
+                element={
+                    <ProtectedRoute>
+                        <Dashboard />
+                    </ProtectedRoute>
+                }
+            /> */}
 
             <Route path="/flashcards/:id" element={<Flashcards />} />
+            {/* <Route
+                path="/flashcards/:id"
+                element={
+                    <Flashcards />
+                }
+            /> */}
         </Routes>
     );
 };

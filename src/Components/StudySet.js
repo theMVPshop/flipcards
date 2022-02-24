@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -10,12 +11,14 @@ const StudySet = ({
 }) => {
     return (
         <Card>
-            <Card.Body>
-                <Card.Title>{setInfo.course}</Card.Title>
-            </Card.Body>
-            <Card.Footer className=''>
-                <Button variant="primary">Edit</Button>
-                <Button variant="primary">Delete</Button>
+            <Link to={`/flashcards/${setInfo.id}`}>
+                <Card.Body>
+                    <Card.Title>{setInfo.course}</Card.Title>
+                </Card.Body>
+            </Link>
+            <Card.Footer>
+                <Button className="btn-edit">Edit</Button>
+                <Button className="btn-delete">Delete</Button>
             </Card.Footer>
         </Card>
     )

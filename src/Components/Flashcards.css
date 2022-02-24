@@ -1,10 +1,18 @@
+.navContainer {
+    width: 50%;
+    margin: auto;
+    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: 25% 50% 25%;
+}
+
 .flashcardsNavigation {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 25%;
+    width: 75% !important;
     margin: auto;
-    margin-top: 1rem;
+    grid-column: 2/3;
 }
 
 .flashcardsNavigation .counter {
@@ -29,4 +37,25 @@
 .flashcardsNavigation button:hover i {
     color: #ccc;
     transition: all .2s ease-in-out;
+}
+
+.dropdown {
+    display: flex;
+    align-items: center;
+}
+
+.dropdown-toggle i {
+    font-size: 1.5rem;
+}
+
+.dropdown-toggle,
+.dropdown-toggle:hover,
+.dropdown-toggle:active {
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.dropdown-toggle::after {
+    content: none !important;
 }
