@@ -1,0 +1,12 @@
+.flashcardsNavigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 25%;
+    margin: auto;
+    margin-top: 1rem;
+}
+
+.flashcardsNavigation .counter {
+    margin-bottom: 0;
+}

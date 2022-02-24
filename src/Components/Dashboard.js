@@ -13,7 +13,7 @@ export default function Dashboard() {
     useEffect(() => {
         // @todo - switch to fetch call to get study sets from db
         setStudySets(data);
-    })
+    }, [])
 
     return (
         <Container>

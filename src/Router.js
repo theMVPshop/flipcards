@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route, Navigate } from 'react-router'
+import { Routes, Route } from 'react-router'
 import Login from './Components/Login'
 // import App from './App'
 // import Details from './Containers/Details'
@@ -11,6 +11,7 @@ import SignUp from './Components/SignUp';
 import Flashcards from './Components/Flashcards';
 import CreateCards from './Components/CreateCards';
 import EditCard from './Components/EditCard';
+
 
 
 
@@ -37,6 +38,7 @@ const Router = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/createcards" element={<CreateCards />} />
             <Route path="/editcard" element={<EditCard />} />
+
             <Route path="/flashcards/:id" element={<Flashcards />} />
         </Routes>
     );
