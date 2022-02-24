@@ -29,7 +29,7 @@ const emailVerificationError = {
   hasSymbols: false,
 }
 
-const SignUp = (props) => {
+const SignUp = () => {
     const [validated, setValidated] = useState(false);
     const [newUser, setNewUser] = useState(initialState);
     const [passwordError, setPasswordError] = useState(passVerificationError);
