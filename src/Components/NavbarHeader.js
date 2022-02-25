@@ -1,19 +1,30 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import cookie from 'cookie';
 
 import './NavbarHeader.css'
 
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 // import { Link } from 'react-router-dom';
 
 export default function NavbarHeader() {
+  const navigate = useNavigate();
 
   const checkAuth = () => {
     const cookies = cookie.parse(document.cookie);
     return cookies['loggedIn'] ? true : false;
+  }
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    document.cookie = 'loggedIn=';
+    document.cookie = 'token=';
+    document.cookie = 'username=';
+    navigate('/');
   }
 
   return (
@@ -29,14 +40,15 @@ export default function NavbarHeader() {
             )}
           </Nav>
           {/* Appears after logged in, else Sign In appears */}
-          {checkAuth() && (
+          {!checkAuth() && (
             <Nav>
               <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
                 <NavDropdown.Item href="/">Profile</NavDropdown.Item>
                 <NavDropdown.Item href="/">Progress</NavDropdown.Item>
                 <NavDropdown.Item href="/">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href="/">Logout</NavDropdown.Item>
+                {/* <NavDropdown.Item href="/">Logout</NavDropdown.Item> */}
+                <Button variant="link" onClick={(e) => handleLogout(e)}>Logout</Button>
               </NavDropdown>
             </Nav>
           )}
