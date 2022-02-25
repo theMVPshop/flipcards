@@ -1,19 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import NavbarHeader from './Components/NavbarHeader';
-import Router from './Router'
+// import { BrowserRouter } from 'react-router-dom';
+// import NavbarHeader from './Components/NavbarHeader';
+// import Router from './Router'
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <App />
+    {/* <BrowserRouter>
       <NavbarHeader />
       <Router />
-    </BrowserRouter>
+    </BrowserRouter> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

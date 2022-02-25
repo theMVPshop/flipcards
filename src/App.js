@@ -1,9 +1,13 @@
-import NavbarHeader from './Components/NavbarHeader';
-import './App.css';
 import React, { Component } from "react";
+import './App.css';
+
+import { BrowserRouter } from 'react-router-dom';
+import Router from './Router'
+
+import NavbarHeader from './Components/NavbarHeader';
 import Login from './Components/Login';
-import Router from './Router';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 // import Dashboard from './Components/Dashboard';
 // import EditCard from './Components/EditCard';
 // import CreateCards from './Components/CreateCards';
@@ -27,22 +31,31 @@ class App extends Component {
   };
 
   render() {
-    return this.state.loggedIn ? (
-      <div>
-        {/* <ButtonAppBar />
-        <Dashboard /> */}
-      </div>
-    ) : (
-      <div classname="login">
-        <Router>
-          {/* <CreateCards /> */}
+    //   return this.state.loggedIn ? (
+    //     <div>
+    //       {/* <ButtonAppBar />
+    //       <Dashboard /> */}
+    //     </div>
+    //   ) : (
+    //     <div classname="login">
+    //       <Router>
+    //         {/* <CreateCards /> */}
+    //         <NavbarHeader />
+    //         <Login />
+    //       </Router>
+    //       {/* <Card /> */}
+    //     </div>
+    //     // </div>
+    //   );
+
+    return (
+      <div className="App">
+        <BrowserRouter>
           <NavbarHeader />
-          <Login />
-        </Router>
-        {/* <Card /> */}
+          <Router />
+        </BrowserRouter>
       </div>
-      // </div>
-    );
+    )
   }
 }
 
