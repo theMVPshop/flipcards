@@ -7,7 +7,8 @@ import Button from 'react-bootstrap/Button';
 import './StudySet.css';
 
 const StudySet = ({
-    setInfo
+    setInfo,
+    handleDelete
 }) => {
     return (
         <Card>
@@ -17,8 +18,16 @@ const StudySet = ({
                 </Card.Body>
             </Link>
             <Card.Footer>
-                <Button className="btn-edit">Edit</Button>
-                <Button className="btn-delete">Delete</Button>
+                <Button className="btn-edit"
+                >
+                    Edit
+                </Button>
+                <Button
+                    className="btn-delete"
+                    onClick={() => handleDelete(setInfo.id)}
+                >
+                    Delete
+                </Button>
             </Card.Footer>
         </Card>
     )

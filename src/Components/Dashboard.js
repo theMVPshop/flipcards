@@ -15,13 +15,21 @@ export default function Dashboard() {
         setStudySets(data);
     }, [])
 
+    const handleDelete = (id) => {
+        let updatedCardSets = studySets.cardSets.filter(set => set.id !== id);
+        let updatedStudySets = {
+            cardSets: updatedCardSets
+        }
+        setStudySets(updatedStudySets);
+    }
+
     return (
         <Container>
             <h1>Recent</h1>
             <Row>
                 {studySets.cardSets && studySets.cardSets.map((set, index) => (
                     <Col key={index} md={6} lg={4}>
-                        <StudySet setInfo={set} />
+                        <StudySet setInfo={set} handleDelete={handleDelete} />
                     </Col>
                 ))}
             </Row>
