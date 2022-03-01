@@ -105,14 +105,14 @@ const ResetPassword = () => {
   </Form.Group> */}
   <Form.Group className="mb-3" controlId="formGroupPassword">
     <Form.Label>New Password</Form.Label>
-    <Form.Control type="password" name="newPass"  value={updateUser.newPass} onChange={handleUpdate} />
-    {!passwordError.isLenthy && <li className="text-danger">Min 8 characters</li>}
-    {!passwordError.hasUpper && <li className="text-danger">At least one upper case </li>}
-    {!passwordError.hasLower && <li className="text-danger">At least one lower case</li>}
-    {!passwordError.hasNumber && <li className="text-danger">At least one number</li>}
-    {!passwordError.hasSpclChr && <li className="text-danger">  At least on of the special characters i.e @ # $ % &</li>}
+    <Form.Control required type="password" name="newPass"  value={updateUser.newPass} onChange={handleUpdate} />
+    {!passwordError.isLenthy && <li className="text">Min 8 characters</li>}
+    {!passwordError.hasUpper && <li className="text">At least one upper case </li>}
+    {!passwordError.hasLower && <li className="text">At least one lower case</li>}
+    {!passwordError.hasNumber && <li className="text">At least one number</li>}
+    {!passwordError.hasSpclChr && <li className="text">  At least on of the special characters i.e @ # $ % &</li>}
   </Form.Group>
-  <Form.Group className="mb-3" controlId="formGroupPassword">
+  <Form.Group className="mb-3" controlId="formGroupConfirmPassword">
     <Form.Label>Confirm New Password</Form.Label>
     <Form.Control required type="password" name="confirmNewPass" value={updateUser.confirmNewPass} onChange={handleUpdate} />
     {updateUser.confirmNewPass !== updateUser.newPass && <li className="text-danger">That password doesn't match</li>}

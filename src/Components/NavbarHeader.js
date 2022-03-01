@@ -9,7 +9,7 @@ import Button from 'react-bootstrap/Button';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function NavbarHeader() {
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ export default function NavbarHeader() {
           {!checkAuth() && (
             <Nav>
               <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="/">Profile</NavDropdown.Item>
+                <NavDropdown.Item><Link to="/updateprofile" className='navbarUpdateLink'>Update Profile</Link></NavDropdown.Item>
                 <NavDropdown.Item href="/">Progress</NavDropdown.Item>
                 <NavDropdown.Item href="/">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />

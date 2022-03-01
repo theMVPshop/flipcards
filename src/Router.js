@@ -10,6 +10,7 @@ import SignUp from './Components/SignUp';
 import Flashcards from './Components/Flashcards';
 import CreateCards from './Components/CreateCards';
 import EditCard from './Components/EditCard';
+import UpdateProfile from './Components/UpdateProfile';
 
 
 // import App from './App'
@@ -46,6 +47,8 @@ const Router = () => {
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/createcards" element={<CreateCards />} />
             <Route path="/editcard" element={<EditCard />} />
+            <Route path="/updateprofile" element={<UpdateProfile />} />
+        
             {/* <Route
                 path="/dashboard"
                 element={

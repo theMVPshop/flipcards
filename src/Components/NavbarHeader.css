@@ -12,3 +12,8 @@
 .adminUser {
   background-color: white !important;
 }
+
+.navbarUpdateLink {
+  text-decoration: none;
+  color: black;
+}

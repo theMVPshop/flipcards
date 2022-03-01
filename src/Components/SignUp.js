@@ -148,7 +148,7 @@ const SignUp = () => {
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formGridConfirmPassword">
                         <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control required type="password" name="confirmPassword" value={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
+                        <Form.Control required type="password" name="confirmPassword" defaultValue={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
                         {newUser.confirmPass !== newUser.password && <li className="text-danger">That password doesn't match</li>}
                     </Form.Group>
                    <ul className="mb-4">

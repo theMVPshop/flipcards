@@ -61,7 +61,7 @@ export default function Login() {
             Password
           </Form.Label>
           <Col>
-            <Form.Control type="password" placeholder="password" />
+            <Form.Control type="password" placeholder="Password" />
           </Col>
         </Row>
         <br />
