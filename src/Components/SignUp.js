@@ -136,11 +136,7 @@ const SignUp = () => {
                         <Form.Label>Email</Form.Label>
                         <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
                         <ul className="mb-4">
-                   <li
-                className={
-                  emailError.hasSymbols ? "text-success" : "text-danger"
-                }
-              >Please enter a valid email</li> </ul>
+                        {!emailError.hasSymbols && <li className="text-danger">Please enter your email</li>}</ul>
                     </Form.Group>
 
                     <Form.Group className="mb-3" controlId="formGridPassword">
@@ -153,51 +149,14 @@ const SignUp = () => {
                     <Form.Group className="mb-3" controlId="formGridConfirmPassword">
                         <Form.Label>Confirm Password</Form.Label>
                         <Form.Control required type="password" name="confirmPassword" value={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
-                        {/* <Form.Text>
-              {!passwordError.confirmPass && (
-                <div className="text-danger mb-3">Password doesn't match!</div>
-              )}
-            </Form.Text> */}
-                        <Form.Control.Feedback type="invalid">
-              Please enter your password.
-            </Form.Control.Feedback>
+                        {newUser.confirmPass !== newUser.password && <li className="text-danger">That password doesn't match</li>}
                     </Form.Group>
                    <ul className="mb-4">
-              <li
-                className={
-                  passwordError.isLenthy ? "text-success" : "text-danger"
-                }
-              >
-                Min 8 characters
-              </li>
-              <li
-                className={
-                  passwordError.hasUpper ? "text-success" : "text-danger"
-                }
-              >
-                At least one upper case
-              </li>
-              <li
-                className={
-                  passwordError.hasLower ? "text-success" : "text-danger"
-                }
-              >
-                At least one lower case
-              </li>
-              <li
-                className={
-                  passwordError.hasNumber ? "text-success" : "text-danger"
-                }
-              >
-                At least one number
-              </li> 
-              <li
-                className={
-                  passwordError.hasSpclChr ? "text-success" : "text-danger"
-                }
-              >
-                At least on of the special characters i.e @ # $ % &{" "}
-              </li>
+                   {!passwordError.isLenthy && <li className="text">Min 8 characters</li>}
+    {!passwordError.hasUpper && <li className="text">At least one upper case </li>}
+    {!passwordError.hasLower && <li className="text">At least one lower case</li>}
+    {!passwordError.hasNumber && <li className="text">At least one number</li>}
+    {!passwordError.hasSpclChr && <li className="text">  At least on of the special characters i.e @ # $ % &</li>}
             </ul> 
                     <div class="text-center">
                         {/* <Link class="btn btn-info" role="button">Link Button</Link> */}
