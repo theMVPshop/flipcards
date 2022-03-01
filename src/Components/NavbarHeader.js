@@ -28,7 +28,7 @@ export default function NavbarHeader() {
   }
 
   return (
-    <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="#1a1d28" variant="dark">
       <Container className="nav">
         <Navbar.Brand href="/">Study Cards</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -45,6 +45,7 @@ export default function NavbarHeader() {
               <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
                 <NavDropdown.Item><Link to="/updateprofile" className='navbarUpdateLink'>Update Profile</Link></NavDropdown.Item>
                 <NavDropdown.Item href="/">Progress</NavDropdown.Item>
+                <NavDropdown.Item href="/">Approve Users</NavDropdown.Item>
                 <NavDropdown.Item href="/">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
                 {/* <NavDropdown.Item href="/">Logout</NavDropdown.Item> */}
