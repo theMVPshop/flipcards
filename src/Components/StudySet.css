@@ -25,6 +25,7 @@ a {
 .card-footer button {
     display: block;
     border: none;
+    width: 100%;
 }
 
 .card-footer .btn-edit {

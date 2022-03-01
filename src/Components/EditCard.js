@@ -4,15 +4,17 @@ import Button from 'react-bootstrap/Button';
 import { useState } from "react";
 
 
-export default function EditCard() {
+export default function EditCard({
+  studySetInfo
+}) {
 
-    const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    return (
-        <div>
-            <Button variant="primary" onClick={handleShow}>
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
+    <div>
+      <Button className="btn-edit" onClick={handleShow}>
         Edit Cards
       </Button>
 
@@ -23,19 +25,19 @@ export default function EditCard() {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Title of card set</Modal.Title>
+          <Modal.Title>{studySetInfo.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        Cards enclosed
+          Cards enclosed
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-          <i class="bi bi-trash"></i>
+            <i class="bi bi-trash"></i>
           </Button>
-          <Button variant="primary">Close</Button>
+          <Button variant="primary" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
-        </div>
-    )
+    </div>
+  )
 }
 

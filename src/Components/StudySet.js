@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import EditCard from './EditCard';
+
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 
@@ -18,10 +20,7 @@ const StudySet = ({
                 </Card.Body>
             </Link>
             <Card.Footer>
-                <Button className="btn-edit"
-                >
-                    Edit
-                </Button>
+                <EditCard studySetInfo={setInfo} />
                 <Button
                     className="btn-delete"
                     onClick={() => handleDelete(setInfo.id)}
