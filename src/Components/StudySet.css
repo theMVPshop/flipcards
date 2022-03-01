@@ -2,8 +2,9 @@ a {
     text-decoration: none !important;
 }
 
-.card {
+.card.card-study-set {
     color: #000;
+    background-color: #fff !important;
 }
 
 .card-body {

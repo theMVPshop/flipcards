@@ -11,7 +11,7 @@ const StudySet = ({
     handleDelete
 }) => {
     return (
-        <Card>
+        <Card className="card-study-set">
             <Link to={`/flashcards/${setInfo.id}`}>
                 <Card.Body>
                     <Card.Title>{setInfo.course}</Card.Title>

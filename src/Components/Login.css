@@ -4,8 +4,6 @@
 }
 
 .login {
-  position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
   height: fit-content;
   /* width:  50vw;  */
   align-self: center;
@@ -28,11 +26,18 @@ margin-right: 250px;
 }
 
 .logo {
-  height: 17vh;
-  width: 17vw;
-  /* align-self: center; */
+  width: 100%;
+  height: auto;
+  margin-bottom: 16px;
 }
 
 .specialty {
   font-size: 20px;
+}
+
+@media (min-width: 768px) {
+  .login {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+  }
 }

@@ -45,7 +45,7 @@ body {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 400px;
+  max-width: 400px;
   margin-top: 20px;
 }
 
