@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -6,16 +7,27 @@ import Button from 'react-bootstrap/Button';
 import './StudySet.css';
 
 const StudySet = ({
-    setInfo
+    setInfo,
+    handleDelete
 }) => {
     return (
         <Card>
-            <Card.Body>
-                <Card.Title>{setInfo.course}</Card.Title>
-            </Card.Body>
-            <Card.Footer className=''>
-                <Button variant="primary">Edit</Button>
-                <Button variant="primary">Delete</Button>
+            <Link to={`/flashcards/${setInfo.id}`}>
+                <Card.Body>
+                    <Card.Title>{setInfo.course}</Card.Title>
+                </Card.Body>
+            </Link>
+            <Card.Footer>
+                <Button className="btn-edit"
+                >
+                    Edit
+                </Button>
+                <Button
+                    className="btn-delete"
+                    onClick={() => handleDelete(setInfo.id)}
+                >
+                    Delete
+                </Button>
             </Card.Footer>
         </Card>
     )

@@ -7,6 +7,8 @@ import FlashCard from './FlashCard';
 
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import Dropdown from 'react-bootstrap/Dropdown';
+
 
 import './Flashcards.css';
 
@@ -58,23 +60,34 @@ const Flashcards = () => {
             {cards && cards.map((card, index) => (
                 <FlashCard key={index} card={card} />
             ))}
-            <nav className='flashcardsNavigation'>
-                <Button
-                    onClick={() => changeCard('previous')}
-                    disabled={currentCardIdx === 0}
-                >
-                    Prev
-                </Button>
-                <p className='counter'>
-                    {currentCardIdx + 1} / {cards.length}
-                </p>
-                <Button
-                    onClick={() => changeCard('next')}
-                    disabled={currentCardIdx === cards.length - 1}
-                >
-                    Next
-                </Button>
-            </nav>
+            <div className="navContainer">
+                <nav className='flashcardsNavigation'>
+                    <Button
+                        onClick={() => changeCard('previous')}
+                        disabled={currentCardIdx === 0}
+                    >
+                        <i class="bi bi-arrow-left-circle-fill"></i>
+                    </Button>
+                    <p className='counter'>
+                        {currentCardIdx + 1} / {cards.length}
+                    </p>
+                    <Button
+                        onClick={() => changeCard('next')}
+                        disabled={currentCardIdx === cards.length - 1}
+                    >
+                        <i class="bi bi-arrow-right-circle-fill"></i>
+                    </Button>
+                </nav>
+                <Dropdown>
+                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                        <i class="bi bi-three-dots-vertical"></i>
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                        <Dropdown.Item href="#">Embed</Dropdown.Item>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
         </Container>
     )
 }

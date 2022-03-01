@@ -1,36 +1,59 @@
 import React from 'react';
-import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar';
-import './NavbarHeader.css'
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import Nav  from 'react-bootstrap/Nav';
-import {Link} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import cookie from 'cookie';
 
+import './NavbarHeader.css'
+
+import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import Nav from 'react-bootstrap/Nav';
+// import { Link } from 'react-router-dom';
 
 export default function NavbarHeader() {
-    return (
-     <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="dark" variant="dark">
-  <Container className="nav">
-  <Navbar.Brand href="#home">Study Cards</Navbar.Brand>
-  <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-  <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="me-auto">
-      <Nav.Link href="#home">Home</Nav.Link>
-      <Nav.Link href="#library">Your Library</Nav.Link>
-    </Nav>
-        {/* Appears after logged in, else Sign In appears */}
-    <Nav>
-    <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
-        <NavDropdown.Item href="/">Profile</NavDropdown.Item>
-        <NavDropdown.Item href="/">Progress</NavDropdown.Item>
-        <NavDropdown.Item href="/">Settings</NavDropdown.Item>
-        <NavDropdown.Divider />
-        <NavDropdown.Item href="/">Logout</NavDropdown.Item>
-      </NavDropdown>
-    </Nav>
-  </Navbar.Collapse>
-  </Container>
-</Navbar>
-    )
-}
+  const navigate = useNavigate();
 
+  const checkAuth = () => {
+    const cookies = cookie.parse(document.cookie);
+    return cookies['loggedIn'] ? true : false;
+  }
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    document.cookie = 'loggedIn=';
+    document.cookie = 'token=';
+    document.cookie = 'username=';
+    navigate('/');
+  }
+
+  return (
+    <Navbar className='navbarHeader' collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container className="nav">
+        <Navbar.Brand href="/">Study Cards</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            {checkAuth() && (
+              <Nav.Link href="/dashboard">Your Library</Nav.Link>
+            )}
+          </Nav>
+          {/* Appears after logged in, else Sign In appears */}
+          {!checkAuth() && (
+            <Nav>
+              <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
+                <NavDropdown.Item href="/">Profile</NavDropdown.Item>
+                <NavDropdown.Item href="/">Progress</NavDropdown.Item>
+                <NavDropdown.Item href="/">Settings</NavDropdown.Item>
+                <NavDropdown.Divider />
+                {/* <NavDropdown.Item href="/">Logout</NavDropdown.Item> */}
+                <Button variant="link" onClick={(e) => handleLogout(e)}>Logout</Button>
+              </NavDropdown>
+            </Nav>
+          )}
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  )
+}

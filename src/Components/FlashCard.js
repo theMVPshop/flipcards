@@ -21,6 +21,9 @@ const FlashCard = ({
                     <div className={`flashcardInner ${flipped ? 'showBack' : 'showFront'}`}>
                         <div className="flashcardFront">
                             <p>Term: {card.term}</p>
+                            {card.id === 1 && (
+                                <p className='cardFooter'>Click to reveal definition</p>
+                            )}
                         </div>
                         <div className="flashcardBack">
                             <p>Definition: {card.definition}</p>

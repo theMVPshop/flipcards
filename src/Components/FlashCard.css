@@ -1,9 +1,11 @@
 .flashcard {
     background-color: transparent;
-    border: 1px solid #fff;
+    border: none;
+    padding: 0;
     width: 50%;
-    height: 200px;
+    height: 350px;
     margin: auto;
+    margin-top: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -12,37 +14,56 @@
     perspective: 1000px;
 }
 
-.flashcardInner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    transition: transform 0.8s;
-    transform-style: preserve-3d;
-  }
+.flashcard,
+.flashcardInner,
+.flashcardFront,
+.flashcardBack {
+    border-radius: 15px;
+}
 
-  .flashcardInner.showBack {
-    transform: rotateY(-180deg);
-  }
-  
-  .flashcardFront, .flashcardBack {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    -webkit-backface-visibility: hidden; /* Safari */
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .flashcardFront {
-    /* background-color: #fff;
-    color: #000; */
-  }
-  
-  .flashcardBack {
-    /* background-color: fff;
-    color: #000; */
-    transform: rotateY(180deg);
-  }
+.flashcardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flashcardInner.showBack {
+  transform: rotateX(-180deg);
+}
+
+.flashcardFront, 
+.flashcardBack {
+  background-color: #fff;
+  font-size: 1.5rem;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flashcardFront .cardFooter {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: goldenrod;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 0;
+  padding: 0.5rem;
+  border-bottom-left-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+.flashcardBack {
+  transform: rotateX(180deg);
+}
