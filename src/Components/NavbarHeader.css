@@ -1,6 +1,7 @@
 .navbarHeader {
     margin-bottom: 10vh;
     border-bottom: 4px white solid;
+    padding: 0 16px;
     /* background-color: #282e3e !important; */
   }
 

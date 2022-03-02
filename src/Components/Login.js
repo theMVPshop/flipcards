@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 
- const Login = (props) => {
+const Login = (props) => {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -54,33 +54,33 @@ import { useNavigate } from "react-router-dom";
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <br/>
+        <br />
         <div class='text-center'>
-        <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
+          <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
-             Course
+              Course
             </Dropdown.Toggle>
 
-        <Dropdown.Menu size="sm" align='left'>
-            <Dropdown.Item href="#">Medical</Dropdown.Item>
-            <Dropdown.Item href="#">Dental</Dropdown.Item>
-             <Dropdown.Item href="#">Coding</Dropdown.Item>
-        </Dropdown.Menu>
-     </Dropdown>
-     </div>
-     <br/>
-     <div class='text-center'>
-     <Button className="loginButton" class="btn btn-primary" block size="md"  type="submit" >
-          Login
-        </Button>
+            <Dropdown.Menu size="sm" align='left'>
+              <Dropdown.Item href="#">Medical</Dropdown.Item>
+              <Dropdown.Item href="#">Dental</Dropdown.Item>
+              <Dropdown.Item href="#">Coding</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <br />
+        <div class='text-center'>
+          <Button className="loginButton" class="btn btn-primary" block size="md" type="submit" >
+            Login
+          </Button>
         </div>
       </Form>
       <div class="dropdown-divider"></div>
       <div class='text-center'>
-     <Link to="/signup">New around here? Sign up</Link>
+        <Link to="/signup">New around here? Sign up</Link>
       </div>
       <div class='text-center'>
-      <Link to="/resetpassword">Forgot Password?</Link>
+        <Link to="/resetpassword">Forgot Password?</Link>
       </div>
     </div>
   );

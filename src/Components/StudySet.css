@@ -2,8 +2,9 @@ a {
     text-decoration: none !important;
 }
 
-.card {
+.card.card-study-set {
     color: #000;
+    background-color: #fff !important;
 }
 
 .card-body {
@@ -24,6 +25,7 @@ a {
 .card-footer button {
     display: block;
     border: none;
+    width: 100%;
 }
 
 .card-footer .btn-edit {

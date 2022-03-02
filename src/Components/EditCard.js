@@ -1,41 +1,46 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+
+import EditCardForm from "./EditCardForm";
 import { useState } from "react";
 
+import styles from './EditCard.module.css';
 
-export default function EditCard() {
 
-    const [show, setShow] = useState(false);
+export default function EditCard({
+  studySetInfo
+}) {
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    return (
-        <div>
-            <Button variant="primary" onClick={handleShow}>
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  return (
+    <div>
+      <Button className="btn-edit" onClick={handleShow}>
         Edit Cards
       </Button>
 
       <Modal
+        size="lg"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        className={styles.editCardModal}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Title of card set</Modal.Title>
+          <Modal.Title>{studySetInfo.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        Cards enclosed
+          <EditCardForm studySetInfo={studySetInfo} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-          <i class="bi bi-trash"></i>
-          </Button>
-          <Button variant="primary">Close</Button>
+          <Button variant="primary" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
-        </div>
-    )
+    </div>
+  )
 }
 

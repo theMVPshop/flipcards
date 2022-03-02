@@ -56,7 +56,7 @@ const Flashcards = () => {
     }
 
     return (
-        <Container>
+        <Container className="flashcards">
             {cards && cards.map((card, index) => (
                 <FlashCard key={index} card={card} />
             ))}

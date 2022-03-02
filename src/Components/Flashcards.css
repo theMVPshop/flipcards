@@ -1,4 +1,4 @@
-.navContainer {
+.flashcards .navContainer {
     width: 50%;
     margin: auto;
     margin-top: 1rem;
@@ -39,23 +39,23 @@
     transition: all .2s ease-in-out;
 }
 
-.dropdown {
+.flashcards .dropdown {
     display: flex;
     align-items: center;
 }
 
-.dropdown-toggle i {
+.flashcards .dropdown-toggle i {
     font-size: 1.5rem;
 }
 
-.dropdown-toggle,
-.dropdown-toggle:hover,
-.dropdown-toggle:active {
+.flashcards .dropdown-toggle,
+.flashcards .dropdown-toggle:hover,
+.flashcards .dropdown-toggle:active {
     background-color: transparent !important;
     border: none !important;
     box-shadow: none !important;
 }
 
-.dropdown-toggle::after {
+.flashcards .dropdown-toggle::after {
     content: none !important;
 }
