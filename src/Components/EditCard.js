@@ -1,7 +1,11 @@
 import React from "react";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+
+import EditCardForm from "./EditCardForm";
 import { useState } from "react";
+
+import styles from './EditCard.module.css';
 
 
 export default function EditCard({
@@ -19,21 +23,20 @@ export default function EditCard({
       </Button>
 
       <Modal
+        size="lg"
         show={show}
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
+        className={styles.editCardModal}
       >
         <Modal.Header closeButton>
           <Modal.Title>{studySetInfo.title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Cards enclosed
+          <EditCardForm studySetInfo={studySetInfo} />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            <i class="bi bi-trash"></i>
-          </Button>
           <Button variant="primary" onClick={handleClose}>Close</Button>
         </Modal.Footer>
       </Modal>
