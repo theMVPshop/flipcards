@@ -11,6 +11,7 @@ import Flashcards from './Components/Flashcards';
 import CreateCards from './Components/CreateCards';
 import EditCard from './Components/EditCard';
 import UpdateProfile from './Components/UpdateProfile';
+import ApproveUsers from './Components/ApproveUsers';
 
 
 // import App from './App'
@@ -48,6 +49,7 @@ const Router = () => {
             <Route path="/createcards" element={<CreateCards />} />
             <Route path="/editcard" element={<EditCard />} />
             <Route path="/updateprofile" element={<UpdateProfile />} />
+            <Route path="/approveusers" element={<ApproveUsers />} />
         
             {/* <Route
                 path="/dashboard"

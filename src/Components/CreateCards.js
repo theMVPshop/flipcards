@@ -18,7 +18,7 @@ const CreateCards = () => {
   }])
   const [title, setTitle] = useState('');
   const [school, setSchool] = useState('');
-  const [course, setCourse] = useState('');
+  // const [course, setCourse] = useState('');
 
   let navigate = useNavigate();
 
