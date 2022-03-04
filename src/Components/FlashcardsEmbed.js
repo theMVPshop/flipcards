@@ -11,11 +11,21 @@ import Button from 'react-bootstrap/Button';
 
 import './Flashcards.css';
 
-const Flashcards = () => {
+const FlashcardsEmbed = () => {
     const { id } = useParams();
     const [studySet, setStudySet] = useState({});
     const [cards, setCards] = useState([]);
     const [currentCardIdx, setCurrentCardIdx] = useState(0);
+
+    useEffect(() => {
+        // add class to navbar to hide it when component loads
+        let navbar = document.querySelector('.navbarHeader');
+        navbar.classList.add('hide');
+        //remove class from navbar to show it after component is destroyed
+        return () => {
+            navbar.classList.remove('hide');
+        }
+    }, [])
 
     useEffect(() => {
         // Get the current study set based on the id from the url parameters
@@ -55,7 +65,7 @@ const Flashcards = () => {
     }
 
     return (
-        <Container className="flashcards">
+        <div className="flashcards flashcards-embed">
             {cards && cards.map((card, index) => (
                 <FlashCard key={index} card={card} />
             ))}
@@ -77,10 +87,9 @@ const Flashcards = () => {
                         <i class="bi bi-arrow-right-circle-fill"></i>
                     </Button>
                 </nav>
-                <EmbedModal studySetId={id} />
             </div>
-        </Container>
+        </div>
     )
 }
 
-export default Flashcards;
+export default FlashcardsEmbed;

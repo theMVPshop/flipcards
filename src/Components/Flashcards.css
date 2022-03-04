@@ -1,3 +1,7 @@
+.navbarHeader.hide {
+    display: none!important;
+  }
+
 .flashcards .navContainer {
     width: 50%;
     margin: auto;
@@ -58,4 +62,12 @@
 
 .flashcards .dropdown-toggle::after {
     content: none !important;
+}
+
+.flashcards-embed .flashcard {
+    width: 100%;
+}
+
+.flashcards-embed .navContainer {
+    display: block;
 }

@@ -8,6 +8,7 @@ import Dashboard from './Components/Dashboard';
 import ResetPassword from './Components/ResetPassword';
 import SignUp from './Components/SignUp';
 import Flashcards from './Components/Flashcards';
+import FlashcardsEmbed from './Components/FlashcardsEmbed';
 import CreateCards from './Components/CreateCards';
 import EditCard from './Components/EditCard';
 import UpdateProfile from './Components/UpdateProfile';
@@ -50,7 +51,7 @@ const Router = () => {
             <Route path="/editcard" element={<EditCard />} />
             <Route path="/updateprofile" element={<UpdateProfile />} />
             <Route path="/approveusers" element={<ApproveUsers />} />
-        
+
             {/* <Route
                 path="/dashboard"
                 element={
@@ -67,6 +68,7 @@ const Router = () => {
                     <Flashcards />
                 }
             /> */}
+            <Route path="/flashcards-embed/:id" element={<FlashcardsEmbed />} />
         </Routes>
     );
 };
