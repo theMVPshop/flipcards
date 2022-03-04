@@ -4,32 +4,31 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from "react-router-dom"; 
-import data from '../data/db.json';
+// import users from '../data/db.json';
 
 
 const ApproveUsers = () => {
 
     let navigate = useNavigate();
-    // let { id } = useParams();
+    let { id } = useParams();
     const [show, setShow] = useState(false);
-
-   
     const handleShow = () => setShow(true);
-    // const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState(null);
     const [isApproved, setIsApproved] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
-    const [users, setUsers] = useState([])
 
   //   useEffect(() => {
   //     // @todo - switch to fetch call to get users from db
   //     setUsers(data);
   // }, [])
 
-  // useEffect(() => {
-  //   let foundUsers = users.find(user => user.id === Number(id));
-  // setUsers(foundUsers);
-  // })
+  useEffect(() => {
+    let url = "../data/db.json";
+    fetch(url)
+        .then(res =>  {return res.json() })
+        .then(data => setUsers(data))
+    }, []);
   
     const handleClose = () => {
       setIsApproved(false);
@@ -84,7 +83,7 @@ const ApproveUsers = () => {
         </Modal.Header>
         <Modal.Body>
         <Form className="userApproval">
-  {users.map((user, id) => (
+  {users && users.map((user, id) => (
     <div key={user.id} className="mb-3">
       <Form.Check type={user} id={`check-api-${id}`}>
         <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id}  onChange={handleChange}/>
