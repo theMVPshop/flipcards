@@ -9,6 +9,7 @@ import Button from 'react-bootstrap/Button';
 import './StudySet.css';
 
 const StudySet = ({
+    // From Dashboard
     setInfo,
     handleDelete
 }) => {

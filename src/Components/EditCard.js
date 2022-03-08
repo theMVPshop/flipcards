@@ -9,6 +9,7 @@ import styles from './EditCard.module.css';
 
 
 export default function EditCard({
+  // From Study Set
   studySetInfo
 }) {
 

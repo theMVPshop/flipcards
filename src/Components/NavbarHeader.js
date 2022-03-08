@@ -44,7 +44,7 @@ export default function NavbarHeader() {
             <Nav>
               <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
                 <NavDropdown.Item><Link to="/updateprofile" className='navbarUpdateLink'>Update Profile</Link></NavDropdown.Item>
-                <NavDropdown.Item href="/">Progress</NavDropdown.Item>
+                {/* <NavDropdown.Item href="/">Progress</NavDropdown.Item> */}
                 <NavDropdown.Item href="/">Approve Users</NavDropdown.Item>
                 <NavDropdown.Item href="/">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
