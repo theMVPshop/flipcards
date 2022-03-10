@@ -4,16 +4,16 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from "react-router-dom"; 
-// import users from '../data/db.json';
+import users from '../data/db.json';
 
 
-const ApproveUsers = () => {
+const ApproveUsers = (user) => {
 
     let navigate = useNavigate();
-    let { id } = useParams();
+    let { userId } = useParams();
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const [users, setUsers] = useState(null);
+    const [users, setUsers] = useState();
     const [isApproved, setIsApproved] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
@@ -23,12 +23,17 @@ const ApproveUsers = () => {
   //     setUsers(data);
   // }, [])
 
+
   useEffect(() => {
-    let url = "../data/db.json";
-    fetch(url)
-        .then(res =>  {return res.json() })
-        .then(data => setUsers(data))
-    }, []);
+    if (user) {
+      fetch('../data/db.json').then((res) =>
+        res.json().then((users) => {
+          return setUsers(users.find((item) => item.id === user.id));
+        })
+      );
+    }
+  }, [user]);
+  
   
     const handleClose = () => {
       setIsApproved(false);
