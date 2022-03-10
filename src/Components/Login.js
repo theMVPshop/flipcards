@@ -55,7 +55,7 @@ const Login = (props) => {
           />
         </Form.Group>
         <br />
-        <div class='text-center'>
+        {/* <div class='text-center'>
           <Dropdown size="sm" align='left' className="specialty-dropdown" autoClose="inside">
             <Dropdown.Toggle id="dropdown-autoclose-inside">
               Course
@@ -68,7 +68,7 @@ const Login = (props) => {
             </Dropdown.Menu>
           </Dropdown>
         </div>
-        <br />
+        <br /> */}
         <div class='text-center'>
           <Button className="loginButton" class="btn btn-primary" block size="md" type="submit" >
             Login
