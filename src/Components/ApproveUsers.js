@@ -4,36 +4,36 @@ import Button from 'react-bootstrap/Button';
 import { useState, useEffect } from "react";
 import Form from 'react-bootstrap/Form';
 import { useNavigate, useParams } from "react-router-dom"; 
-import users from '../data/db.json';
+import data from '../data/db.json';
 
 
-const ApproveUsers = (user) => {
+const ApproveUsers = () => {
 
     let navigate = useNavigate();
-    let { userId } = useParams();
     const [show, setShow] = useState(false);
     const handleShow = () => setShow(true);
-    const [users, setUsers] = useState();
+    const [users, setUsers] = useState([]);
     const [isApproved, setIsApproved] = useState(false);
     const [isChecked, setIsChecked] = useState(false);
 
 
-  //   useEffect(() => {
-  //     // @todo - switch to fetch call to get users from db
-  //     setUsers(data);
-  // }, [])
+    useEffect(() => {
+      // @todo - switch to fetch call to get study sets from db
+      setUsers(data.users);
+  }, [])
 
 
-  useEffect(() => {
-    if (user) {
-      fetch('../data/db.json').then((res) =>
-        res.json().then((users) => {
-          return setUsers(users.find((item) => item.id === user.id));
-        })
-      );
-    }
-  }, [user]);
+  // useEffect(() => {
+  //   if (user) {
+  //     fetch('../data/db.json').then((res) =>
+  //       res.json().then((users) => {
+  //         return setUsers(users.find((item) => item.id === user.id));
+  //       })
+  //     );
+  //   }
+  // }, [user]);
   
+
   
     const handleClose = () => {
       setIsApproved(false);
@@ -91,7 +91,7 @@ const ApproveUsers = (user) => {
   {users && users.map((user, id) => (
     <div key={user.id} className="mb-3">
       <Form.Check type={user} id={`check-api-${id}`}>
-        <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id}  onChange={handleChange}/>
+        <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id} onChange={handleChange}/>
         <Form.Check.Label>{`${user.name}`}</Form.Check.Label>
       </Form.Check>
     </div>
