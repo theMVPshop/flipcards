@@ -10,9 +10,18 @@ import StudySet from './StudySet';
 
 import styles from './Dashboard.module.css';
 
+const FILTER_MAP = {
+    All: () => true,
+    Medical: set => set.course === 'Medical',
+    Dental: set => set.course === 'Dental',
+    Coding: set => set.course === 'Coding',
+};
+
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+
 export default function Dashboard() {
     const [studySets, setStudySets] = useState([]);
-    const [filter, setFilter] = useState('all');
+    const [filter, setFilter] = useState('All');
 
     useEffect(() => {
         // @todo - switch to fetch call to get study sets from db
@@ -28,9 +37,7 @@ export default function Dashboard() {
     }
 
     const filterCourses = (e) => {
-        // let studySetsCopy = { ...studySets };
-        // let updatedCardSets = studySetsCopy.cardSets.filter(set => set.course.toLowerCase() === e.target.value);
-        // let updatedStudySets = { ...studySetsCopy, cardSets: updatedCardSets }
+        setFilter(e.target.value);
     }
 
     return (
@@ -41,16 +48,15 @@ export default function Dashboard() {
                     <Form.Group className="mb-3">
                         <Form.Label>Filter by Course</Form.Label>
                         <Form.Select aria-label="Filter by Course" onChange={(e) => filterCourses(e)}>
-                            <option value="all">All</option>
-                            <option value="medical">Medical</option>
-                            <option value="dental">Dental</option>
-                            <option value="coding">Coding</option>
+                            {FILTER_NAMES.map((name, index) => (
+                                <option key={index} value={name}>{name}</option>
+                            ))}
                         </Form.Select>
                     </Form.Group>
                 </Form>
             </header>
             <Row>
-                {studySets.cardSets && studySets.cardSets.map((set, index) => (
+                {studySets.cardSets && studySets.cardSets.filter(FILTER_MAP[filter]).map((set, index) => (
                     <Col key={index} md={6} lg={4}>
                         <StudySet setInfo={set} handleDelete={handleDelete} />
                     </Col>
