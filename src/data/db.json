@@ -134,23 +134,22 @@
                 }
             ]
         }
-    ], 
-
+    ],
     "users": [
         {
-            "id:" : 1, 
+            "id": 1,
             "name": "Barry Manilow"
-        }, 
+        },
         {
-            "id": 2, 
+            "id": 2,
             "name": "Tony Stark"
-        }, 
+        },
         {
-            "id": 3, 
+            "id": 3,
             "name": "Mary Crawley"
-        }, 
+        },
         {
-            "id": 4, 
+            "id": 4,
             "name": "Ruth Bader Ginsburg"
         }
     ]

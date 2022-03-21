@@ -92,14 +92,12 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(newUser);
-    const { name, phone, email, company, address, password } = newUser;
+    const { firstName, lastName, email, password } = newUser;
 
     const newRegistration = {
-      name,
-      phone,
+      firstName,
+      lastName,
       email,
-      company,
-      address,
       password,
     };
     const form = e.currentTarget;
