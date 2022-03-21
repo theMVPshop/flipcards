@@ -91,7 +91,7 @@ const ApproveUsers = () => {
   {users && users.map((user, id) => (
     <div key={user.id} className="mb-3">
       <Form.Check type={user} id={`check-api-${id}`}>
-        <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id} onChange={handleChange}/>
+        <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id} onChange={((e) => handleChange)}/>
         <Form.Check.Label>{`${user.name}`}</Form.Check.Label>
       </Form.Check>
     </div>
