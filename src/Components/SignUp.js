@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
 
+const SIGNUP_API = '';
 
 const initialState = {
   firstName: "",
@@ -30,34 +31,35 @@ const emailVerificationError = {
 }
 
 const SignUp = () => {
-    const [validated, setValidated] = useState(false);
-    const [newUser, setNewUser] = useState(initialState);
-    const [passwordError, setPasswordError] = useState(passVerificationError);
-    const [emailError, setEmailError] = useState(emailVerificationError);
-    let navigate = useNavigate();
-    useEffect(() => {}, [newUser])
-    // const navigate = useNavigate();
-    // const [error, setError] = React.useState(null);
+  const [validated, setValidated] = useState(false);
+  const [newUser, setNewUser] = useState(initialState);
+  const [passwordError, setPasswordError] = useState(passVerificationError);
+  const [emailError, setEmailError] = useState(emailVerificationError);
+  const [signupError, setSignupError] = useState('');
+  let navigate = useNavigate();
+  useEffect(() => { }, [newUser])
+  // const navigate = useNavigate();
+  // const [error, setError] = React.useState(null);
 
-    // async function handleClick(event) {
-    //     event.preventDefault();
-    //     let result = await submitForm(event.target);
-    //     if (result.error) {
-    //       setError(result.error);
-    //     } else {
-    //       navigate('success');
-    //     }
-    //   }
+  // async function handleClick(event) {
+  //     event.preventDefault();
+  //     let result = await submitForm(event.target);
+  //     if (result.error) {
+  //       setError(result.error);
+  //     } else {
+  //       navigate('success');
+  //     }
+  //   }
 
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setNewUser({...newUser, [name]: value});
+    const { name, value } = e.target;
+    setNewUser({ ...newUser, [name]: value });
 
-    if(name === "email") {
+    if (name === "email") {
       const hasSymbols = /[@,.]/.test(value);
 
       setEmailError({
-        ...emailError, 
+        ...emailError,
         hasSymbols
       })
     }
@@ -108,64 +110,79 @@ const SignUp = () => {
 
     setValidated(true);
     navigate('/')
+
+    // fetch(SIGNUP_API, {
+    //   method: 'POST',
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Accept': 'application/json'
+    //   },
+    //   body: JSON.stringify(newRegistration)
+    // })
+    //   .then(response => response.json())
+    //   .catch(error => {
+    //     setSignupError('Unable to sign up, please try again.')
+    //     console.log(error)
+    //   })
   };
-        return (
-            <div className='signup'>
-    <Form noValidate validated={validated} onSubmit={handleSubmit}>
-                    <Row className="mb-3">
-                        <Form.Group as={Col} controlId="formGridFirstName">
-                            <Form.Label>First Name</Form.Label>
-                            <Form.Control required type="text" name="firstName" value={newUser.firstName} onChange={handleChange} placeholder="First name" />
-                            <Form.Control.Feedback type="invalid">
+  return (
+    <div className='signup'>
+      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Row className="mb-3">
+          <Form.Group as={Col} controlId="formGridFirstName">
+            <Form.Label>First Name</Form.Label>
+            <Form.Control required type="text" name="firstName" value={newUser.firstName} onChange={handleChange} placeholder="First name" />
+            <Form.Control.Feedback type="invalid">
               Please enter your first name.
             </Form.Control.Feedback>
-                        </Form.Group>
+          </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridLastName">
-                            <Form.Label>Last Name</Form.Label>
-                            <Form.Control required type="text" name="lastName" value={newUser.lastName} onChange={handleChange} placeholder="Last name" />
-                            <Form.Control.Feedback type="invalid">
+          <Form.Group as={Col} controlId="formGridLastName">
+            <Form.Label>Last Name</Form.Label>
+            <Form.Control required type="text" name="lastName" value={newUser.lastName} onChange={handleChange} placeholder="Last name" />
+            <Form.Control.Feedback type="invalid">
               Please enter your last name.
             </Form.Control.Feedback>
-                        </Form.Group>
-                    </Row>
+          </Form.Group>
+        </Row>
 
-                    <Form.Group className="mb-3" controlId="formGridEmail">
-                        <Form.Label>Email</Form.Label>
-                        <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
-                        <ul className="mb-4">
-                        {!emailError.hasSymbols && <li className="text-danger">Please enter your email</li>}</ul>
-                    </Form.Group>
+        <Form.Group className="mb-3" controlId="formGridEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
+          <ul className="mb-4">
+            {!emailError.hasSymbols && <li className="text-danger">Please enter your email</li>}</ul>
+        </Form.Group>
 
-                    <Form.Group className="mb-3" controlId="formGridPassword">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control required type="password" name="password" value={newUser.password} onChange={handleChange} placeholder="Enter Password" />
-                        <Form.Control.Feedback type="invalid">
-              Please enter your password.
-            </Form.Control.Feedback>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formGridConfirmPassword">
-                        <Form.Label>Confirm Password</Form.Label>
-                        <Form.Control required type="password" name="confirmPassword" defaultValue={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
-                        {newUser.confirmPass !== newUser.password && <li className="text-danger">That password doesn't match</li>}
-                    </Form.Group>
-                   <ul className="mb-4">
-                   {!passwordError.isLenthy && <li className="text">Min 8 characters</li>}
-    {!passwordError.hasUpper && <li className="text">At least one upper case </li>}
-    {!passwordError.hasLower && <li className="text">At least one lower case</li>}
-    {!passwordError.hasNumber && <li className="text">At least one number</li>}
-    {!passwordError.hasSpclChr && <li className="text">  At least on of the special characters i.e @ # $ % &</li>}
-            </ul> 
-                    <div class="text-center">
-                        {/* <Link class="btn btn-info" role="button">Link Button</Link> */}
-                    <Button className="mt-5" variant="primary" type="submit" >
-        Register
-      </Button>
-                    </div>
-                </Form>
-            </div>
-        )
-    }
-  
+        <Form.Group className="mb-3" controlId="formGridPassword">
+          <Form.Label>Password</Form.Label>
+          <Form.Control required type="password" name="password" value={newUser.password} onChange={handleChange} placeholder="Enter Password" />
+          <Form.Control.Feedback type="invalid">
+            Please enter your password.
+          </Form.Control.Feedback>
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formGridConfirmPassword">
+          <Form.Label>Confirm Password</Form.Label>
+          <Form.Control required type="password" name="confirmPassword" defaultValue={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
+          {newUser.confirmPass !== newUser.password && <li className="text-danger">That password doesn't match</li>}
+        </Form.Group>
+        <ul className="mb-4">
+          {!passwordError.isLenthy && <li className="text">Min 8 characters</li>}
+          {!passwordError.hasUpper && <li className="text">At least one upper case </li>}
+          {!passwordError.hasLower && <li className="text">At least one lower case</li>}
+          {!passwordError.hasNumber && <li className="text">At least one number</li>}
+          {!passwordError.hasSpclChr && <li className="text">  At least on of the special characters i.e @ # $ % &</li>}
+        </ul>
+        <div class="text-center">
+          {/* <Link class="btn btn-info" role="button">Link Button</Link> */}
+          <Button className="mt-5" variant="primary" type="submit" >
+            Register
+          </Button>
+          <p>{signupError}</p>
+        </div>
+      </Form>
+    </div>
+  )
+}
+
 export default SignUp
 
