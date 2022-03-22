@@ -78,7 +78,7 @@ const EditCardForm = ({
                 </Row>
 
                 <Row className="align-items-center">
-                    <Button className='createButton' type='submit'>Create</Button>
+                    <Button className='createButton' type='submit'>Edit</Button>
                 </Row>
             </Form>
         </Container>
