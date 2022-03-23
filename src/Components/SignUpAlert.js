@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
 import { useNavigate } from 'react-router-dom';
 
-function Notification() {
+function SignUpAlert() {
     const [show, setShow] = useState(true);
     let navigate = useNavigate();
 
@@ -30,4 +30,4 @@ function Notification() {
   )
 }
 
-export default Notification
+export default SignUpAlert

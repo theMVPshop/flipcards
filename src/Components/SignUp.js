@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
-import Notification from './Notification';
+import SignUpAlert from './SignUpAlert';
 
 const SIGNUP_API = 'https://flipcardzdb.herokuapp.com/user/register';
 
@@ -196,7 +196,7 @@ const SignUp = () => {
             Register
           </Button>
           <p>{signupError}</p>
-          {formSubmit && <Notification />}
+          {formSubmit && <SignUpAlert />}
         </div>
       </Form>
     </div>

@@ -37,32 +37,7 @@ const ResetPassword = () => {
   // const [oldPassword, setOldPassword] = useState('');
   let navigate = useNavigate();
   useEffect(() => {}, [updateUser]);
-  let Reset_API = 'https://flipcardzdb.herokuapp.com/resetpassword'
-
-  fetch(Reset_API, {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-    },
-    body: JSON.stringify(updateUser)
-})
-    .then(response => response.json())
-  //   .then(data => {
-  //     // cookies expire in 3 hours
-  //     document.cookie = `token=${data.token};max-age=60*60";`;
-  //     document.cookie = `username=${data.user.username};max-age=60*60";`;
-  //     document.cookie = `userId=${data.user.id};max-age=60*60;`;
-  //     document.cookie = `loggedIn=true;max-age=60*60";`;
-   
-  // })
-    .catch(error => {
-        setSubmitError('Error, please check that all fields are correct');
-        console.log('Form not correct: ', error)
-    })
-
-
-
+  let RESET_API = 'https://flipcardzdb.herokuapp.com/resetpassword';
 
   const handleUpdate = (e) => {
     const { name, value } = e.target;
@@ -109,6 +84,7 @@ const ResetPassword = () => {
       email,
       newPass,
     };
+
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
@@ -116,8 +92,23 @@ const ResetPassword = () => {
     }
 
     setValidated(true);
-    navigate('/')
+    navigate('/');
+
+    fetch(RESET_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(updateRegistration)
+    })
+      .then(response => response.json())
+      .catch(error => {
+        setSubmitError('Error, please check that all fields are correct');
+        console.log(error)
+      })
   };
+
   return (
     <div className="resetPassword">
       <Form noValidate validated={validated} className='align-items-center' onSubmit={handleSubmit}>
