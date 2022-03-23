@@ -88,8 +88,6 @@ const SignUp = () => {
         confirmPassword: newUser.password === value,
       });
     }
-
-
   }
 
   const handleSubmit = (e) => {
