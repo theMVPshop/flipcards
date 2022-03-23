@@ -6,14 +6,15 @@ import Button from 'react-bootstrap/Button';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
 
-const SIGNUP_API = '';
+const SIGNUP_API = 'https://flipcardzdb.herokuapp.com/user/register';
 
 const initialState = {
   firstName: "",
   lastName: "",
   email: "",
+  program: "",
   password: "",
-  confirmPass: "",
+  confirmPassword: "",
 };
 
 
@@ -23,7 +24,7 @@ const passVerificationError = {
   hasLower: false,
   hasNumber: false,
   hasSpclChr: false,
-  confirmPass: false,
+  confirmPassword: false,
 };
 
 const emailVerificationError = {
@@ -81,10 +82,10 @@ const SignUp = () => {
       });
     }
 
-    if (name === "confirmPass") {
+    if (name === "confirmPassword") {
       setPasswordError({
         ...passwordError,
-        confirmPass: newUser.password === value,
+        confirmPassword: newUser.password === value,
       });
     }
 
@@ -94,14 +95,16 @@ const SignUp = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // console.log(newUser);
-    const { firstName, lastName, email, password } = newUser;
+    const { firstName, lastName, email, program, password } = newUser;
 
     const newRegistration = {
-      firstName,
-      lastName,
+      first_name: firstName,
+      last_name: lastName,
       email,
+      program,
       password,
     };
+
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -109,21 +112,20 @@ const SignUp = () => {
     }
 
     setValidated(true);
-    navigate('/')
 
-    // fetch(SIGNUP_API, {
-    //   method: 'POST',
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Accept': 'application/json'
-    //   },
-    //   body: JSON.stringify(newRegistration)
-    // })
-    //   .then(response => response.json())
-    //   .catch(error => {
-    //     setSignupError('Unable to sign up, please try again.')
-    //     console.log(error)
-    //   })
+    fetch(SIGNUP_API, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(newRegistration)
+    })
+      .then(response => response.json())
+      .catch(error => {
+        setSignupError('Unable to sign up, please try again.')
+        console.log(error)
+      })
   };
   return (
     <div className='signup'>
@@ -146,12 +148,25 @@ const SignUp = () => {
           </Form.Group>
         </Row>
 
-        <Form.Group className="mb-3" controlId="formGridEmail">
-          <Form.Label>Email</Form.Label>
-          <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
-          <ul className="mb-4">
-            {!emailError.hasSymbols && <li className="text-danger">Please enter your email</li>}</ul>
-        </Form.Group>
+        <Row className="mb-3">
+          <Col md={6}>
+            <Form.Group className="mb-3" controlId="formGridEmail">
+              <Form.Label>Email</Form.Label>
+              <Form.Control required type="email" name="email" value={newUser.email} onChange={handleChange} placeholder="Enter email" />
+              <ul className="mb-4">
+                {!emailError.hasSymbols && <li className="text-danger">Please enter your email</li>}</ul>
+            </Form.Group>
+          </Col>
+          <Col md={6}>
+            <Form.Label for="program">Program</Form.Label>
+            <Form.Select controlId="formGridProgram" aria-label="Select a program" name="program" id="program" onChange={handleChange}>
+              <option>Select a program</option>
+              <option value="medical">Medical</option>
+              <option value="coding">Coding</option>
+              <option value="dental">Dental</option>
+            </Form.Select>
+          </Col>
+        </Row>
 
         <Form.Group className="mb-3" controlId="formGridPassword">
           <Form.Label>Password</Form.Label>
@@ -163,7 +178,7 @@ const SignUp = () => {
         <Form.Group className="mb-3" controlId="formGridConfirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control required type="password" name="confirmPassword" defaultValue={newUser.confirmPass} onChange={handleChange} placeholder="Confirm Password" />
-          {newUser.confirmPass !== newUser.password && <li className="text-danger">That password doesn't match</li>}
+          {newUser.confirmPassword !== newUser.password && <li className="text-danger">That password doesn't match</li>}
         </Form.Group>
         <ul className="mb-4">
           {!passwordError.isLenthy && <li className="text">Min 8 characters</li>}
