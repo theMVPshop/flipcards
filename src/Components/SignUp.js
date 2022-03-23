@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import './Signup.css';
 import { useNavigate } from 'react-router-dom';
+import Notification from './Notification';
 
 const SIGNUP_API = 'https://flipcardzdb.herokuapp.com/user/register';
 
@@ -37,6 +38,7 @@ const SignUp = () => {
   const [passwordError, setPasswordError] = useState(passVerificationError);
   const [emailError, setEmailError] = useState(emailVerificationError);
   const [signupError, setSignupError] = useState('');
+  const [formSubmit, setFormSubmit] = useState(false)
   let navigate = useNavigate();
   useEffect(() => { }, [newUser])
   // const navigate = useNavigate();
@@ -112,6 +114,7 @@ const SignUp = () => {
     }
 
     setValidated(true);
+    setFormSubmit(true);
 
     fetch(SIGNUP_API, {
       method: 'POST',
@@ -193,6 +196,7 @@ const SignUp = () => {
             Register
           </Button>
           <p>{signupError}</p>
+          {formSubmit && <Notification />}
         </div>
       </Form>
     </div>

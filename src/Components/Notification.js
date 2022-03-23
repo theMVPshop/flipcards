@@ -2,27 +2,30 @@ import React from 'react';
 import {useState} from 'react'; 
 import Button from 'react-bootstrap/Button';
 import Alert from 'react-bootstrap/Alert';
+import { useNavigate } from 'react-router-dom';
 
 function Notification() {
     const [show, setShow] = useState(true);
+    let navigate = useNavigate();
+
+    const handleClick = () => {
+        setShow(false);
+        navigate('/')
+    }
   return (
     <div>
         <Alert show={show} variant="success">
-        <Alert.Heading>How's it going?!</Alert.Heading>
+        <Alert.Heading>Thanks for registering!</Alert.Heading>
         <p>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-          lacinia odio sem nec elit. Cras mattis consectetur purus sit amet
-          fermentum.
+            You'll be notified when you've been approved. 
         </p>
         <hr />
         <div className="d-flex justify-content-end">
-          <Button onClick={() => setShow(false)} variant="outline-success">
-            Close me y'all!
+          <Button onClick={handleClick} variant="outline-success">
+            Home
           </Button>
         </div>
       </Alert>
-
-      {!show && <Button onClick={() => setShow(true)}>Show Alert</Button>}
     </div>
   )
 }
