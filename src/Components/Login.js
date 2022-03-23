@@ -11,26 +11,15 @@ import { useNavigate } from "react-router-dom";
 
 const LOGIN_API = 'https://flipcardzdb.herokuapp.com/user/login';
 
-const Login = (props) => {
+const Login = () => {
   // const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [validated, setValidated] = useState(false);
   const [loginError, setLoginError] = useState('')
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.preventDefault();
-    //   event.stopPropagation();
-    //   document.cookie = "loggedIn=true";
-    //   props.userLogin(user)
-    // }
-
-    // setValidated(true);
-    // navigate('/dashboard')
 
     let user = {
       email: email,
@@ -48,11 +37,14 @@ const Login = (props) => {
       .then(response => response.json())
       .then(data => {
         // cookies expire in 3 hours
-        // document.cookie = `token=${data.token};max-age=60*60";`;
-        // document.cookie = `username=${data.user.username};max-age=60*60";`;
-        // document.cookie = `userId=${data.user.id};max-age=60*60;`;
+        document.cookie = `token=${data.token};max-age=60*60";`;
+        document.cookie = `firstname=${data.user.first_name};max-age=60*60";`;
+        document.cookie = `lastname=${data.user.last_name};max-age=60*60";`;
+        document.cookie = `email=${data.user.email};max-age=60*60";`;
+        document.cookie = `program=${data.user.program};max-age=60*60";`;
+        document.cookie = `userId=${data.user.User_ID};max-age=60*60;`;
         document.cookie = `loggedIn=true;max-age=60*60";`;
-
+        navigate('/dashboard')
       })
       .catch(error => {
         setLoginError('Unable to login, please try again');
@@ -65,7 +57,7 @@ const Login = (props) => {
       <div class="text-center">
         <img src={logo} className="logo" alt="logo" />
       </div>
-      <Form noValidate validated={validated} className="loginForm" onSubmit={handleSubmit}>
+      <Form className="loginForm" onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
           <Form.Label>Email</Form.Label>
           <Form.Control
