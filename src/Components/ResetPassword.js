@@ -32,10 +32,37 @@ const ResetPassword = () => {
   const [updateUser, setUpdateUser] = useState(updatedState);
   const [passwordError, setPasswordError] = useState(passVerError);
       const [emailError, setEmailError] = useState(emailVerError);
+      const [submitError, setSubmitError] = useState('')
   // const [newPassword, setNewPassword] = useState('');
   // const [oldPassword, setOldPassword] = useState('');
   let navigate = useNavigate();
   useEffect(() => {}, [updateUser]);
+  let Reset_API = 'https://flipcardzdb.herokuapp.com/resetpassword'
+
+  fetch(Reset_API, {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+    },
+    body: JSON.stringify(updateUser)
+})
+    .then(response => response.json())
+  //   .then(data => {
+  //     // cookies expire in 3 hours
+  //     document.cookie = `token=${data.token};max-age=60*60";`;
+  //     document.cookie = `username=${data.user.username};max-age=60*60";`;
+  //     document.cookie = `userId=${data.user.id};max-age=60*60;`;
+  //     document.cookie = `loggedIn=true;max-age=60*60";`;
+   
+  // })
+    .catch(error => {
+        setSubmitError('Error, please check that all fields are correct');
+        console.log('Form not correct: ', error)
+    })
+
+
+
 
   const handleUpdate = (e) => {
     const {name, value} = e.target;
