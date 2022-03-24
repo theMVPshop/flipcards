@@ -55,7 +55,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <div class="text-center">
+      <div className="text-center">
         <img src={logo} className="logo" alt="logo" />
       </div>
       <Form className="loginForm" onSubmit={handleSubmit}>
@@ -84,17 +84,17 @@ const Login = () => {
         </Form.Group>
         <br />
         <br />
-        <div class='text-center'>
+        <div className='text-center'>
           <Button className="loginButton" class="btn btn-primary" block size="md" type="submit" >
             Login
           </Button>
         </div>
       </Form>
-      <div class="dropdown-divider"></div>
-      <div class='text-center'>
+      <div className="dropdown-divider"></div>
+      <div className='text-center'>
         <Link to="/signup">New around here? Sign up</Link>
       </div>
-      <div class='text-center'>
+      <div className='text-center'>
         <Link to="/resetpassword">Forgot Password?</Link>
       </div>
       <div className="loginAlert">
