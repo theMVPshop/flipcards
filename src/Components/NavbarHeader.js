@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cookie from 'cookie';
 
@@ -12,6 +12,13 @@ import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
 export default function NavbarHeader() {
+  const loggedInUser = () => {
+    const cookies = cookie.parse(document.cookie);
+    return cookies['email'];
+  }
+
+  const [user, setUser] = useState(loggedInUser);
+
   const navigate = useNavigate();
 
   const checkAuth = () => {
@@ -21,9 +28,13 @@ export default function NavbarHeader() {
 
   const handleLogout = (e) => {
     e.preventDefault();
-    document.cookie = 'loggedIn=';
-    document.cookie = 'token=';
-    document.cookie = 'username=';
+    document.cookie = `token=`;
+    document.cookie = `firstname=`;
+    document.cookie = `lastname=`;
+    document.cookie = `email=`;
+    document.cookie = `program=`;
+    document.cookie = `userId=`;
+    document.cookie = `loggedIn=`;
     navigate('/');
   }
 
@@ -40,11 +51,11 @@ export default function NavbarHeader() {
             )}
           </Nav>
           {/* Appears after logged in, else Sign In appears */}
-          {!checkAuth() && (
+          {checkAuth() && (
             <Nav>
-              <NavDropdown className='adminUser' title="Admin User" id="collasible-nav-dropdown">
-                <NavDropdown.Item><Link to="/updateprofile" className='navbarUpdateLink'>Update Profile</Link></NavDropdown.Item>
-                <NavDropdown.Item href="/approveusers" className='navbarUpdateLink'>Approve Users</NavDropdown.Item>
+              <NavDropdown className='adminUser' title={user} id="collasible-nav-dropdown">
+                <NavDropdown.Item href="/updateprofile" className='navbarUpdateLink'>Update Profile</NavDropdown.Item>
+                <NavDropdown.Item><Link to="/approveusers" className='navbarUpdateLink'>Approve Users</Link></NavDropdown.Item>
                 <NavDropdown.Item href="/">Settings</NavDropdown.Item>
                 <NavDropdown.Divider />
                 {/* <NavDropdown.Item href="/">Logout</NavDropdown.Item> */}
