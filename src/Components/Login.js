@@ -8,6 +8,7 @@ import "./Login.css";
 import logo from './logo.svg';
 import { Link } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
+import LoginAlert from "./LoginAlert";
 
 const LOGIN_API = 'https://flipcardzdb.herokuapp.com/user/login';
 
@@ -95,6 +96,9 @@ const Login = () => {
       </div>
       <div class='text-center'>
         <Link to="/resetpassword">Forgot Password?</Link>
+      </div>
+      <div className="loginAlert">
+      {loginError && <LoginAlert />}
       </div>
     </div>
   );

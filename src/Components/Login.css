@@ -36,9 +36,14 @@ margin-right: 250px;
   font-size: 20px;
 }
 
-@media (min-width: 768px) {
+.loginAlert {
+  margin-top: 10px;
+}
+
+/* @media (min-width: 768px) {
   .login {
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
   }
-}
+} */
+
