@@ -18,7 +18,6 @@ export default function EditCard({
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  
 
   return (
     <div>

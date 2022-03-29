@@ -15,6 +15,8 @@ const EditCardForm = ({
     const [title, setTitle] = useState('');
     const [course, setCourse] = useState('');
 
+    const FLASHCARD_API = 'https://flipcardzdb.herokuapp.com/card';
+
     useEffect(() => {
         setCards(studySetInfo.cards);
         setTitle(studySetInfo.title || '');
