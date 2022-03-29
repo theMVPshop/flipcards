@@ -1,4 +1,4 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import cookie from 'cookie';
 
@@ -11,12 +11,12 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import Nav from 'react-bootstrap/Nav';
 
 export default function NavbarHeader() {
-  const loggedInUser = () => {
-    const cookies = cookie.parse(document.cookie);
-    return cookies['email'];
-  }
+  const [user, setUser] = useState('');
 
-  const [user, setUser] = useState(loggedInUser);
+  useEffect(() => {
+    const cookies = cookie.parse(document.cookie);
+    setUser(cookies['email']);
+  }, [])
 
   const navigate = useNavigate();
 
