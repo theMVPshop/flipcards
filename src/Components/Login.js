@@ -98,7 +98,7 @@ const Login = () => {
         <Link to="/resetpassword">Forgot Password?</Link>
       </div>
       <div className="loginAlert">
-      {loginError && <LoginAlert />}
+        {loginError && <LoginAlert />}
       </div>
     </div>
   );

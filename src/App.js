@@ -7,20 +7,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.state = {
-      loggedIn: false,
-    }
-  };
+  //   this.state = {
+  //     loggedIn: false,
+  //   }
+  // };
 
-  handleClick = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn,
-    })
-    this.handleClick.bind(this)
-  };
+  // handleClick = () => {
+  //   this.setState({
+  //     loggedIn: !this.state.loggedIn,
+  //   })
+  //   this.handleClick.bind(this)
+  // };
 
   render() {
     return (
