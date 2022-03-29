@@ -23,7 +23,7 @@ export default function NavbarHeader() {
 
   const checkAuth = () => {
     const cookies = cookie.parse(document.cookie);
-    return cookies['loggedIn'] ? true : false;
+    return cookies['loggedIn'] === 'true';
   }
 
   const handleLogout = (e) => {

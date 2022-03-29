@@ -85,7 +85,7 @@ const Login = () => {
         <br />
         <br />
         <div className='text-center'>
-          <Button className="loginButton" class="btn btn-primary" block size="md" type="submit" >
+          <Button className="loginButton btn btn-primary" block size="md" type="submit" >
             Login
           </Button>
         </div>
@@ -98,7 +98,7 @@ const Login = () => {
         <Link to="/resetpassword">Forgot Password?</Link>
       </div>
       <div className="loginAlert">
-      {loginError && <LoginAlert />}
+        {loginError && <LoginAlert />}
       </div>
     </div>
   );

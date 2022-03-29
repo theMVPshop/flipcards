@@ -65,7 +65,7 @@ const Flashcards = () => {
                         onClick={() => changeCard('previous')}
                         disabled={currentCardIdx === 0}
                     >
-                        <i class="bi bi-arrow-left-circle-fill"></i>
+                        <i className="bi bi-arrow-left-circle-fill"></i>
                     </Button>
                     <p className='counter'>
                         {currentCardIdx + 1} / {cards.length}
@@ -74,7 +74,7 @@ const Flashcards = () => {
                         onClick={() => changeCard('next')}
                         disabled={currentCardIdx === cards.length - 1}
                     >
-                        <i class="bi bi-arrow-right-circle-fill"></i>
+                        <i className="bi bi-arrow-right-circle-fill"></i>
                     </Button>
                 </nav>
                 <EmbedModal studySetId={id} />

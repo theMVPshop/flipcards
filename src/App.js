@@ -15,20 +15,20 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 // import ResetPassword from './Components/ResetPassword'
 
 class App extends Component {
-  constructor() {
-    super();
+  // constructor() {
+  //   super();
 
-    this.state = {
-      loggedIn: false,
-    }
-  };
+  //   this.state = {
+  //     loggedIn: false,
+  //   }
+  // };
 
-  handleClick = () => {
-    this.setState({
-      loggedIn: !this.state.loggedIn,
-    })
-    this.handleClick.bind(this)
-  };
+  // handleClick = () => {
+  //   this.setState({
+  //     loggedIn: !this.state.loggedIn,
+  //   })
+  //   this.handleClick.bind(this)
+  // };
 
   render() {
     //   return this.state.loggedIn ? (
