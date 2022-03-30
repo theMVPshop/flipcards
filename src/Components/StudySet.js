@@ -17,7 +17,7 @@ const StudySet = ({
         <Card className="card-study-set">
             <Link to={`/flashcards/${setInfo.id}`}>
                 <Card.Body>
-                    <Card.Title>{setInfo.course}</Card.Title>
+                    <Card.Title>{setInfo.title}</Card.Title>
                 </Card.Body>
             </Link>
             <Card.Footer>

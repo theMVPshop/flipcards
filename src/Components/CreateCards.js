@@ -8,6 +8,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Container from 'react-bootstrap/esm/Container';
 
+const STUDYSET_API = 'https://flipcardzdb.herokuapp.com/cardset';
 const FLASHCARD_API = 'https://flipcardzdb.herokuapp.com/card';
 
 const CreateCards = () => {
@@ -17,7 +18,6 @@ const CreateCards = () => {
   const [fields, setFields] = useState([{
     term: '',
     definition: '',
-    description: '',
     front_img: '',
     back_img: ''
   }])
@@ -33,29 +33,53 @@ const CreateCards = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fields.forEach((field, idx) => {
-      field.title = title;
-      field.course = course;
+    let newSet = {
+      set_name: title,
+      course: course
+    }
 
-      fetch(FLASHCARD_API, {
-        method: 'post',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(field)
-      })
-        .then(res => res.json())
-        .then(navigate('/dashboard'))
-        .catch(error => console.log('Failed to create flashcard'))
+    fetch(STUDYSET_API, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(newSet)
     })
+      .then(res => res.json())
+      .then(data => {
+        // Get the ID
+        let studySetId = data.set_id;
+
+        // Loop over the fields and create flashcards for each one
+        fields.forEach((field, idx) => {
+          field.set_id = studySetId;
+
+          createFlashCard(field);
+        })
+
+      })
+      .catch(error => console.log(error))
+  }
+
+  const createFlashCard = (field) => {
+    fetch(FLASHCARD_API, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(field)
+    })
+      .then(res => res.json())
+      .then(navigate('/dashboard'))
+      .catch(error => console.log(error))
   }
 
   const addCard = () => {
     setFields([...fields, {
       term: '',
       definition: '',
-      description: '',
       front_img: '',
       back_img: ''
     }])
