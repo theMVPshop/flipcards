@@ -1,27 +1,23 @@
 import React from "react";
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import { useState, useEffect } from "react";
-import Form from 'react-bootstrap/Form';
-import { useNavigate, useParams } from "react-router-dom"; 
-import data from '../data/db.json';
-
+import Form from "react-bootstrap/Form";
+import { useNavigate, useParams } from "react-router-dom";
+import data from "../data/db.json";
 
 const ApproveUsers = () => {
+  let navigate = useNavigate();
+  const [show, setShow] = useState(false);
+  const handleShow = () => setShow(true);
+  const [users, setUsers] = useState([]);
+  const [isApproved, setIsApproved] = useState(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-    let navigate = useNavigate();
-    const [show, setShow] = useState(false);
-    const handleShow = () => setShow(true);
-    const [users, setUsers] = useState([]);
-    const [isApproved, setIsApproved] = useState(false);
-    const [isChecked, setIsChecked] = useState(false);
-
-
-    useEffect(() => {
-      // @todo - switch to fetch call to get study sets from db
-      setUsers(data.users);
-  }, [])
-
+  useEffect(() => {
+    // @todo - switch to fetch call to get study sets from db
+    setUsers(data.users);
+  }, []);
 
   // useEffect(() => {
   //   if (user) {
@@ -32,47 +28,45 @@ const ApproveUsers = () => {
   //     );
   //   }
   // }, [user]);
-  
 
-  
-    const handleClose = () => {
-      setIsApproved(false);
-      setShow(false);}
+  const handleClose = () => {
+    setIsApproved(false);
+    setShow(false);
+  };
 
-    const handleChange = (e) => {
-     const { value, isChecked } = e.target;
+  const handleChange = (e) => {
+    const { value, isChecked } = e.target;
     //  const { id, name } = users;
 
-     console.log(`${value} is ${isChecked}`)
+    console.log(`${value} is ${isChecked}`);
 
-     if(isChecked) {
-       setIsChecked(true);
-       setUsers({
-         //maybe just needs to be users: [...users]
-        users: [...users]
-       })
-     } else {
-       setIsChecked(false);
-       setUsers({
-        users: users.filter((e) => e !== value), 
-       })
-     }
+    if (isChecked) {
+      setIsChecked(true);
+      setUsers({
+        //maybe just needs to be users: [...users]
+        users: [...users],
+      });
+    } else {
+      setIsChecked(false);
+      setUsers({
+        users: users.filter((e) => e !== value),
+      });
     }
+  };
 
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      navigate('/dashboard');
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
 
-
-      if(isChecked === true){
-        setIsApproved(true);
-      }
-      console.log(`${this.user.name} is approved`)
+    if (isChecked === true) {
+      setIsApproved(true);
     }
+    console.log(`${this.user.name} is approved`);
+  };
 
-    return (
-        <div>
-            <Button variant="primary" onClick={handleShow}>
+  return (
+    <div>
+      <Button variant="primary" onClick={handleShow}>
         Users to Approve
       </Button>
 
@@ -87,26 +81,35 @@ const ApproveUsers = () => {
           <Modal.Title>Users Waiting for Approval</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form className="userApproval">
-  {users && users.map((user, id) => (
-    <div key={user.id} className="mb-3">
-      <Form.Check type={user} id={`check-api-${id}`}>
-        <Form.Check.Input type={'checkbox'} isValid checked={isChecked[user.id]} value={user.id} onChange={handleChange}/>
-        <Form.Check.Label>{`${user.name}`}</Form.Check.Label>
-      </Form.Check>
-    </div>
-  ))}
-</Form>
+          <Form className="userApproval">
+            {users &&
+              users.map((user, id) => (
+                <div key={user.id} className="mb-3">
+                  <Form.Check type={user} id={`check-api-${id}`}>
+                    <Form.Check.Input
+                      type={"checkbox"}
+                      isValid
+                      checked={isChecked[user.id]}
+                      value={user.id}
+                      onChange={handleChange}
+                    />
+                    <Form.Check.Label>{`${user.name}`}</Form.Check.Label>
+                  </Form.Check>
+                </div>
+              ))}
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-          <i class="bi bi-trash"></i>
+            <i class="bi bi-trash"></i>
           </Button>
-          <Button variant="success" onClick={handleSubmit}>Approve Users</Button>
+          <Button variant="success" onClick={handleSubmit}>
+            Approve Users
+          </Button>
         </Modal.Footer>
       </Modal>
-        </div>
-    )
-}
+    </div>
+  );
+};
 
-export default ApproveUsers
+export default ApproveUsers;
