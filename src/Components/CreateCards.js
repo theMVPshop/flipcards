@@ -14,7 +14,6 @@ const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
 const CreateCards = () => {
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
-  const [isVisible, setIsVisible] = useState(false);
   const [fields, setFields] = useState([
     {
       term: "",
@@ -30,10 +29,6 @@ const CreateCards = () => {
     const values = [...fields];
     values[index][e.target.name] = e.target.value;
     setFields(values);
-  };
-
-  const handleImage = (index, e) => {
-    setIsVisible(true);
   };
 
   const handleSubmit = (e) => {
@@ -91,7 +86,6 @@ const CreateCards = () => {
         back_img: "",
       },
     ]);
-    setIsVisible(false);
   };
 
   const handleDelete = (id) => {
