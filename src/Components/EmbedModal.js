@@ -9,6 +9,9 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 const EmbedModal = ({ studySetId }) => {
   const [showModal, setShowModal] = useState(false);
   const [text, setText] = useState("");
+  const [embedCode, setEmbedCode] = useState(
+    `<iframe class="embed-code" id="studySetIframe" src="http://localhost:3000/flashcards-embed/${studySetId}" width="650" height="600" frameBorder="0" scrolling="no"></iframe>`
+  );
 
   const handleShow = () => {
     setShowModal(true);
@@ -17,9 +20,6 @@ const EmbedModal = ({ studySetId }) => {
   const handleClose = () => {
     setShowModal(false);
   };
-  const handleClick = () => {
-      console.log(text)
-  }
 
   return (
     <>
@@ -60,13 +60,12 @@ const EmbedModal = ({ studySetId }) => {
                     `}</code>
         </Modal.Body>
         <Modal.Footer>
-          <CopyToClipboard text={text}>
+          <CopyToClipboard text={embedCode}>
             <Button
               variant="secondary"
               className="button"
               data-clipboard-action="copy"
               data-clipboard-target="#studySetIframe"
-              onClick={handleClick}
             >
               Copy Link
             </Button>

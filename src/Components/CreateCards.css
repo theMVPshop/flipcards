@@ -1,55 +1,58 @@
- .card {
-    background-color: #1a1d28 !important;
-    margin-top: 10px
+.card {
+  background-color: #1a1d28 !important;
+  margin-top: 10px;
 }
 
- .imageButton {
-    margin-right: 40px;
-    background-color: #22559c !important;
-    border: white solid 1px !important;
+.imageButton {
+  margin-right: 40px;
+  background-color: #22559c !important;
+  border: white solid 1px !important;
 }
 
 .deleteButton {
-    background-color: rgb(206, 49, 80) !important;
-    border: white solid 1px !important;
+  background-color: rgb(206, 49, 80) !important;
+  border: white solid 1px !important;
 }
 
 .addCard {
-    background-color: goldenrod !important;
-    border: white solid 1px !important;
-    color: white;
+  background-color: goldenrod !important;
+  border: white solid 1px !important;
+  color: white;
 }
 
 .createButton {
-    width: 150px !important;
-    height: 50px;
-    background-color: #552e5a !important;
-    border: 1px white solid !important;
+  width: 150px !important;
+  height: 50px;
+  background-color: #552e5a !important;
+  border: 1px white solid !important;
 }
 
 .align-items-center {
-    justify-content: center;
+  justify-content: center;
 }
 
 .align-items-left {
-    justify-content: left;
- 
+  justify-content: left;
 }
 
 .createCard {
-    margin-left: 20px;
-    margin-right: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 .createCardSet {
-    display: grid;
-    margin-bottom: 10px;
-    justify-content: center;
-    font-size: 30px;
-    font-family: 'Roboto', sans-serif ;
-    font-weight: bold;
-    font-style: italic;
-    color: white;
+  display: grid;
+  margin-bottom: 10px;
+  justify-content: center;
+  font-size: 30px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  font-style: italic;
+  color: white;
 }
 /* .createCardSet {
     color: white;
 }  */
+
+.imageLink {
+  width: 150px !important;
+}
