@@ -15,9 +15,9 @@ const StudySet = ({
 }) => {
     return (
         <Card className="card-study-set">
-            <Link to={`/flashcards/${setInfo.id}`}>
+            <Link to={`/flashcards/${setInfo.set_id}`}>
                 <Card.Body>
-                    <Card.Title>{setInfo.title}</Card.Title>
+                    <Card.Title>{setInfo.set_name}</Card.Title>
                 </Card.Body>
             </Link>
             <Card.Footer>

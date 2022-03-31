@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import data from '../data/db.json';
+// import data from '../data/db.json';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,6 +10,8 @@ import Form from 'react-bootstrap/Form';
 import StudySet from './StudySet';
 
 import styles from './Dashboard.module.css';
+
+const STUDYSET_API = 'https://flipcardzdb.herokuapp.com/cardset/all-sets-flashcards';
 
 const FILTER_MAP = {
     All: () => true,
@@ -25,8 +27,10 @@ export default function Dashboard() {
     const [filter, setFilter] = useState('All');
 
     useEffect(() => {
-        // @todo - switch to fetch call to get study sets from db
-        setStudySets(data);
+        fetch(STUDYSET_API)
+            .then(res => res.json())
+            .then(data => setStudySets(data))
+            .catch(error => console.log(error))
     }, [])
 
     const handleDelete = (id) => {
@@ -57,7 +61,7 @@ export default function Dashboard() {
                 </Form>
             </header>
             <Row>
-                {studySets.cardSets && studySets.cardSets.filter(FILTER_MAP[filter]).map((set, index) => (
+                {studySets && studySets.filter(FILTER_MAP[filter]).map((set, index) => (
                     <Col key={index} md={6} lg={4}>
                         <StudySet setInfo={set} handleDelete={handleDelete} />
                     </Col>

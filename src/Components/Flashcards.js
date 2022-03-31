@@ -17,23 +17,32 @@ const Flashcards = () => {
     const [cards, setCards] = useState([]);
     const [currentCardIdx, setCurrentCardIdx] = useState(0);
 
+    // Get Studyset only - no flashcards included
+    // @todo - see if they can include flashcards or make a second call to get them too
+    const STUDYSET_API = `https://flipcardzdb.herokuapp.com/cardset/set/${id}`;
+
     useEffect(() => {
         // Get the current study set based on the id from the url parameters
-        let foundStudySet = data.cardSets.find(set => set.id === Number(id));
-        setStudySet(foundStudySet);
+        fetch(STUDYSET_API)
+            .then(res => res.json())
+            .then(data => {
+                // let foundStudySet = data.cardSets.find(set => set.id === Number(id));
+                // setStudySet(foundStudySet);
+                setStudySet(data)
 
-        // Get the flashcards from the study set and set the first card visibility to isVisible
-        let flashCards = foundStudySet.cards.map((card, index) => {
-            if (index === currentCardIdx) {
-                card.isVisible = true;
-                return card;
-            } else {
-                card.isVisible = false;
-                return card;
-            }
-        })
-        setCards(flashCards);
-    }, [data])
+                // Get the flashcards from the study set and set the first card visibility to isVisible
+                let flashCards = data.cards.map((card, index) => {
+                    if (index === currentCardIdx) {
+                        card.isVisible = true;
+                        return card;
+                    } else {
+                        card.isVisible = false;
+                        return card;
+                    }
+                })
+                setCards(flashCards);
+            })
+    }, [])
 
     const changeCard = (direction) => {
         // Set the current card isVisible to false
