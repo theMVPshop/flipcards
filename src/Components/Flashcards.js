@@ -38,7 +38,7 @@ const Flashcards = () => {
           setStudySet(foundStudySet);
 
           // Get the flashcards from the study set and set the first card visibility to isVisible
-          let flashCards = foundStudySet.cardSets.map((card, index) =>
+          let flashCards = foundStudySet.cards.map((card, index) =>
             index === currentCardIdx
               ? ((card.isVisible = true), card)
               : ((card.isVisible = false), card)

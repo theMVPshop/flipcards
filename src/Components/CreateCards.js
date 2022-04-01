@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { v4 as uuidv4 } from "uuid";
 import "./CreateCards.css";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
@@ -9,72 +10,112 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 
-const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset";
-const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
+// const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset";
+// const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
+const STUDYSET_API = "http://localhost:8080/cardset";
+const FLASHCARD_API = "http://localhost:8080/card";
 
 const CreateCards = () => {
+  const [currentSetId, setCurrentSetId] = useState("");
   const [title, setTitle] = useState("");
   const [course, setCourse] = useState("");
-  const [cards, setCards] = useState([{}]);
+  const [card, setCard] = useState({});
+  const [cards, setCards] = useState([]);
   let navigate = useNavigate();
+
+  async function fetchCards() {
+    try {
+      let res, data;
+      res = await axios.get(`${FLASHCARD_API}/${currentSetId}`);
+      if (res.status === 200 && data !== null) {
+        data = res.data;
+        return data;
+      }
+    } catch (e) {
+      console.log("fetch cards error", e);
+    }
+  }
 
   const handleTitleChange = (e) => setTitle(e.target.value);
   const handleCourseChange = (e) => setCourse(e.target.value);
-  const handleChange = (e, index) => {
-    const values = [...cards];
-    values[index][e.target.name] = e.target.value;
-    setCards(values);
+  // const handleChange = (e, card) => (card[e.target.name] = e.target.value);
+  const handleChange = (e, cardId) => {
+    setCard({ ...card, [e.target.name]: e.target.value });
+    setCards((prevState) => {
+      let newState = prevState;
+      let matchingCardIdx = newState.findIndex(
+        (card) => card.card_id === cardId
+      );
+      newState[matchingCardIdx][e.target.name] = e.target.value;
+      return newState;
+    });
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/dashboard");
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const addSet = async (e) => {
     try {
-      let body, res, data;
+      let body, addSetSQL, data, newCard;
       body = { set_name: title, course: course };
-      res = await axios.post(STUDYSET_API, body);
-      data = res.data;
+      addSetSQL = await axios.post(STUDYSET_API, body);
+      data = addSetSQL.data;
 
-      let enhancedCards = [...cards];
-      enhancedCards.forEach(async (card) => {
-        card.set_id = data.set_id;
-        card.set_name = data.set_name;
-        card.set_course = data.set_course;
-        await axios.post(FLASHCARD_API, card);
-      });
-      navigate("/dashboard");
+      setCurrentSetId(data.set_id);
+
+      newCard = {
+        set_id: data.set_id,
+        set_name: data.set_name,
+        set_course: data.set_course,
+      };
+      setCard(newCard);
+      setCards([...cards, newCard]);
     } catch (error) {
-      console.log(error);
+      console.log("addSet error", error);
     }
   };
 
-  const addCard = () =>
-    setCards([
-      ...cards,
-      {
-        set_name: title,
-        set_course: course,
-        term: "",
-        definition: "",
-        front_img: "",
-        back_img: "",
-      },
-    ]);
+  const addCard = async (e) => {
+    try {
+      let addCardSQL, newCard, fetchedCards;
+      addCardSQL = await axios.post(FLASHCARD_API, card);
 
-  const handleDelete = (id) =>
-    setCards(
-      [...cards].filter((card, index) => {
-        console.log("delete", id, index);
-        return index !== id;
-      })
-    );
+      if (addCardSQL.status === 200) {
+        newCard = {
+          set_id: currentSetId,
+          set_name: title,
+          set_course: course,
+          term: "",
+          definition: "",
+        };
+        setCard(newCard);
+        fetchedCards = await fetchCards();
+        setCards([...fetchedCards, newCard]);
+      }
+    } catch (err) {
+      console.log("couldnt create card", err);
+    }
+  };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`${FLASHCARD_API}/${id}`);
+      setCards(cards.filter((card) => card.card_id !== id));
+      fetchCards();
+    } catch (e) {
+      console.log("couldnt delete card", e);
+    }
+  };
+
+  console.log("cards after", cards);
   return (
     <div className="card">
       <header className="createCardSet">Create A New Study Set</header>
       <br />
       <Container>
         <Form onSubmit={handleSubmit}>
-          <Row className="mb-3">
+          <Row className="mb-3 d-flex justify-content-center">
             <Form.Group as={Col} controlId="formGridTitle">
               <Form.Control
                 placeholder="Title"
@@ -89,62 +130,79 @@ const CreateCards = () => {
                 onChange={handleCourseChange}
               />
             </Form.Group>
+            <Form.Group as={Col} controlId="addSet">
+              <Button className="addSet" onClick={() => addSet()}>
+                {" "}
+                + Create New Set
+              </Button>
+            </Form.Group>
           </Row>
           <Row>
             <Form.Group className="mb-3" controlId="formCard">
-              {cards.map((card, index) => (
-                <div key={index}>
-                  <Row className="mt-5">
-                    <Form.Label>{index + 1}</Form.Label>
-                    <Form.Group as={Col} controlId="formGridTerm">
-                      <Form.Control
-                        placeholder="Term"
-                        name="term"
-                        defaultValue={card.term}
-                        onChange={(e) => handleChange(e, index)}
-                      />
-                    </Form.Group>
-                    <Form.Group as={Col} controlId="formGridDefinition">
-                      <Form.Control
-                        placeholder="Definition"
-                        name="definition"
-                        defaultValue={card.definition}
-                        onChange={(e) => handleChange(e, index)}
-                      />
-                    </Form.Group>
-                    <Form.Group
-                      as={Col}
-                      className="imageLink"
-                      controlId="formGridImage"
-                    >
-                      <Form.Control
-                        placeholder="Image Link"
-                        name="imageLink"
-                        defaultValue={card.back_img}
-                        onChange={(e) => handleChange(e, index)}
-                      />
-                    </Form.Group>
-
-                    <Form.Group as={Col} controlId="formGridButtons">
-                      <Button
-                        className="deleteButton"
-                        variant="secondary"
-                        onClick={() => handleDelete(index)}
+              {cards.length > 0 &&
+                cards.map((c, index) => (
+                  <div key={index}>
+                    <Row className="mt-5">
+                      {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
+                      <Form.Group as={Col} controlId="formGridTerm">
+                        <Form.Control
+                          placeholder="Term"
+                          name="term"
+                          value={
+                            cards[
+                              cards.findIndex((x) => x.card_id === c.card_id)
+                            ].term ?? card.term
+                          }
+                          onChange={(e) => handleChange(e, c.card_id)}
+                        />
+                      </Form.Group>
+                      <Form.Group as={Col} controlId="formGridDefinition">
+                        <Form.Control
+                          placeholder="Definition"
+                          name="definition"
+                          value={
+                            cards[
+                              cards.findIndex((x) => x.card_id === c.card_id)
+                            ].definition ?? card.definition
+                          }
+                          onChange={(e) => handleChange(e, c.card_id)}
+                        />
+                      </Form.Group>
+                      <Form.Group
+                        as={Col}
+                        className="imageLink"
+                        controlId="formGridImage"
                       >
-                        Delete
-                      </Button>
-                    </Form.Group>
-                  </Row>
-                </div>
-              ))}
+                        <Form.Control
+                          placeholder="Image Link"
+                          name="imageLink"
+                          defaultValue={card.back_img}
+                          onChange={(e) => handleChange(e, c.card_id)}
+                        />
+                      </Form.Group>
+
+                      <Form.Group as={Col} controlId="formGridButtons">
+                        <Button
+                          className="deleteButton"
+                          variant="secondary"
+                          onClick={() => handleDelete(c.card_id)}
+                        >
+                          Delete
+                        </Button>
+                      </Form.Group>
+                    </Row>
+                  </div>
+                ))}
             </Form.Group>
           </Row>
-          <Form.Group as={Col} controlId="addCard">
-            <Button className="addCard" onClick={() => addCard()}>
-              {" "}
-              + Add Card
-            </Button>
-          </Form.Group>
+          {cards.length > 0 && (
+            <Form.Group as={Col} controlId="addCard">
+              <Button className="addCard" onClick={() => addCard()}>
+                {" "}
+                + Add Card
+              </Button>
+            </Form.Group>
+          )}
           <Row className="align-items-center">
             <Button className="createButton" type="submit">
               Create
