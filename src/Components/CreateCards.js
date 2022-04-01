@@ -15,12 +15,15 @@ const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
 // const FLASHCARD_API = "http://localhost:8080/card"
 
 const CreateCards = () => {
+  const navigate = useNavigate()
+  const [inProgress, setInProgress] = useState(false)
+  const [finished, setFinished] = useState(1)
   const [currentSetId, setCurrentSetId] = useState("")
   const [title, setTitle] = useState("")
   const [course, setCourse] = useState("")
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
-  let navigate = useNavigate()
+
   async function fetchCards() {
     try {
       let res, data
@@ -40,24 +43,36 @@ const CreateCards = () => {
     setCard({ ...card, [e.target.name]: e.target.value })
     setCards((prevState) => {
       let newState = prevState
-      let matchingCardIdx = newState.findIndex((card) => card.card_id === cardId)
+      let matchingCardIdx = newState.findIndex((c) => c.card_id === cardId)
       newState[matchingCardIdx][e.target.name] = e.target.value
       return newState
     })
   }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    navigate("/dashboard")
+    setCard(Object.create(null))
+    setCards([])
+    setTitle("")
+    setCourse("")
+    setFinished(true)
+    setInProgress(false)
+    // navigate("/dashboard")
   }
 
-  const addSet = async () => {
+  async function createNewSet() {
+    if (!finished) {
+      alert("Please finish creating your current set before creating a new one")
+      return
+    }
+    setInProgress(true)
     try {
-      let body, addSetSQL, data, newCard
+      let body, createNewSetSQL, data, newCard
       body = { set_name: title, course: course }
-      addSetSQL = await axios.post(STUDYSET_API, body)
-      data = addSetSQL.data
+      createNewSetSQL = await axios.post(STUDYSET_API, body)
+      data = createNewSetSQL.data
 
-      if (addSetSQL.status === 200 && data !== null) {
+      if (createNewSetSQL.status === 200 && data !== null) {
         setCurrentSetId(data.set_id)
 
         newCard = {
@@ -69,11 +84,13 @@ const CreateCards = () => {
         setCards([...cards, newCard])
       }
     } catch (error) {
-      console.error("addSet error", error)
+      console.error("createNewSet error", error)
+    } finally {
+      setFinished(false)
     }
   }
 
-  const addCard = async () => {
+  async function addCard() {
     try {
       let addCardSQL, newCard, fetchedCards
       addCardSQL = await axios.post(FLASHCARD_API, card)
@@ -95,11 +112,13 @@ const CreateCards = () => {
     }
   }
 
-  const handleDelete = async (id) => {
+  async function deleteCard(id) {
+    if (!id) return
     try {
       let res = await axios.delete(`${FLASHCARD_API}/${id}`)
       if (res.status === 200) {
-        setCards(cards.filter((card) => card.card_id !== id))
+        let updatedCards = cards.filter((card) => card.card_id !== id)
+        setCards(updatedCards)
         fetchCards()
       }
     } catch (e) {
@@ -107,53 +126,92 @@ const CreateCards = () => {
     }
   }
 
+  async function deleteSet() {
+    try {
+      let res = await axios.delete(`${STUDYSET_API}/${currentSetId}`)
+      if (res.status === 200) {
+        setCurrentSetId("")
+        setCards([])
+        setTitle("")
+        setCourse("")
+        setFinished(true)
+        setInProgress(false)
+      }
+    } catch (e) {
+      console.error("couldnt delete set", e)
+    }
+  }
+
   return (
     <div className="card">
-      <header className="createCardSet">Create A New Study Set</header>
+      <header className="createCardSet">
+        {title || course ? `${course}: ${title}` : "Create A New Study Set"}
+      </header>
       <br />
       <Container>
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3 d-flex justify-content-center">
-            <Form.Group as={Col} controlId="formGridTitle">
-              <Form.Control placeholder="Title" value={title} onChange={handleTitleInput} />
-            </Form.Group>
             <Form.Group as={Col} controlId="formGridCourse">
-              <Form.Control placeholder="Course" value={course} onChange={handleCourseInput} />
+              <Form.Control
+                placeholder="Course"
+                value={course}
+                onChange={handleCourseInput}
+                disabled={inProgress}
+              />
             </Form.Group>
-            <Form.Group as={Col} controlId="addSet">
-              <Button className="addSet" onClick={() => addSet()}>
-                {" "}
-                + Create New Set
-              </Button>
+            <Form.Group as={Col} controlId="formGridTitle">
+              <Form.Control
+                placeholder="Title"
+                value={title}
+                onChange={handleTitleInput}
+                disabled={inProgress}
+              />
+            </Form.Group>
+            <Form.Group as={Col} controlId="createNewSet">
+              {inProgress ? (
+                <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
+                  {" "}
+                  - Delete Set
+                </Button>
+              ) : (
+                <Button className="createNewSet" onClick={() => createNewSet()}>
+                  {" "}
+                  + Create New Set
+                </Button>
+              )}
             </Form.Group>
           </Row>
           <Row>
             <Form.Group className="mb-3" controlId="formCard">
               {cards.length > 0 &&
                 cards.map((c, index) => {
-                  let cardFields = cards[cards.findIndex((x) => x.card_id === c.card_id)]
+                  let cardIdxById = cards.findIndex((x) => x.card_id === c.card_id)
+                  const activeCard = cards[cardIdxById] === cards[cards.length - 1]
                   return (
                     <div key={index}>
                       <Row className="mt-5">
                         {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
                         <Form.Group as={Col} controlId="formGridTerm">
                           <Form.Control
+                            disabled={!activeCard}
                             placeholder="Term"
                             name="term"
-                            value={cardFields.term ?? card.term}
+                            value={cards[cardIdxById].term ?? card.term}
                             onChange={(e) => handleCardsInputs(e, c.card_id)}
                           />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridDefinition">
                           <Form.Control
+                            disabled={!activeCard}
                             placeholder="Definition"
                             name="definition"
-                            value={cardFields.definition ?? card.definition}
+                            value={cards[cardIdxById].definition ?? card.definition}
                             onChange={(e) => handleCardsInputs(e, c.card_id)}
                           />
                         </Form.Group>
                         <Form.Group as={Col} className="imageLink" controlId="formGridImage">
                           <Form.Control
+                            disabled={!activeCard}
                             placeholder="Image Link"
                             name="imageLink"
                             defaultValue={card.back_img}
@@ -165,7 +223,7 @@ const CreateCards = () => {
                           <Button
                             className="deleteButton"
                             variant="secondary"
-                            onClick={() => handleDelete(c.card_id)}>
+                            onClick={() => deleteCard(c.card_id)}>
                             Delete
                           </Button>
                         </Form.Group>
@@ -185,7 +243,7 @@ const CreateCards = () => {
           )}
           <Row className="align-items-center">
             <Button className="createButton" type="submit">
-              Return To Dashboard
+              Begin New Set
             </Button>
           </Row>
         </Form>
