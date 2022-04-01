@@ -1,85 +1,82 @@
-import React from "react";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import "./CreateCards.css";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import Button from "react-bootstrap/Button";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Container from "react-bootstrap/esm/Container";
+import React from "react"
+import axios from "axios"
+import "./CreateCards.css"
+import Form from "react-bootstrap/Form"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import Button from "react-bootstrap/Button"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Container from "react-bootstrap/esm/Container"
 
-// const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset";
-// const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
-const STUDYSET_API = "http://localhost:8080/cardset";
-const FLASHCARD_API = "http://localhost:8080/card";
+const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
+const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
+// const STUDYSET_API = "http://localhost:8080/cardset"
+// const FLASHCARD_API = "http://localhost:8080/card"
 
 const CreateCards = () => {
-  const [currentSetId, setCurrentSetId] = useState("");
-  const [title, setTitle] = useState("");
-  const [course, setCourse] = useState("");
-  const [card, setCard] = useState({});
-  const [cards, setCards] = useState([]);
-  let navigate = useNavigate();
-
+  const [currentSetId, setCurrentSetId] = useState("")
+  const [title, setTitle] = useState("")
+  const [course, setCourse] = useState("")
+  const [card, setCard] = useState({})
+  const [cards, setCards] = useState([])
+  let navigate = useNavigate()
   async function fetchCards() {
     try {
-      let res, data;
-      res = await axios.get(`${FLASHCARD_API}/${currentSetId}`);
+      let res, data
+      res = await axios.get(`${FLASHCARD_API}/${currentSetId}`)
       if (res.status === 200 && data !== null) {
-        data = res.data;
-        return data;
+        data = res.data
+        return data
       }
     } catch (e) {
-      console.log("fetch cards error", e);
+      console.log("fetch cards error", e)
     }
   }
 
-  const handleTitleChange = (e) => setTitle(e.target.value);
-  const handleCourseChange = (e) => setCourse(e.target.value);
-  // const handleChange = (e, card) => (card[e.target.name] = e.target.value);
-  const handleChange = (e, cardId) => {
-    setCard({ ...card, [e.target.name]: e.target.value });
+  const handleTitleInput = (e) => setTitle(e.target.value)
+  const handleCourseInput = (e) => setCourse(e.target.value)
+  const handleCardsInputs = (e, cardId) => {
+    setCard({ ...card, [e.target.name]: e.target.value })
     setCards((prevState) => {
-      let newState = prevState;
-      let matchingCardIdx = newState.findIndex(
-        (card) => card.card_id === cardId
-      );
-      newState[matchingCardIdx][e.target.name] = e.target.value;
-      return newState;
-    });
-  };
+      let newState = prevState
+      let matchingCardIdx = newState.findIndex((card) => card.card_id === cardId)
+      newState[matchingCardIdx][e.target.name] = e.target.value
+      return newState
+    })
+  }
   const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/dashboard");
-  };
+    e.preventDefault()
+    navigate("/dashboard")
+  }
 
-  const addSet = async (e) => {
+  const addSet = async () => {
     try {
-      let body, addSetSQL, data, newCard;
-      body = { set_name: title, course: course };
-      addSetSQL = await axios.post(STUDYSET_API, body);
-      data = addSetSQL.data;
+      let body, addSetSQL, data, newCard
+      body = { set_name: title, course: course }
+      addSetSQL = await axios.post(STUDYSET_API, body)
+      data = addSetSQL.data
 
-      setCurrentSetId(data.set_id);
+      if (addSetSQL.status === 200 && data !== null) {
+        setCurrentSetId(data.set_id)
 
-      newCard = {
-        set_id: data.set_id,
-        set_name: data.set_name,
-        set_course: data.set_course,
-      };
-      setCard(newCard);
-      setCards([...cards, newCard]);
+        newCard = {
+          set_id: data.set_id,
+          set_name: data.set_name,
+          set_course: data.set_course,
+        }
+        setCard(newCard)
+        setCards([...cards, newCard])
+      }
     } catch (error) {
-      console.log("addSet error", error);
+      console.error("addSet error", error)
     }
-  };
+  }
 
-  const addCard = async (e) => {
+  const addCard = async () => {
     try {
-      let addCardSQL, newCard, fetchedCards;
-      addCardSQL = await axios.post(FLASHCARD_API, card);
+      let addCardSQL, newCard, fetchedCards
+      addCardSQL = await axios.post(FLASHCARD_API, card)
 
       if (addCardSQL.status === 200) {
         newCard = {
@@ -88,27 +85,28 @@ const CreateCards = () => {
           set_course: course,
           term: "",
           definition: "",
-        };
-        setCard(newCard);
-        fetchedCards = await fetchCards();
-        setCards([...fetchedCards, newCard]);
+        }
+        setCard(newCard)
+        fetchedCards = await fetchCards()
+        setCards([...fetchedCards, newCard])
       }
     } catch (err) {
-      console.log("couldnt create card", err);
+      console.error("couldnt create card", err)
     }
-  };
+  }
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`${FLASHCARD_API}/${id}`);
-      setCards(cards.filter((card) => card.card_id !== id));
-      fetchCards();
+      let res = await axios.delete(`${FLASHCARD_API}/${id}`)
+      if (res.status === 200) {
+        setCards(cards.filter((card) => card.card_id !== id))
+        fetchCards()
+      }
     } catch (e) {
-      console.log("couldnt delete card", e);
+      console.error("couldnt delete card", e)
     }
-  };
+  }
 
-  console.log("cards after", cards);
   return (
     <div className="card">
       <header className="createCardSet">Create A New Study Set</header>
@@ -117,18 +115,10 @@ const CreateCards = () => {
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3 d-flex justify-content-center">
             <Form.Group as={Col} controlId="formGridTitle">
-              <Form.Control
-                placeholder="Title"
-                value={title}
-                onChange={handleTitleChange}
-              />
+              <Form.Control placeholder="Title" value={title} onChange={handleTitleInput} />
             </Form.Group>
             <Form.Group as={Col} controlId="formGridCourse">
-              <Form.Control
-                placeholder="Course"
-                value={course}
-                onChange={handleCourseChange}
-              />
+              <Form.Control placeholder="Course" value={course} onChange={handleCourseInput} />
             </Form.Group>
             <Form.Group as={Col} controlId="addSet">
               <Button className="addSet" onClick={() => addSet()}>
@@ -140,59 +130,49 @@ const CreateCards = () => {
           <Row>
             <Form.Group className="mb-3" controlId="formCard">
               {cards.length > 0 &&
-                cards.map((c, index) => (
-                  <div key={index}>
-                    <Row className="mt-5">
-                      {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
-                      <Form.Group as={Col} controlId="formGridTerm">
-                        <Form.Control
-                          placeholder="Term"
-                          name="term"
-                          value={
-                            cards[
-                              cards.findIndex((x) => x.card_id === c.card_id)
-                            ].term ?? card.term
-                          }
-                          onChange={(e) => handleChange(e, c.card_id)}
-                        />
-                      </Form.Group>
-                      <Form.Group as={Col} controlId="formGridDefinition">
-                        <Form.Control
-                          placeholder="Definition"
-                          name="definition"
-                          value={
-                            cards[
-                              cards.findIndex((x) => x.card_id === c.card_id)
-                            ].definition ?? card.definition
-                          }
-                          onChange={(e) => handleChange(e, c.card_id)}
-                        />
-                      </Form.Group>
-                      <Form.Group
-                        as={Col}
-                        className="imageLink"
-                        controlId="formGridImage"
-                      >
-                        <Form.Control
-                          placeholder="Image Link"
-                          name="imageLink"
-                          defaultValue={card.back_img}
-                          onChange={(e) => handleChange(e, c.card_id)}
-                        />
-                      </Form.Group>
+                cards.map((c, index) => {
+                  let cardFields = cards[cards.findIndex((x) => x.card_id === c.card_id)]
+                  return (
+                    <div key={index}>
+                      <Row className="mt-5">
+                        {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
+                        <Form.Group as={Col} controlId="formGridTerm">
+                          <Form.Control
+                            placeholder="Term"
+                            name="term"
+                            value={cardFields.term ?? card.term}
+                            onChange={(e) => handleCardsInputs(e, c.card_id)}
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} controlId="formGridDefinition">
+                          <Form.Control
+                            placeholder="Definition"
+                            name="definition"
+                            value={cardFields.definition ?? card.definition}
+                            onChange={(e) => handleCardsInputs(e, c.card_id)}
+                          />
+                        </Form.Group>
+                        <Form.Group as={Col} className="imageLink" controlId="formGridImage">
+                          <Form.Control
+                            placeholder="Image Link"
+                            name="imageLink"
+                            defaultValue={card.back_img}
+                            onChange={(e) => handleCardsInputs(e, c.card_id)}
+                          />
+                        </Form.Group>
 
-                      <Form.Group as={Col} controlId="formGridButtons">
-                        <Button
-                          className="deleteButton"
-                          variant="secondary"
-                          onClick={() => handleDelete(c.card_id)}
-                        >
-                          Delete
-                        </Button>
-                      </Form.Group>
-                    </Row>
-                  </div>
-                ))}
+                        <Form.Group as={Col} controlId="formGridButtons">
+                          <Button
+                            className="deleteButton"
+                            variant="secondary"
+                            onClick={() => handleDelete(c.card_id)}>
+                            Delete
+                          </Button>
+                        </Form.Group>
+                      </Row>
+                    </div>
+                  )
+                })}
             </Form.Group>
           </Row>
           {cards.length > 0 && (
@@ -205,13 +185,13 @@ const CreateCards = () => {
           )}
           <Row className="align-items-center">
             <Button className="createButton" type="submit">
-              Create
+              Return To Dashboard
             </Button>
           </Row>
         </Form>
       </Container>
     </div>
-  );
-};
+  )
+}
 
-export default CreateCards;
+export default CreateCards
