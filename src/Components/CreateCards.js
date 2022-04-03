@@ -17,7 +17,6 @@ const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
 const CreateCards = () => {
   const navigate = useNavigate()
   const [inProgress, setInProgress] = useState(false)
-  const [finished, setFinished] = useState(1)
   const [currentSetId, setCurrentSetId] = useState("")
   const [title, setTitle] = useState("")
   const [course, setCourse] = useState("")
@@ -43,7 +42,7 @@ const CreateCards = () => {
     setCard({ ...card, [e.target.name]: e.target.value })
     setCards((prevState) => {
       let newState = prevState
-      let matchingCardIdx = newState.findIndex((c) => c.card_id === cardId)
+      const matchingCardIdx = newState.findIndex((c) => c.card_id === cardId)
       newState[matchingCardIdx][e.target.name] = e.target.value
       return newState
     })
@@ -55,16 +54,11 @@ const CreateCards = () => {
     setCards([])
     setTitle("")
     setCourse("")
-    setFinished(true)
     setInProgress(false)
     // navigate("/dashboard")
   }
 
   async function createNewSet() {
-    if (!finished) {
-      alert("Please finish creating your current set before creating a new one")
-      return
-    }
     setInProgress(true)
     try {
       let body, createNewSetSQL, data, newCard
@@ -85,8 +79,6 @@ const CreateCards = () => {
       }
     } catch (error) {
       console.error("createNewSet error", error)
-    } finally {
-      setFinished(false)
     }
   }
 
@@ -134,7 +126,6 @@ const CreateCards = () => {
         setCards([])
         setTitle("")
         setCourse("")
-        setFinished(true)
         setInProgress(false)
       }
     } catch (e) {
