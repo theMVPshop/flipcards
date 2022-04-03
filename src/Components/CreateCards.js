@@ -41,10 +41,10 @@ const CreateCards = () => {
   const handleCardsInputs = (e, cardId) => {
     setCard({ ...card, [e.target.name]: e.target.value })
     setCards((prevState) => {
-      let newState = prevState
-      const matchingCardIdx = newState.findIndex((c) => c.card_id === cardId)
-      newState[matchingCardIdx][e.target.name] = e.target.value
-      return newState
+      let cards = prevState
+      const matchingCardIdx = cards.findIndex((c) => c.card_id === cardId)
+      cards[matchingCardIdx][e.target.name] = e.target.value
+      return cards
     })
   }
 
