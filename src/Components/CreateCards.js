@@ -22,15 +22,12 @@ const CreateCards = () => {
   const [course, setCourse] = useState("")
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
+  let newCardRef = React.useRef()
 
   async function fetchCards() {
     try {
-      let res, data
-      res = await axios.get(`${FLASHCARD_API}/${currentSetId}`)
-      if (res.status === 200 && data !== null) {
-        data = res.data
-        return data
-      }
+      const { data } = await axios.get(`${FLASHCARD_API}/${currentSetId}`)
+      return data
     } catch (e) {
       console.log("fetch cards error", e)
     }
@@ -41,16 +38,16 @@ const CreateCards = () => {
   const handleCardsInputs = (e, cardId) => {
     setCard({ ...card, [e.target.name]: e.target.value })
     setCards((prevState) => {
-      let cards = prevState
-      const matchingCardIdx = cards.findIndex((c) => c.card_id === cardId)
-      cards[matchingCardIdx][e.target.name] = e.target.value
-      return cards
+      let newState = prevState
+      const matchingCardIdx = newState.findIndex((c) => c.card_id === cardId)
+      newState[matchingCardIdx][e.target.name] = e.target.value
+      return newState
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setCard(Object.create(null))
+    setCard({})
     setCards([])
     setTitle("")
     setCourse("")
@@ -59,6 +56,7 @@ const CreateCards = () => {
   }
 
   async function createNewSet() {
+    if (!title || !course) return
     setInProgress(true)
     try {
       let body, createNewSetSQL, data, newCard
@@ -76,6 +74,7 @@ const CreateCards = () => {
         }
         setCard(newCard)
         setCards([...cards, newCard])
+        newCardRef.current.focus()
       }
     } catch (error) {
       console.error("createNewSet error", error)
@@ -98,6 +97,7 @@ const CreateCards = () => {
         setCard(newCard)
         fetchedCards = await fetchCards()
         setCards([...fetchedCards, newCard])
+        newCardRef.current.focus()
       }
     } catch (err) {
       console.error("couldnt create card", err)
@@ -112,6 +112,7 @@ const CreateCards = () => {
         let updatedCards = cards.filter((card) => card.card_id !== id)
         setCards(updatedCards)
         fetchCards()
+        newCardRef.current.focus()
       }
     } catch (e) {
       console.error("couldnt delete card", e)
@@ -184,6 +185,7 @@ const CreateCards = () => {
                         {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
                         <Form.Group as={Col} controlId="formGridTerm">
                           <Form.Control
+                            ref={activeCard ? newCardRef : null}
                             disabled={!activeCard}
                             placeholder="Term"
                             name="term"

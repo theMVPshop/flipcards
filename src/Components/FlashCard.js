@@ -1,25 +1,21 @@
-import React from "react";
-import { useState } from "react";
+import React from "react"
+import { useState } from "react"
 
-import "./FlashCard.css";
+import "./FlashCard.css"
 
 const FlashCard = ({ card }) => {
-  const [flipped, setFlipped] = useState(false);
+  const [flipped, setFlipped] = useState(false)
 
-  const flipCard = () => setFlipped(!flipped);
+  const flipCard = () => setFlipped(!flipped)
 
   return (
     <>
       {card.isVisible && (
         <button onClick={flipCard} className="flashcard">
-          <div
-            className={`flashcardInner ${flipped ? "showBack" : "showFront"}`}
-          >
+          <div className={`flashcardInner ${flipped ? "showBack" : "showFront"}`}>
             <div className="flashcardFront">
               <p>Term: {card.term}</p>
-              {card.id === 1 && (
-                <p className="cardFooter">Click to reveal definition</p>
-              )}
+              <p className="cardFooter">Click to reveal definition</p>
             </div>
             <div className="flashcardBack">
               <p>Definition: {card.definition}</p>
@@ -28,7 +24,7 @@ const FlashCard = ({ card }) => {
         </button>
       )}
     </>
-  );
-};
+  )
+}
 
-export default FlashCard;
+export default FlashCard

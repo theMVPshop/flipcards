@@ -21,18 +21,14 @@ const Flashcards = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        let res, data, cardSet
-        res = await axios.get(flashcardsBySetId)
-        if (res.status === 200 && data !== null) {
-          data = res.data
-          // Set the first card visibility to isVisible
-          cardSet = data.map((card, index) =>
-            index === currentCardIdx
-              ? ((card.isVisible = true), card)
-              : ((card.isVisible = false), card)
-          )
-          setCards(cardSet)
-        }
+        let { data } = await axios.get(flashcardsBySetId)
+        // Set the first card visibility to isVisible
+        let cardSet = data.map((card, index) =>
+          index === currentCardIdx
+            ? ((card.isVisible = true), card)
+            : ((card.isVisible = false), card)
+        )
+        setCards(cardSet)
       } catch (e) {
         console.log("fetch cards error", e)
       }
@@ -62,7 +58,7 @@ const Flashcards = () => {
 
   return (
     <Container className="flashcards">
-      {cards && cards.map((card) => <FlashCard key={card.card_id} card={card} />)}
+      {cards.length > -1 && cards.map((card) => <FlashCard key={card.card_id} card={card} />)}
       <div className="navContainer">
         <nav className="flashcardsNavigation">
           <Button onClick={() => changeCard("previous")} disabled={currentCardIdx === 0}>
