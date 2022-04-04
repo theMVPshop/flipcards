@@ -1,5 +1,6 @@
 import React from "react"
 import axios from "axios"
+import { useQuery, useMutation, useQueryClient } from "react-query"
 import "./CreateCards.css"
 import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
@@ -22,19 +23,22 @@ const CreateCards = () => {
   const [course, setCourse] = useState("")
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
+  let newCardRef = React.useRef()
+
+  const queryClient = useQueryClient()
 
   async function fetchCards() {
-    try {
-      let res, data
-      res = await axios.get(`${FLASHCARD_API}/${currentSetId}`)
-      if (res.status === 200 && data !== null) {
-        data = res.data
-        return data
-      }
-    } catch (e) {
-      console.log("fetch cards error", e)
-    }
+    const { data } = await axios.get(`${FLASHCARD_API}/${currentSetId}`)
+    return data
   }
+  // async function fetchFlashcardSet() {
+  //   const { data } = await axios.post(STUDYSET_API, body)
+  //   return data
+  // }
+  // async function postFlashcard() {
+  //   const { data } = await axios.post(FLASHCARD_API, card)
+  //   return data //returns cardId
+  // }
 
   const handleTitleInput = (e) => setTitle(e.target.value)
   const handleCourseInput = (e) => setCourse(e.target.value)
@@ -50,7 +54,7 @@ const CreateCards = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    setCard(Object.create(null))
+    setCard({})
     setCards([])
     setTitle("")
     setCourse("")
@@ -98,6 +102,7 @@ const CreateCards = () => {
         setCard(newCard)
         fetchedCards = await fetchCards()
         setCards([...fetchedCards, newCard])
+        newCardRef.current.focus()
       }
     } catch (err) {
       console.error("couldnt create card", err)
@@ -133,6 +138,31 @@ const CreateCards = () => {
     }
   }
 
+  const useFlashcards = () => useQuery("cardsQ", fetchCards)
+  // const useFlashcardSet = useQuery("cards", fetchCardSet)
+  const postFlashcardMutation = useMutation(addCard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("cardsQ")
+    },
+  })
+  const postFlashcardsMutation = useMutation(createNewSet, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("cardsQ")
+    },
+  })
+  const deleteFlashcardMutation = useMutation(deleteCard, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("cardsQ")
+    },
+  })
+  const deleteFlashcardsMutation = useMutation(deleteSet, {
+    onSuccess: () => {
+      queryClient.invalidateQueries("cardsQ")
+    },
+  })
+
+  const { isLoading, error, data, isFetching } = useFlashcards()
+
   return (
     <div className="card">
       <header className="createCardSet">
@@ -160,12 +190,15 @@ const CreateCards = () => {
             </Form.Group>
             <Form.Group as={Col} controlId="createNewSet">
               {inProgress ? (
-                <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
+                <Button
+                  className="deleteButton"
+                  variant="secondary"
+                  onClick={() => deleteFlashcardsMutation()}>
                   {" "}
                   - Delete Set
                 </Button>
               ) : (
-                <Button className="createNewSet" onClick={() => createNewSet()}>
+                <Button className="createNewSet" onClick={() => postFlashcardsMutation.mutate()}>
                   {" "}
                   + Create New Set
                 </Button>
@@ -174,8 +207,11 @@ const CreateCards = () => {
           </Row>
           <Row>
             <Form.Group className="mb-3" controlId="formCard">
-              {cards.length > 0 &&
-                cards.map((c, index) => {
+              <div>{isFetching ? "Updating..." : ""}</div>
+              {data &&
+                data.map((c, index) => {
+                  if (isLoading) return "Loading..."
+                  if (error) return "An error has occurred: " + error.message
                   let cardIdxById = cards.findIndex((x) => x.card_id === c.card_id)
                   const activeCard = cards[cardIdxById] === cards[cards.length - 1]
                   return (
@@ -184,6 +220,7 @@ const CreateCards = () => {
                         {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
                         <Form.Group as={Col} controlId="formGridTerm">
                           <Form.Control
+                            ref={activeCard ? newCardRef : null}
                             disabled={!activeCard}
                             placeholder="Term"
                             name="term"
@@ -214,7 +251,7 @@ const CreateCards = () => {
                           <Button
                             className="deleteButton"
                             variant="secondary"
-                            onClick={() => deleteCard(c.card_id)}>
+                            onClick={() => deleteFlashcardMutation.mutate(c.card_id)}>
                             Delete
                           </Button>
                         </Form.Group>
@@ -226,7 +263,7 @@ const CreateCards = () => {
           </Row>
           {cards.length > 0 && (
             <Form.Group as={Col} controlId="addCard">
-              <Button className="addCard" onClick={() => addCard()}>
+              <Button className="addCard" onClick={() => postFlashcardMutation.mutate()}>
                 {" "}
                 + Add Card
               </Button>
