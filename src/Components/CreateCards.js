@@ -31,7 +31,7 @@ const CreateCards = () => {
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
   let newCardRef = React.useRef()
-  const spinner = <Spinner animation="border" variant="info" size="sm" />
+  const spinner = <Spinner animation="border" variant="success" size="sm" />
 
   async function fetchCards() {
     try {
