@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
+import Spinner from "react-bootstrap/Spinner"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
@@ -17,12 +18,20 @@ const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
 const CreateCards = () => {
   const navigate = useNavigate()
   const [inProgress, setInProgress] = useState(false)
+  const [loading, setLoading] = useState({
+    card: false,
+    cards: false,
+    deletingCard: false,
+    deletingCards: false,
+    clickedId: null,
+  })
   const [currentSetId, setCurrentSetId] = useState("")
   const [title, setTitle] = useState("")
   const [course, setCourse] = useState("")
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
   let newCardRef = React.useRef()
+  const spinner = <Spinner animation="border" variant="info" size="sm" />
 
   async function fetchCards() {
     try {
@@ -57,31 +66,28 @@ const CreateCards = () => {
 
   async function createNewSet() {
     if (!title || !course) return
+    setLoading({ cards: true })
     setInProgress(true)
     try {
-      let body, createNewSetSQL, data, newCard
-      body = { set_name: title, course: course }
-      createNewSetSQL = await axios.post(STUDYSET_API, body)
-      data = createNewSetSQL.data
-
-      if (createNewSetSQL.status === 200 && data !== null) {
-        setCurrentSetId(data.set_id)
-
-        newCard = {
-          set_id: data.set_id,
-          set_name: data.set_name,
-          set_course: data.set_course,
-        }
-        setCard(newCard)
-        setCards([...cards, newCard])
-        newCardRef.current.focus()
+      const body = { set_name: title, course: course }
+      const { data } = await axios.post(STUDYSET_API, body)
+      setCurrentSetId(data.set_id)
+      const newCard = {
+        set_id: data.set_id,
+        set_name: data.set_name,
+        set_course: data.set_course,
       }
+      setCard(newCard)
+      setCards([...cards, newCard])
+      setLoading({ cards: false })
+      newCardRef.current.focus()
     } catch (error) {
       console.error("createNewSet error", error)
     }
   }
 
   async function addCard() {
+    setLoading({ card: true })
     try {
       let addCardSQL, newCard, fetchedCards
       addCardSQL = await axios.post(FLASHCARD_API, card)
@@ -97,6 +103,7 @@ const CreateCards = () => {
         setCard(newCard)
         fetchedCards = await fetchCards()
         setCards([...fetchedCards, newCard])
+        setLoading({ card: false })
         newCardRef.current.focus()
       }
     } catch (err) {
@@ -106,12 +113,13 @@ const CreateCards = () => {
 
   async function deleteCard(id) {
     if (!id) return
+    setLoading({ deletingCard: true, clickedId: id })
     try {
       let res = await axios.delete(`${FLASHCARD_API}/${id}`)
       if (res.status === 200) {
         let updatedCards = cards.filter((card) => card.card_id !== id)
         setCards(updatedCards)
-        fetchCards()
+        setLoading({ deletingCard: false })
         newCardRef.current.focus()
       }
     } catch (e) {
@@ -120,6 +128,7 @@ const CreateCards = () => {
   }
 
   async function deleteSet() {
+    setLoading({ deletingCards: true })
     try {
       let res = await axios.delete(`${STUDYSET_API}/${currentSetId}`)
       if (res.status === 200) {
@@ -128,6 +137,7 @@ const CreateCards = () => {
         setTitle("")
         setCourse("")
         setInProgress(false)
+        setLoading({ deletingCards: false })
       }
     } catch (e) {
       console.error("couldnt delete set", e)
@@ -163,7 +173,7 @@ const CreateCards = () => {
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
                   {" "}
-                  - Delete Set
+                  {loading.cards || loading.deletingCards ? spinner : "- Delete Set"}
                 </Button>
               ) : (
                 <Button className="createNewSet" onClick={() => createNewSet()}>
@@ -217,7 +227,9 @@ const CreateCards = () => {
                             className="deleteButton"
                             variant="secondary"
                             onClick={() => deleteCard(c.card_id)}>
-                            Delete
+                            {loading.deletingCard && loading.clickedId === c.card_id
+                              ? spinner
+                              : "Delete"}
                           </Button>
                         </Form.Group>
                       </Row>
@@ -230,7 +242,7 @@ const CreateCards = () => {
             <Form.Group as={Col} controlId="addCard">
               <Button className="addCard" onClick={() => addCard()}>
                 {" "}
-                + Add Card
+                {loading.card ? spinner : "+ Add Card"}
               </Button>
             </Form.Group>
           )}
