@@ -41,6 +41,13 @@ export default function Dashboard() {
         setStudySets(updatedStudySets);
     }
 
+    const handleUpdateStudySets = (updatedSet) => {
+        let newStudySets = [...studySets];
+        let foundSetIndex = newStudySets.findIndex(set => Number(set.set_id) === Number(updatedSet.set_id));
+        newStudySets.splice(foundSetIndex, 1, updatedSet);
+        setStudySets(newStudySets);
+    }
+
     const filterCourses = (e) => {
         setFilter(e.target.value);
     }
@@ -63,7 +70,11 @@ export default function Dashboard() {
             <Row>
                 {studySets && studySets.filter(FILTER_MAP[filter]).map((set, index) => (
                     <Col key={index} md={6} lg={4}>
-                        <StudySet setInfo={set} handleDelete={handleDelete} />
+                        <StudySet
+                            setInfo={set}
+                            handleDelete={handleDelete}
+                            handleUpdateStudySets={handleUpdateStudySets}
+                        />
                     </Col>
                 ))}
             </Row>
