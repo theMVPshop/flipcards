@@ -11,7 +11,8 @@ import './StudySet.css';
 const StudySet = ({
     // From Dashboard
     setInfo,
-    handleDelete
+    handleDelete,
+    handleUpdateStudySets
 }) => {
     return (
         <Card className="card-study-set">
@@ -21,7 +22,7 @@ const StudySet = ({
                 </Card.Body>
             </Link>
             <Card.Footer>
-                <EditCard studySetInfo={setInfo} />
+                <EditCard studySetInfo={setInfo} handleUpdateStudySets={handleUpdateStudySets} />
                 <Button
                     className="btn-delete"
                     onClick={() => handleDelete(setInfo.id)}
