@@ -34,7 +34,7 @@ const CreateCards = () => {
   let newCardRef = React.useRef()
   let set_nameInputRef = React.useRef()
   let courseInputRef = React.useRef()
-  const spinner = <Spinner animation="border" variant="success" size="sm" />
+  const loadingSpinner = <Spinner animation="border" variant="success" size="sm" />
 
   async function fetchCards() {
     try {
@@ -192,7 +192,7 @@ const CreateCards = () => {
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
                   {" "}
-                  {loading.cards || loading.deletingCards ? spinner : "Delete Set"}
+                  {loading.cards || loading.deletingCards ? loadingSpinner : "Delete Set"}
                 </Button>
               ) : (
                 <Button className="createNewSet" onClick={() => createNewSet()}>
@@ -247,7 +247,7 @@ const CreateCards = () => {
                             variant="secondary"
                             onClick={() => deleteCard(c.card_id)}>
                             {loading.deletingCard && loading.clickedId === c.card_id
-                              ? spinner
+                              ? loadingSpinner
                               : "Delete"}
                           </Button>
                         </Form.Group>
@@ -261,7 +261,7 @@ const CreateCards = () => {
             <Form.Group as={Col} controlId="addCard">
               <Button className="addCard" onClick={() => addCard()}>
                 {" "}
-                {loading.card ? spinner : "+ Add Card"}
+                {loading.card ? loadingSpinner : "+ Add Card"}
               </Button>
             </Form.Group>
           )}
