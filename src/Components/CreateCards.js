@@ -10,10 +10,10 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
 
-const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
-const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
-// const STUDYSET_API = "http://localhost:8080/cardset"
-// const FLASHCARD_API = "http://localhost:8080/card"
+// const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
+// const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
+const STUDYSET_API = "http://localhost:8080/cardset"
+const FLASHCARD_API = "http://localhost:8080/card"
 
 const CreateCards = () => {
   const navigate = useNavigate()
@@ -25,12 +25,15 @@ const CreateCards = () => {
     deletingCards: false,
     clickedId: null,
   })
+  const [error, setError] = useState("")
   const [currentSetId, setCurrentSetId] = useState("")
   const [title, setTitle] = useState("")
   const [course, setCourse] = useState("")
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
   let newCardRef = React.useRef()
+  let set_nameInputRef = React.useRef()
+  let courseInputRef = React.useRef()
   const spinner = <Spinner animation="border" variant="success" size="sm" />
 
   async function fetchCards() {
@@ -41,7 +44,7 @@ const CreateCards = () => {
       console.log("fetch cards error", e)
     }
   }
-
+  React.useEffect(() => courseInputRef.current.focus(), [])
   const handleTitleInput = (e) => setTitle(e.target.value)
   const handleCourseInput = (e) => setCourse(e.target.value)
   const handleCardsInputs = (e, cardId) => {
@@ -81,8 +84,13 @@ const CreateCards = () => {
       setCards([...cards, newCard])
       setLoading({ cards: false })
       newCardRef.current.focus()
-    } catch (error) {
-      console.error("createNewSet error", error)
+    } catch (err) {
+      setInProgress(false)
+      console.error("createNewSet error", err)
+      setError(err.response.data.message)
+      setLoading({ cards: false })
+      alert(err.response.data.message)
+      set_nameInputRef.current.focus()
     }
   }
 
@@ -107,7 +115,10 @@ const CreateCards = () => {
         newCardRef.current.focus()
       }
     } catch (err) {
+      setError(err.response.data.message)
       console.error("couldnt create card", err)
+      setLoading({ card: false })
+      alert(err.response.data.message)
     }
   }
 
@@ -122,8 +133,11 @@ const CreateCards = () => {
         setLoading({ deletingCard: false })
         newCardRef.current.focus()
       }
-    } catch (e) {
-      console.error("couldnt delete card", e)
+    } catch (err) {
+      setError(err.response.data.message)
+      console.error("couldnt delete card", err)
+      setLoading({ deletingCard: false })
+      alert(err.response.data.message)
     }
   }
 
@@ -139,8 +153,11 @@ const CreateCards = () => {
         setInProgress(false)
         setLoading({ deletingCards: false })
       }
-    } catch (e) {
-      console.error("couldnt delete set", e)
+    } catch (err) {
+      setError(err.response.data.message)
+      console.error("couldnt delete set", err)
+      setLoading({ deletingCards: false })
+      alert(err.response.data.message)
     }
   }
 
@@ -155,6 +172,7 @@ const CreateCards = () => {
           <Row className="mb-3 d-flex justify-content-center">
             <Form.Group as={Col} controlId="formGridCourse">
               <Form.Control
+                ref={courseInputRef}
                 placeholder="Course"
                 value={course}
                 onChange={handleCourseInput}
@@ -163,6 +181,7 @@ const CreateCards = () => {
             </Form.Group>
             <Form.Group as={Col} controlId="formGridTitle">
               <Form.Control
+                ref={set_nameInputRef}
                 placeholder="Title"
                 value={title}
                 onChange={handleTitleInput}
@@ -173,7 +192,7 @@ const CreateCards = () => {
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
                   {" "}
-                  {loading.cards || loading.deletingCards ? spinner : "- Delete Set"}
+                  {loading.cards || loading.deletingCards ? spinner : "Delete Set"}
                 </Button>
               ) : (
                 <Button className="createNewSet" onClick={() => createNewSet()}>
