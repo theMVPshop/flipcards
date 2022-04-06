@@ -191,12 +191,10 @@ const CreateCards = () => {
             <Form.Group as={Col} controlId="createNewSet">
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
-                  {" "}
                   {loading.cards || loading.deletingCards ? loadingSpinner : "Delete Set"}
                 </Button>
               ) : (
                 <Button className="createNewSet" onClick={() => createNewSet()}>
-                  {" "}
                   + Create New Set
                 </Button>
               )}
@@ -209,7 +207,7 @@ const CreateCards = () => {
                   let cardIdxById = cards.findIndex((x) => x.card_id === c.card_id)
                   const activeCard = cards[cardIdxById] === cards[cards.length - 1]
                   return (
-                    <div key={index}>
+                    <ul key={c.card_id}>
                       <Row className="mt-5">
                         {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
                         <Form.Group as={Col} controlId="formGridTerm">
@@ -252,7 +250,7 @@ const CreateCards = () => {
                           </Button>
                         </Form.Group>
                       </Row>
-                    </div>
+                    </ul>
                   )
                 })}
             </Form.Group>
