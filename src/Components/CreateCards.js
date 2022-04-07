@@ -6,14 +6,16 @@ import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Button from "react-bootstrap/Button"
 import Spinner from "react-bootstrap/Spinner"
+import Dropdown from "react-bootstrap/Dropdown"
+import DropdownButton from "react-bootstrap/DropdownButton"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
 
-// const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
-// const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
-const STUDYSET_API = "http://localhost:8080/cardset"
-const FLASHCARD_API = "http://localhost:8080/card"
+const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
+const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
+// const STUDYSET_API = "http://localhost:8080/cardset"
+// const FLASHCARD_API = "http://localhost:8080/card"
 
 const CreateCards = () => {
   const navigate = useNavigate()
@@ -28,7 +30,7 @@ const CreateCards = () => {
   const [error, setError] = useState("")
   const [currentSetId, setCurrentSetId] = useState("")
   const [title, setTitle] = useState("")
-  const [course, setCourse] = useState("")
+  const [course, setCourse] = useState()
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
   let newCardRef = React.useRef()
@@ -171,13 +173,20 @@ const CreateCards = () => {
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3 d-flex justify-content-center">
             <Form.Group as={Col} controlId="formGridCourse">
-              <Form.Control
+              <DropdownButton
+                id="dropdown-basic-button"
+                className="float-end"
+                title={course || "Select Course"}
                 ref={courseInputRef}
                 placeholder="Course"
                 value={course}
                 onChange={handleCourseInput}
                 disabled={inProgress}
-              />
+                variant="warning">
+                <Dropdown.Item onClick={() => setCourse("Medical")}>Medical</Dropdown.Item>
+                <Dropdown.Item onClick={() => setCourse("Dental")}>Dental</Dropdown.Item>
+                <Dropdown.Item onClick={() => setCourse("Coding")}>Coding</Dropdown.Item>
+              </DropdownButton>
             </Form.Group>
             <Form.Group as={Col} controlId="formGridTitle">
               <Form.Control
@@ -266,6 +275,9 @@ const CreateCards = () => {
           <Row className="align-items-center">
             <Button className="createButton" type="submit">
               Begin New Set
+            </Button>
+            <Button className="createButton" onClick={() => navigate("/dashboard")}>
+              Return To Dash
             </Button>
           </Row>
         </Form>
