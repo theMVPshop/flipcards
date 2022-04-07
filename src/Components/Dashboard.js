@@ -3,13 +3,11 @@ import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 // import data from '../data/db.json';
-
-import Container from "react-bootstrap/Container"
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Form from "react-bootstrap/Form"
 import StudySet from "./StudySet"
-
+import Container from "react-bootstrap/Container"
 import styles from "./Dashboard.module.css"
 
 const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset/all-sets-flashcards"
@@ -71,6 +69,12 @@ export default function Dashboard() {
           </Form.Group>
         </Form>
       </header>
+      <div className={styles.createButton}>
+        <Link className="btn btn-primary" to="/createcards">
+          Create Study Set
+        </Link>
+      </div>
+      <br />
       <Row>
         {studySets &&
           studySets.filter(FILTER_MAP[filter]).map((set, index) => (
@@ -83,11 +87,6 @@ export default function Dashboard() {
             </Col>
           ))}
       </Row>
-      <div className={styles.createButton}>
-        <Link className="btn btn-primary" to="/createcards">
-          Create Study Set
-        </Link>
-      </div>
     </Container>
   )
 }
