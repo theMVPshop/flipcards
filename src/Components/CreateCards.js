@@ -7,6 +7,7 @@ import Button from "react-bootstrap/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
+import { getToken } from "../helpers";
 
 const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset";
 const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
@@ -44,6 +45,7 @@ const CreateCards = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(newSet),
     })
@@ -68,6 +70,7 @@ const CreateCards = () => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(field),
     })

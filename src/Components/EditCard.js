@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { getToken } from "../helpers";
 
 import styles from './EditCard.module.css';
 
@@ -49,7 +50,8 @@ export default function EditCard({
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
         }
       })
         .then(res => res.json())
@@ -91,7 +93,8 @@ export default function EditCard({
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(updatedStudySet)
     })
@@ -124,7 +127,8 @@ export default function EditCard({
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(flashcard)
     })
@@ -137,7 +141,8 @@ export default function EditCard({
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(flashcard)
     })
