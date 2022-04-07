@@ -83,9 +83,7 @@ const Router = () => {
             <Route
                 path="/flashcards-embed/:id"
                 element={
-                    <ProtectedRoute>
-                        <FlashcardsEmbed />
-                    </ProtectedRoute>
+                    <FlashcardsEmbed />
                 }
             />
         </Routes>
