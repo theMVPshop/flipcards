@@ -182,7 +182,7 @@ const CreateCards = () => {
                 value={course}
                 onChange={handleCourseInput}
                 disabled={inProgress}
-                variant="warning">
+                variant="light">
                 <Dropdown.Item onClick={() => setCourse("Medical")}>Medical</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCourse("Dental")}>Dental</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCourse("Coding")}>Coding</Dropdown.Item>
@@ -272,12 +272,12 @@ const CreateCards = () => {
               </Button>
             </Form.Group>
           )}
-          <Row className="align-items-center">
+          <Row className="finishedButtons">
             <Button className="createButton" type="submit">
-              Begin New Set
+              Save Set
             </Button>
-            <Button className="createButton" onClick={() => navigate("/dashboard")}>
-              Return To Dash
+            <Button className="returnButton" onClick={() => navigate("/dashboard")}>
+              Home
             </Button>
           </Row>
         </Form>
