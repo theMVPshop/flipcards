@@ -75,8 +75,11 @@ const CreateCards = () => {
     setLoading({ cards: true })
     setInProgress(true)
     try {
+      const config = {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      };
       const body = { set_name: title, course: course }
-      const { data } = await axios.post(STUDYSET_API, body)
+      const { data } = await axios.post(STUDYSET_API, body, config)
       setCurrentSetId(data.set_id)
       const newCard = {
         set_id: data.set_id,
@@ -100,8 +103,11 @@ const CreateCards = () => {
   async function addCard() {
     setLoading({ card: true })
     try {
+      const config = {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      };
       let addCardSQL, newCard, fetchedCards
-      addCardSQL = await axios.post(FLASHCARD_API, card)
+      addCardSQL = await axios.post(FLASHCARD_API, card, config)
 
       if (addCardSQL.status === 200) {
         newCard = {
@@ -129,7 +135,10 @@ const CreateCards = () => {
     if (!id) return
     setLoading({ deletingCard: true, clickedId: id })
     try {
-      let res = await axios.delete(`${FLASHCARD_API}/${id}`)
+      const config = {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      };
+      let res = await axios.delete(`${FLASHCARD_API}/${id}`, config)
       if (res.status === 200) {
         let updatedCards = cards.filter((card) => card.card_id !== id)
         setCards(updatedCards)
@@ -147,7 +156,10 @@ const CreateCards = () => {
   async function deleteSet() {
     setLoading({ deletingCards: true })
     try {
-      let res = await axios.delete(`${STUDYSET_API}/${currentSetId}`)
+      const config = {
+        headers: { Authorization: `Bearer ${getToken()}` }
+      };
+      let res = await axios.delete(`${STUDYSET_API}/${currentSetId}`, config)
       if (res.status === 200) {
         setCurrentSetId("")
         setCards([])

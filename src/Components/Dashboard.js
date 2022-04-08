@@ -2,13 +2,13 @@ import React from "react"
 import axios from "axios"
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
-// import data from '../data/db.json';
 import Row from "react-bootstrap/Row"
 import Col from "react-bootstrap/Col"
 import Form from "react-bootstrap/Form"
 import StudySet from "./StudySet"
 import Container from "react-bootstrap/Container"
 import styles from "./Dashboard.module.css"
+import { getToken } from "../helpers";
 
 const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset/all-sets-flashcards"
 
@@ -33,8 +33,11 @@ export default function Dashboard() {
   }, [])
 
   const handleDelete = async (id) => {
+    const config = {
+      headers: { Authorization: `Bearer ${getToken()}` }
+    };
     await axios
-      .delete(`https://flipcardzdb.herokuapp.com/cardset/${id}`)
+      .delete(`https://flipcardzdb.herokuapp.com/cardset/${id}`, config)
       .catch((e) => console.log("delete set error", e))
     let updatedCardSets = studySets.filter((set) => set.set_id !== id)
     // let updatedStudySets = { cardSets: updatedCardSets };
