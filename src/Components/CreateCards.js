@@ -11,7 +11,7 @@ import DropdownButton from "react-bootstrap/DropdownButton"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
-import { getToken } from "../helpers";
+import { getToken } from "../helpers"
 
 const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
 const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
@@ -273,7 +273,7 @@ const CreateCards = () => {
               </Button>
             </Form.Group>
           )}
-          <Row className="finishedButtons">
+          <Row className="align-items-center">
             <Button className="createButton" type="submit">
               Save Set
             </Button>

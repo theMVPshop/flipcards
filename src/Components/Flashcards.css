@@ -1,26 +1,26 @@
 .navbarHeader.hide {
-    display: none!important;
-  }
+  display: none !important;
+}
 
 .flashcards .navContainer {
-    width: 50%;
-    margin: auto;
-    margin-top: 1rem;
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
+  width: 50%;
+  margin: auto;
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
 }
 
 .flashcardsNavigation {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 75% !important;
-    margin: auto;
-    grid-column: 2/3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 75% !important;
+  margin: auto;
+  grid-column: 2/3;
 }
 
 .flashcardsNavigation .counter {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .flashcardsNavigation button,
@@ -28,46 +28,52 @@
 .flashcardsNavigation button:hover,
 .flashcardsNavigation button:focus,
 .flashcardsNavigation button:active:focus {
-    background-color: transparent;
-    border: none;
-    box-shadow: none;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .flashcardsNavigation button i {
-    font-size: 2rem;
-    color: #fff;
+  font-size: 2rem;
+  color: #fff;
 }
 
 .flashcardsNavigation button:hover i {
-    color: #ccc;
-    transition: all .2s ease-in-out;
+  color: #ccc;
+  transition: all 0.2s ease-in-out;
 }
 
 .flashcards .dropdown {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .flashcards .dropdown-toggle i {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .flashcards .dropdown-toggle,
 .flashcards .dropdown-toggle:hover,
 .flashcards .dropdown-toggle:active {
-    background-color: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .flashcards .dropdown-toggle::after {
-    content: none !important;
+  content: none !important;
 }
 
 .flashcards-embed .flashcard {
-    width: 100%;
+  width: 100%;
 }
 
 .flashcards-embed .navContainer {
-    display: block;
+  display: block;
+}
+
+.noCards {
+text-align: center;
+margin-top: 40vh;
+overflow: hidden;
 }
