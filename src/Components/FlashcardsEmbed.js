@@ -62,7 +62,7 @@ const FlashcardsEmbed = () => {
     setCurrentCardIdx(newIdx)
   }
 
-  if (cards.length === 0) return <h1>No Flash Cards for this Set</h1>
+  if (cards.length === 0) return <h1 className="noCards">No Flashcards for this Set</h1>
   return (
     <div className="flashcards flashcards-embed">
       {cards && cards.map((card, index) => <FlashCard key={index} card={card} />)}
