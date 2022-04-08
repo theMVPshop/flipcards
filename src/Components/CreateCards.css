@@ -25,9 +25,10 @@
   height: 50px;
   background-color: #552e5a !important;
   border: 1px white solid !important;
+  margin: 20px;
 }
 
-.align-items-center {
+.finishedButtons {
   justify-content: center;
 }
 
@@ -55,4 +56,17 @@
 
 .imageLink {
   width: 150px !important;
+}
+
+.float-end {
+  margin-right: 20px;
+  background-color: goldenrod !important;
+}
+
+.returnButton {
+  width: 150px !important;
+  height: 50px;
+  background-color: #552e5a !important;
+  border: 1px white solid !important;
+  margin: 20px;
 }

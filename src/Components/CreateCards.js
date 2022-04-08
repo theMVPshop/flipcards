@@ -11,6 +11,7 @@ import DropdownButton from "react-bootstrap/DropdownButton"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
+import { getToken } from "../helpers";
 
 const STUDYSET_API = "https://flipcardzdb.herokuapp.com/cardset"
 const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
@@ -182,7 +183,7 @@ const CreateCards = () => {
                 value={course}
                 onChange={handleCourseInput}
                 disabled={inProgress}
-                variant="warning">
+                variant="light">
                 <Dropdown.Item onClick={() => setCourse("Medical")}>Medical</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCourse("Dental")}>Dental</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCourse("Coding")}>Coding</Dropdown.Item>
@@ -272,12 +273,12 @@ const CreateCards = () => {
               </Button>
             </Form.Group>
           )}
-          <Row className="align-items-center">
+          <Row className="finishedButtons">
             <Button className="createButton" type="submit">
-              Begin New Set
+              Save Set
             </Button>
-            <Button className="createButton" onClick={() => navigate("/dashboard")}>
-              Return To Dash
+            <Button className="returnButton" onClick={() => navigate("/dashboard")}>
+              Home
             </Button>
           </Row>
         </Form>
