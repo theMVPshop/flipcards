@@ -1,48 +1,46 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React from "react"
+import { useState, useEffect } from "react"
+import cookie from "cookie"
 
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/esm/Container";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Modal from "react-bootstrap/Modal"
+import Button from "react-bootstrap/Button"
+import Container from "react-bootstrap/esm/Container"
+import Form from "react-bootstrap/Form"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
-import styles from "./EditCard.module.css";
+import styles from "./EditCard.module.css"
 
 export default function EditCard({
   // From Study Set
   studySetInfo,
   handleUpdateStudySets,
 }) {
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const [show, setShow] = useState(false)
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
-  const [cards, setCards] = useState([]);
-  const [title, setTitle] = useState("");
-  const [course, setCourse] = useState("");
-  const EDIT_CARDSET_API = `https://flipcardzdb.herokuapp.com/cardset/${studySetInfo.set_id}`;
-  const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card";
+  const [cards, setCards] = useState([])
+  const [title, setTitle] = useState("")
+  const [course, setCourse] = useState("")
+  const EDIT_CARDSET_API = `https://flipcardzdb.herokuapp.com/cardset/${studySetInfo.set_id}`
+  const FLASHCARD_API = "https://flipcardzdb.herokuapp.com/card"
 
   useEffect(() => {
-    setCards(studySetInfo.cards || {});
-    setTitle(studySetInfo.set_name || "");
-    setCourse(studySetInfo.course || "");
-  }, []);
+    setCards(studySetInfo.cards || {})
+    setTitle(studySetInfo.set_name || "")
+    setCourse(studySetInfo.course || "")
+  }, [])
 
   const handleChange = (e, index) => {
-    const newCards = [...cards];
-    newCards[index][e.target.name] = e.target.value;
-    setCards(newCards);
-  };
+    const newCards = [...cards]
+    newCards[index][e.target.name] = e.target.value
+    setCards(newCards)
+  }
 
   const addCard = (id) => {
-    setCards([
-      ...cards,
-      { card_id: "", term: "", definition: "", front_img: "" },
-    ]);
-  };
+    setCards([...cards, { card_id: "", term: "", definition: "", front_img: "" }])
+  }
 
   const handleDelete = (id, index) => {
     // Check to see if flashcard exists - if so delete existing card
@@ -56,25 +54,25 @@ export default function EditCard({
       })
         .then((res) => res.json())
         .then((data) => {
-          deleteFlashcardRow(index);
+          deleteFlashcardRow(index)
         })
-        .catch((error) => console.log(error));
+        .catch((error) => console.log(error))
     } else {
       // If flashcard is newly created delete row
-      deleteFlashcardRow(index);
+      deleteFlashcardRow(index)
     }
-  };
+  }
 
   const deleteFlashcardRow = (index) => {
-    console.log(index);
-    const rows = [...cards];
+    console.log(index)
+    const rows = [...cards]
     // const newRows = rows.filter(row => Number(row.card_id) !== Number(id))
-    rows.splice(index, 1);
-    setCards(rows);
-  };
+    rows.splice(index, 1)
+    setCards(rows)
+  }
 
   const handleEdit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     let newStudySet = {
       set_id: studySetInfo.set_id,
@@ -82,18 +80,20 @@ export default function EditCard({
       course: course,
       amount: cards.length,
       cards: cards,
-    };
+    }
 
     let updatedStudySet = {
       set_name: title,
       course: course,
-    };
-
+    }
+    
+    const token = cookie.parse(document.cookie).token
+    
     fetch(EDIT_CARDSET_API, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Authorization": "Bearer " + token,
       },
       body: JSON.stringify(updatedStudySet),
     })
@@ -102,56 +102,59 @@ export default function EditCard({
         // Loop over the flashcards
         cards.forEach((card) => {
           // Add setinfo to card object
-          card.set_id = studySetInfo.set_id;
-          card.set_name = title;
-          card.set_course = course;
+          card.set_id = studySetInfo.set_id
+          card.set_name = title
+          card.set_course = course
 
           // See if flashcard already exists - if so update it
           if (card.card_id !== "") {
-            editFlashcard(card);
+            editFlashcard(card)
           } else {
             // If flashcard is new create it
-            addFlashcard(card);
+            addFlashcard(card)
           }
-        });
+        })
         // If all flashcard edit/adds successful update dashboard state with newStudySet
-        handleUpdateStudySets(newStudySet);
-        handleClose();
+        handleUpdateStudySets(newStudySet)
+        handleClose()
       })
-      .catch((error) => console.log(error));
-  };
-
+      .catch((error) => console.log(error))
+  }
   const editFlashcard = (flashcard) => {
-    console.log(flashcard);
+    const token = cookie.parse(document.cookie).token
+    console.log(flashcard)
     fetch(`${FLASHCARD_API}/${flashcard.card_id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        'Authorization': 'Bearer ' + token,
+        // "Accept": "application/json",
       },
       body: JSON.stringify(flashcard),
     })
-      .then((res) => res.json())
-      .catch((error) => console.log(error));
-  };
-
+    .then((res) => res.json())
+    .catch((error) => console.log(error))
+  }
+  
   const addFlashcard = (flashcard) => {
+    const token = cookie.parse(document.cookie).token
+    console.log(flashcard)
     fetch(`${FLASHCARD_API}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Accept: "application/json",
+        "Authorization": "Bearer " + token,
       },
       body: JSON.stringify(flashcard),
     })
       .then((res) => res.json())
-      .catch((error) => console.log(error));
-  };
+      .catch((error) => console.log(error))
+  }
 
   const handleImage = (e) => {
-    e.preventDefault();
-    console.log('hover')
-  };
+    e.preventDefault()
+    console.log("hover")
+  }
 
   return (
     <div>
@@ -165,8 +168,7 @@ export default function EditCard({
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        className={styles.editCardModal}
-      >
+        className={styles.editCardModal}>
         <Modal.Header closeButton>
           <Modal.Title>{studySetInfo.title}</Modal.Title>
         </Modal.Header>
@@ -222,7 +224,7 @@ export default function EditCard({
                             value={cards[index].front_img}
                             onChange={(e) => handleChange(e, index)}
                             onMouseOver={(e) => {
-                              handleImage(e);
+                              handleImage(e)
                             }}
                           />
                         </Form.Group>
@@ -231,8 +233,7 @@ export default function EditCard({
                           <Button
                             className="deleteButton"
                             variant="secondary"
-                            onClick={() => handleDelete(card.card_id, index)}
-                          >
+                            onClick={() => handleDelete(card.card_id, index)}>
                             Delete
                           </Button>
                         </Form.Group>
@@ -250,11 +251,7 @@ export default function EditCard({
               <Row className="align-items-left"></Row>
 
               <Row className="align-items-center">
-                <Button
-                  className="createButton"
-                  type="submit"
-                  onClick={(e) => handleEdit(e)}
-                >
+                <Button className="createButton" type="submit" onClick={(e) => handleEdit(e)}>
                   Save
                 </Button>
               </Row>
@@ -268,5 +265,5 @@ export default function EditCard({
         </Modal.Footer>
       </Modal>
     </div>
-  );
+  )
 }
