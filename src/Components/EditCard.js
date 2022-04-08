@@ -1,12 +1,13 @@
 import React from "react";
 import { useState, useEffect } from "react";
 
-import Modal from "react-bootstrap/Modal";
-import Button from "react-bootstrap/Button";
-import Container from "react-bootstrap/esm/Container";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/esm/Container';
+import Form from 'react-bootstrap/Form';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { getToken } from "../helpers";
 
 import styles from "./EditCard.module.css";
 
@@ -50,9 +51,10 @@ export default function EditCard({
       fetch(`${FLASHCARD_API}/${id}`, {
         method: "DELETE",
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Authorization': `Bearer ${getToken()}`
+        }
       })
         .then((res) => res.json())
         .then((data) => {
@@ -92,8 +94,9 @@ export default function EditCard({
     fetch(EDIT_CARDSET_API, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(updatedStudySet),
     })
@@ -126,8 +129,9 @@ export default function EditCard({
     fetch(`${FLASHCARD_API}/${flashcard.card_id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(flashcard),
     })
@@ -139,8 +143,9 @@ export default function EditCard({
     fetch(`${FLASHCARD_API}`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': `Bearer ${getToken()}`
       },
       body: JSON.stringify(flashcard),
     })
