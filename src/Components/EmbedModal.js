@@ -1,25 +1,25 @@
-import React from "react";
-import { useState } from "react";
-import Modal from "react-bootstrap/Modal";
-import Dropdown from "react-bootstrap/Dropdown";
-import Button from "react-bootstrap/Button";
-import styles from "./EmbedModal.module.css";
-import { CopyToClipboard } from "react-copy-to-clipboard";
+import React from "react"
+import { useState } from "react"
+import Modal from "react-bootstrap/Modal"
+import Dropdown from "react-bootstrap/Dropdown"
+import Button from "react-bootstrap/Button"
+import styles from "./EmbedModal.module.css"
+import { CopyToClipboard } from "react-copy-to-clipboard"
 
 const EmbedModal = ({ studySetId }) => {
-  const [showModal, setShowModal] = useState(false);
-  const [text, setText] = useState("");
+  const [showModal, setShowModal] = useState(false)
+  const [text, setText] = useState("")
   const [embedCode, setEmbedCode] = useState(
-    `<iframe class="embed-code" id="studySetIframe" src="http://localhost:3000/flashcards-embed/${studySetId}" width="650" height="600" frameBorder="0" scrolling="no"></iframe>`
-  );
+    `<iframe class="embed-code" id="studySetIframe" src="https://flipcardz.herokuapp.com/flashcards-embed/${studySetId}" width="650" height="600" frameBorder="0" scrolling="no"></iframe>`
+  )
 
   const handleShow = () => {
-    setShowModal(true);
-  };
+    setShowModal(true)
+  }
 
   const handleClose = () => {
-    setShowModal(false);
-  };
+    setShowModal(false)
+  }
 
   return (
     <>
@@ -39,8 +39,7 @@ const EmbedModal = ({ studySetId }) => {
         onHide={handleClose}
         backdrop="static"
         keyboard={false}
-        className={styles.embedModal}
-      >
+        className={styles.embedModal}>
         <Modal.Header closeButton>
           <Modal.Title>Embed Code</Modal.Title>
         </Modal.Header>
@@ -50,7 +49,7 @@ const EmbedModal = ({ studySetId }) => {
                             class="embed-code"
                             id="studySetIframe"
                             allow="clipboard-read; clipboard-write"
-                            src="http://localhost:3000/flashcards-embed/${studySetId}"
+                            src="https://flipcardz.herokuapp.com/flashcards-embed/${studySetId}"
                             width="650"
                             height="600"
                             frameBorder="0"
@@ -65,8 +64,7 @@ const EmbedModal = ({ studySetId }) => {
               variant="secondary"
               className="button"
               data-clipboard-action="copy"
-              data-clipboard-target="#studySetIframe"
-            >
+              data-clipboard-target="#studySetIframe">
               Copy Link
             </Button>
           </CopyToClipboard>
@@ -76,7 +74,7 @@ const EmbedModal = ({ studySetId }) => {
         </Modal.Footer>
       </Modal>
     </>
-  );
-};
+  )
+}
 
-export default EmbedModal;
+export default EmbedModal
