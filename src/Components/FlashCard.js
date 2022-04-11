@@ -18,7 +18,11 @@ const FlashCard = ({ card }) => {
                 <div>
                   <p>Term: {card.term}</p>
                   <div style={{ width: "300px", height: "200px", overflow: "hidden" }}>
-                    <img style={{ width: "100%" }} src={card.front_img} alt={card.term} />
+                    <img
+                      style={{ width: "auto", height: "100%" }}
+                      src={card.front_img}
+                      alt={card.term}
+                    />
                   </div>
                   <p className="cardFooter">Click to reveal definition</p>
                 </div>
