@@ -116,6 +116,7 @@ const CreateCards = () => {
           set_course: course,
           term: "",
           definition: "",
+          front_img: "",
         }
         setCard(newCard)
         fetchedCards = await fetchCards()
@@ -255,8 +256,8 @@ const CreateCards = () => {
                           <Form.Control
                             disabled={!activeCard}
                             placeholder="Image Link"
-                            name="imageLink"
-                            defaultValue={card.back_img}
+                            name="front_img"
+                            value={cards[cardIdxById].front_img || card.front_img}
                             onChange={(e) => handleCardsInputs(e, c.card_id)}
                           />
                         </Form.Group>
