@@ -2,15 +2,16 @@ import React from "react"
 import { useState, useEffect } from "react"
 import cookie from "cookie"
 
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/esm/Container';
-import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import { getToken } from "../helpers";
+import Modal from "react-bootstrap/Modal"
+import Button from "react-bootstrap/Button"
+import Container from "react-bootstrap/esm/Container"
+import Form from "react-bootstrap/Form"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
+import { getToken } from "../helpers"
 
 import styles from "./EditCard.module.css"
+import EditCardImagePop from "./EditCardImagePop"
 
 export default function EditCard({
   // From Study Set
@@ -49,10 +50,10 @@ export default function EditCard({
       fetch(`${FLASHCARD_API}/${id}`, {
         method: "DELETE",
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Authorization': `Bearer ${getToken()}`
-        }
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: `Bearer ${getToken()}`,
+        },
       })
         .then((res) => res.json())
         .then((data) => {
@@ -88,15 +89,15 @@ export default function EditCard({
       set_name: title,
       course: course,
     }
-    
+
     const token = cookie.parse(document.cookie).token
-    
+
     fetch(EDIT_CARDSET_API, {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${getToken()}`
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(updatedStudySet),
     })
@@ -129,25 +130,25 @@ export default function EditCard({
     fetch(`${FLASHCARD_API}/${flashcard.card_id}`, {
       method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${getToken()}`
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(flashcard),
     })
-    .then((res) => res.json())
-    .catch((error) => console.log(error))
+      .then((res) => res.json())
+      .catch((error) => console.log(error))
   }
-  
+
   const addFlashcard = (flashcard) => {
     const token = cookie.parse(document.cookie).token
     console.log(flashcard)
     fetch(`${FLASHCARD_API}`, {
       method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${getToken()}`
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: `Bearer ${getToken()}`,
       },
       body: JSON.stringify(flashcard),
     })
@@ -222,14 +223,10 @@ export default function EditCard({
                           />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridImageUrl">
-                          <Form.Control
-                            placeholder="Image Url"
-                            name="front_img"
-                            value={cards[index].front_img}
-                            onChange={(e) => handleChange(e, index)}
-                            onMouseOver={(e) => {
-                              handleImage(e)
-                            }}
+                          <EditCardImagePop
+                            cards={cards}
+                            index={index}
+                            handleChange={handleChange}
                           />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridButtons">
