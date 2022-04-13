@@ -58,17 +58,17 @@ const Flashcards = () => {
 
   return (
     <Container className="flashcards">
-      {cards.length > -1 && cards.map((card) => <FlashCard key={card.card_id} card={card} />)}
+      {cards.length > -1 && cards.map((card) => <FlashCard key={card.card_id} card={card} isVisible={card.isVisible} />)}
       <div className="navContainer">
         <nav className="flashcardsNavigation">
           <Button onClick={() => changeCard("previous")} disabled={currentCardIdx === 0}>
-            <i class="bi bi-arrow-left-circle-fill"></i>
+            <i className="bi bi-arrow-left-circle-fill"></i>
           </Button>
           <p className="counter">
             {currentCardIdx + 1} / {cards.length}
           </p>
           <Button onClick={() => changeCard("next")} disabled={currentCardIdx === cards.length - 1}>
-            <i class="bi bi-arrow-right-circle-fill"></i>
+            <i className="bi bi-arrow-right-circle-fill"></i>
           </Button>
         </nav>
         <EmbedModal studySetId={id} />
