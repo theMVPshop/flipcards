@@ -65,7 +65,7 @@ const FlashcardsEmbed = () => {
     if (cards.length === 0) return <h1 className="noCards">No Flashcards for this Set</h1>
     return (
         <div className="flashcards flashcards-embed" style={{ padding: "3rem" }}>
-            {cards && cards.map((card, index) => <FlashCard key={index} card={card} />)}
+            {cards && cards.map((card, index) => <FlashCard key={index} card={card} isVisible={card.isVisible} />)}
             <div className="navContainer">
                 {console.log(cards)}
                 <nav className="flashcardsNavigation">
