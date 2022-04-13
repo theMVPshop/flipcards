@@ -1,12 +1,18 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { useState } from "react"
 
 import "./FlashCard.css"
 
-const FlashCard = ({ card }) => {
+const FlashCard = ({ card, isVisible }) => {
   const [flipped, setFlipped] = useState(false)
 
   const flipCard = () => setFlipped(!flipped)
+
+  useEffect(() => {
+    if (isVisible === false) {
+      setFlipped(false)
+    }
+  }, [isVisible])
 
   return (
     <>
