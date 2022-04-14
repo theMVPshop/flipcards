@@ -1,7 +1,8 @@
 import React from "react"
 import { useState, useEffect } from "react"
 import cookie from "cookie"
-
+import DropdownButton from "react-bootstrap/DropdownButton"
+import Dropdown from "react-bootstrap/Dropdown"
 import Modal from "react-bootstrap/Modal"
 import Button from "react-bootstrap/Button"
 import Container from "react-bootstrap/esm/Container"
@@ -190,12 +191,17 @@ export default function EditCard({
                   />
                 </Form.Group>
                 <Form.Group as={Col} controlId="formGridSchool">
-                  <Form.Control
-                    placeholder="Course"
-                    name="course"
-                    value={course}
-                    onChange={(e) => setCourse(e.target.value)}
-                  />
+                  <DropdownButton id="dropdown-basic-button" title={course}>
+                    <Dropdown.Item value="Dental" onClick={() => setCourse("Dental")}>
+                      Dental
+                    </Dropdown.Item>
+                    <Dropdown.Item value="Medical" onClick={() => setCourse("Medical")}>
+                      Medical
+                    </Dropdown.Item>
+                    <Dropdown.Item value="Coding" onClick={() => setCourse("Coding")}>
+                      Coding
+                    </Dropdown.Item>
+                  </DropdownButton>
                 </Form.Group>
               </Row>
               <br />
