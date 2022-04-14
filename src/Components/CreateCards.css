@@ -3,6 +3,11 @@
   margin-top: 10px;
 }
 
+.dropdown-toggle.btn {
+  width: 100%;
+  text-align: start;
+}
+
 .imageButton {
   margin-right: 40px;
   background-color: #22559c !important;
@@ -40,6 +45,7 @@
   margin-left: 20px;
   margin-right: 20px;
 }
+
 .createCardSet {
   display: grid;
   margin-bottom: 10px;
@@ -50,13 +56,14 @@
   font-style: italic;
   color: white;
 }
+
 /* .createCardSet {
     color: white;
 }  */
 
-.imageLink {
+/* .imageLink {
   width: 150px !important;
-}
+} */
 
 .float-end {
   margin-right: 20px;
@@ -69,4 +76,10 @@
   background-color: #552e5a !important;
   border: 1px white solid !important;
   margin: 20px;
+}
+
+.nav-btns {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
 }
