@@ -179,17 +179,16 @@ const CreateCards = () => {
 
   return (
     <div className="card">
-      <header className="createCardSet">
+      <header className="createCardSet px-3">
         {title || course ? `${course}: ${title}` : "Create A New Study Set"}
       </header>
       <br />
       <Container>
         <Form onSubmit={handleSubmit}>
-          <Row className="mb-3 d-flex justify-content-center">
-            <Form.Group as={Col} controlId="formGridCourse">
+          <Row className="d-flex justify-content-center">
+            <Col md={3} className={'my-3'} controlId="formGridCourse">
               <DropdownButton
                 id="dropdown-basic-button"
-                className="float-end"
                 title={course || "Select Course"}
                 ref={courseInputRef}
                 placeholder="Course"
@@ -201,8 +200,8 @@ const CreateCards = () => {
                 <Dropdown.Item onClick={() => setCourse("Dental")}>Dental</Dropdown.Item>
                 <Dropdown.Item onClick={() => setCourse("Coding")}>Coding</Dropdown.Item>
               </DropdownButton>
-            </Form.Group>
-            <Form.Group as={Col} controlId="formGridTitle">
+            </Col>
+            <Col md={3} className={'my-3'} controlId="formGridTitle">
               <Form.Control
                 ref={set_nameInputRef}
                 placeholder="Title"
@@ -210,8 +209,8 @@ const CreateCards = () => {
                 onChange={handleTitleInput}
                 disabled={inProgress}
               />
-            </Form.Group>
-            <Form.Group as={Col} controlId="createNewSet">
+            </Col>
+            <Col md={'auto'} className={'my-3'} controlId="createNewSet">
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
                   {loading.cards || loading.deletingCards ? loadingSpinner : "Delete Set"}
@@ -221,79 +220,77 @@ const CreateCards = () => {
                   + Create New Set
                 </Button>
               )}
-            </Form.Group>
+            </Col>
           </Row>
-          <Row>
-            <Form.Group className="mb-3" controlId="formCard">
-              {cards.length > 0 &&
-                cards.map((c, index) => {
-                  let cardIdxById = cards.findIndex((x) => x.card_id === c.card_id)
-                  const activeCard = cards[cardIdxById] === cards[cards.length - 1]
-                  return (
-                    <ul key={c.card_id}>
-                      <Row className="mt-5">
-                        {cards.length > 0 && <Form.Label>{index + 1}</Form.Label>}
-                        <Form.Group as={Col} controlId="formGridTerm">
-                          <Form.Control
-                            ref={activeCard ? newCardRef : null}
-                            disabled={!activeCard}
-                            placeholder="Term"
-                            name="term"
-                            value={cards[cardIdxById].term ?? card.term}
-                            onChange={(e) => handleCardsInputs(e, c.card_id)}
-                          />
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="formGridDefinition">
-                          <Form.Control
-                            disabled={!activeCard}
-                            placeholder="Definition"
-                            name="definition"
-                            value={cards[cardIdxById].definition ?? card.definition}
-                            onChange={(e) => handleCardsInputs(e, c.card_id)}
-                          />
-                        </Form.Group>
-                        <Form.Group as={Col} className="imageLink" controlId="formGridImage">
-                          <Form.Control
-                            disabled={!activeCard}
-                            placeholder="Image Link"
-                            name="front_img"
-                            value={cards[cardIdxById].front_img || card.front_img}
-                            onChange={(e) => handleCardsInputs(e, c.card_id)}
-                          />
-                        </Form.Group>
 
-                        <Form.Group as={Col} controlId="formGridButtons">
-                          <Button
-                            className="deleteButton"
-                            variant="secondary"
-                            onClick={() => deleteCard(c.card_id)}>
-                            {loading.deletingCard && loading.clickedId === c.card_id
-                              ? loadingSpinner
-                              : "Delete"}
-                          </Button>
-                        </Form.Group>
-                      </Row>
-                    </ul>
-                  )
-                })}
-            </Form.Group>
-          </Row>
-          {cards.length > 0 && (
-            <Form.Group as={Col} controlId="addCard">
-              <Button className="addCard" onClick={() => addCard()}>
-                {" "}
-                {loading.card ? loadingSpinner : "+ Add Card"}
-              </Button>
-            </Form.Group>
-          )}
-          <Row className="align-items-center">
+          {cards.length > 0 &&
+            cards.map((c, index) => {
+              let cardIdxById = cards.findIndex((x) => x.card_id === c.card_id)
+              const activeCard = cards[cardIdxById] === cards[cards.length - 1]
+              return (
+                <Row key={c.card_id}>
+                  <Col md={'auto'} className={'my-3'}>
+                    <Form.Label>{index + 1}</Form.Label>
+                  </Col>
+                  <Col md={3} className={'my-3'} controlId="formGridTerm">
+                    <Form.Control
+                      ref={activeCard ? newCardRef : null}
+                      disabled={!activeCard}
+                      placeholder="Term"
+                      name="term"
+                      value={cards[cardIdxById].term ?? card.term}
+                      onChange={(e) => handleCardsInputs(e, c.card_id)}
+                    />
+                  </Col>
+                  <Col md={3} className={'my-3'} controlId="formGridDefinition">
+                    <Form.Control
+                      disabled={!activeCard}
+                      placeholder="Definition"
+                      name="definition"
+                      value={cards[cardIdxById].definition ?? card.definition}
+                      onChange={(e) => handleCardsInputs(e, c.card_id)}
+                    />
+                  </Col>
+                  <Col md={3} className="imageLink my-3" controlId="formGridImage">
+                    <Form.Control
+                      disabled={!activeCard}
+                      placeholder="Image Link"
+                      name="front_img"
+                      value={cards[cardIdxById].front_img || card.front_img}
+                      onChange={(e) => handleCardsInputs(e, c.card_id)}
+                    />
+                  </Col>
+
+                  <Col md={'auto'} className={'my-3'} controlId="formGridButtons">
+                    <Button
+                      className="deleteButton"
+                      variant="secondary"
+                      onClick={() => deleteCard(c.card_id)}>
+                      {loading.deletingCard && loading.clickedId === c.card_id
+                        ? loadingSpinner
+                        : "Delete"}
+                    </Button>
+                  </Col>
+                  {index === cards.length - 1 && (
+                    <Col md={'auto'} className={'my-3'} controlId="addCard">
+                      <Button className="addCard" onClick={() => addCard()}>
+                        {" "}
+                        {loading.card ? loadingSpinner : "Save Card"}
+                      </Button>
+                    </Col>
+                  )}
+                </Row>
+              )
+            })}
+
+          <div className="nav-btns mt-3">
             <Button className="createButton" type="submit">
-              Save Set
+              + New Set
             </Button>
             <Button className="returnButton" onClick={() => navigate("/dashboard")}>
               Home
             </Button>
-          </Row>
+          </div>
         </Form>
       </Container>
     </div>
