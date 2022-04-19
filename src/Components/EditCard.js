@@ -157,11 +157,6 @@ export default function EditCard({
       .catch((error) => console.log(error))
   }
 
-  const handleImage = (e) => {
-    e.preventDefault()
-    console.log("hover")
-  }
-
   return (
     <div>
       <Button className="btn-edit" onClick={handleShow}>

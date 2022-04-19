@@ -11,14 +11,14 @@ export default function EditCardImagePop(props) {
     <Form.Group as={Col} controlId="formGridImageUrl">
       <Form.Control
         placeholder="Image Url"
-        name="front_img"
-        value={cards[index].front_img}
+        name="back_img"
+        value={cards[index].back_img}
         onChange={(e) => handleChange(e, index)}
         onMouseOver={() => setImagePop(!imagePop)}
         onMouseOut={() => setImagePop(!imagePop)}
       />
       <>
-        {imagePop ? (
+        {imagePop && cards[index].back_img && cards[index].back_img.startsWith("http") ? (
           <div
             key={index}
             style={{
@@ -28,7 +28,11 @@ export default function EditCardImagePop(props) {
               overflow: "hidden",
               borderRadius: "10px",
             }}>
-            <img style={{ width: "auto", height: "150px" }} src={cards[index].front_img} alt="" />
+            <img
+              style={{ width: "auto", height: "150px" }}
+              src={cards[index].back_img}
+              alt={cards[index].term}
+            />
           </div>
         ) : (
           <div></div>
