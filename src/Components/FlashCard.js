@@ -1,5 +1,8 @@
 import React, { useEffect } from "react"
 import { useState } from "react"
+import Container from "react-bootstrap/Container"
+import Row from "react-bootstrap/Row"
+import Col from "react-bootstrap/Col"
 
 import "./FlashCard.css"
 
@@ -23,13 +26,6 @@ const FlashCard = ({ card, isVisible }) => {
               {card.front_img && card.front_img.startsWith("http") ? (
                 <div>
                   <p>Term: {card.term}</p>
-                  <div style={{ width: "300px", height: "200px", overflow: "hidden" }}>
-                    <img
-                      style={{ width: "auto", height: "100%" }}
-                      src={card.front_img}
-                      alt={card.term}
-                    />
-                  </div>
                   <p className="cardFooter">Click to reveal definition</p>
                 </div>
               ) : (
@@ -40,7 +36,21 @@ const FlashCard = ({ card, isVisible }) => {
               )}
             </div>
             <div className="flashcardBack">
-              <p>Definition: {card.definition}</p>
+              <Container>
+                <Row className="align-items-center">
+                  <Col md={6}>
+                    <p>Definition: {card.definition}</p>
+                  </Col>
+
+                  <Col md={6}>
+                    <img
+                      style={{ maxWidth: "100%", height: "auto", maxHeight: "300px" }}
+                      src={card.back_img}
+                      alt={card.term}
+                    />
+                  </Col>
+                </Row>
+              </Container>
             </div>
           </div>
         </button>

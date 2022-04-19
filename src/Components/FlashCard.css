@@ -1,24 +1,24 @@
 .flashcard {
-    background-color: transparent;
-    border: none;
-    padding: 0;
-    width: 50%;
-    height: 350px;
-    margin: auto;
-    margin-top: 3rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    perspective: 1000px;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: 100%;
+  height: 350px;
+  margin: auto;
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  perspective: 1000px;
 }
 
 .flashcard,
 .flashcardInner,
 .flashcardFront,
 .flashcardBack {
-    border-radius: 15px;
+  border-radius: 15px;
 }
 
 .flashcardInner {
@@ -34,14 +34,15 @@
   transform: rotateX(-180deg);
 }
 
-.flashcardFront, 
+.flashcardFront,
 .flashcardBack {
   background-color: #fff;
   font-size: 1.5rem;
   position: absolute;
   width: 100%;
   height: 100%;
-  -webkit-backface-visibility: hidden; /* Safari */
+  -webkit-backface-visibility: hidden;
+  /* Safari */
   backface-visibility: hidden;
   display: flex;
   justify-content: center;
@@ -66,4 +67,10 @@
 
 .flashcardBack {
   transform: rotateX(180deg);
+}
+
+@media (min-width: 768px) {
+  .flashcard {
+    width: 50%;
+  }
 }
