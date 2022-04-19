@@ -8,7 +8,7 @@ import Button from "react-bootstrap/Button"
 import Spinner from "react-bootstrap/Spinner"
 import Dropdown from "react-bootstrap/Dropdown"
 import DropdownButton from "react-bootstrap/DropdownButton"
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import Container from "react-bootstrap/esm/Container"
 import { getToken } from "../helpers"
@@ -34,9 +34,9 @@ const CreateCards = () => {
   const [course, setCourse] = useState()
   const [card, setCard] = useState({})
   const [cards, setCards] = useState([])
-  let newCardRef = React.useRef()
-  let set_nameInputRef = React.useRef()
-  let courseInputRef = React.useRef()
+  let newCardRef = useRef()
+  let set_nameInputRef = useRef()
+  let courseInputRef = useRef()
   const loadingSpinner = <Spinner animation="border" variant="success" size="sm" />
 
   async function fetchCards() {
@@ -47,7 +47,7 @@ const CreateCards = () => {
       console.log("fetch cards error", e)
     }
   }
-  React.useEffect(() => courseInputRef.current.focus(), [])
+  useEffect(() => courseInputRef.current.focus(), [])
   const handleTitleInput = (e) => setTitle(e.target.value)
   const handleCourseInput = (e) => setCourse(e.target.value)
   const handleCardsInputs = (e, cardId) => {
@@ -76,8 +76,8 @@ const CreateCards = () => {
     setInProgress(true)
     try {
       const config = {
-        headers: { Authorization: `Bearer ${getToken()}` }
-      };
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
       const body = { set_name: title, course: course }
       const { data } = await axios.post(STUDYSET_API, body, config)
       setCurrentSetId(data.set_id)
@@ -104,8 +104,8 @@ const CreateCards = () => {
     setLoading({ card: true })
     try {
       const config = {
-        headers: { Authorization: `Bearer ${getToken()}` }
-      };
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
       let addCardSQL, newCard, fetchedCards
       addCardSQL = await axios.post(FLASHCARD_API, card, config)
 
@@ -116,7 +116,7 @@ const CreateCards = () => {
           set_course: course,
           term: "",
           definition: "",
-          front_img: "",
+          back_img: "",
         }
         setCard(newCard)
         fetchedCards = await fetchCards()
@@ -137,8 +137,8 @@ const CreateCards = () => {
     setLoading({ deletingCard: true, clickedId: id })
     try {
       const config = {
-        headers: { Authorization: `Bearer ${getToken()}` }
-      };
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
       let res = await axios.delete(`${FLASHCARD_API}/${id}`, config)
       if (res.status === 200) {
         let updatedCards = cards.filter((card) => card.card_id !== id)
@@ -158,8 +158,8 @@ const CreateCards = () => {
     setLoading({ deletingCards: true })
     try {
       const config = {
-        headers: { Authorization: `Bearer ${getToken()}` }
-      };
+        headers: { Authorization: `Bearer ${getToken()}` },
+      }
       let res = await axios.delete(`${STUDYSET_API}/${currentSetId}`, config)
       if (res.status === 200) {
         setCurrentSetId("")
@@ -186,7 +186,7 @@ const CreateCards = () => {
       <Container>
         <Form onSubmit={handleSubmit}>
           <Row className="d-flex justify-content-center">
-            <Col md={3} className={'my-3'} controlId="formGridCourse">
+            <Col md={3} className={"my-3"} controlId="formGridCourse">
               <DropdownButton
                 id="dropdown-basic-button"
                 title={course || "Select Course"}
@@ -201,7 +201,7 @@ const CreateCards = () => {
                 <Dropdown.Item onClick={() => setCourse("Coding")}>Coding</Dropdown.Item>
               </DropdownButton>
             </Col>
-            <Col md={3} className={'my-3'} controlId="formGridTitle">
+            <Col md={3} className={"my-3"} controlId="formGridTitle">
               <Form.Control
                 ref={set_nameInputRef}
                 placeholder="Title"
@@ -210,7 +210,7 @@ const CreateCards = () => {
                 disabled={inProgress}
               />
             </Col>
-            <Col md={'auto'} className={'my-3'} controlId="createNewSet">
+            <Col md={"auto"} className={"my-3"} controlId="createNewSet">
               {inProgress ? (
                 <Button className="deleteButton" variant="secondary" onClick={() => deleteSet()}>
                   {loading.cards || loading.deletingCards ? loadingSpinner : "Delete Set"}
@@ -229,10 +229,10 @@ const CreateCards = () => {
               const activeCard = cards[cardIdxById] === cards[cards.length - 1]
               return (
                 <Row key={c.card_id}>
-                  <Col md={'auto'} className={'my-3'}>
+                  <Col md={"auto"} className={"my-3"}>
                     <Form.Label>{index + 1}</Form.Label>
                   </Col>
-                  <Col md={3} className={'my-3'} controlId="formGridTerm">
+                  <Col md={3} className={"my-3"} controlId="formGridTerm">
                     <Form.Control
                       ref={activeCard ? newCardRef : null}
                       disabled={!activeCard}
@@ -242,7 +242,7 @@ const CreateCards = () => {
                       onChange={(e) => handleCardsInputs(e, c.card_id)}
                     />
                   </Col>
-                  <Col md={3} className={'my-3'} controlId="formGridDefinition">
+                  <Col md={3} className={"my-3"} controlId="formGridDefinition">
                     <Form.Control
                       disabled={!activeCard}
                       placeholder="Definition"
@@ -255,13 +255,13 @@ const CreateCards = () => {
                     <Form.Control
                       disabled={!activeCard}
                       placeholder="Image Link"
-                      name="front_img"
-                      value={cards[cardIdxById].front_img || card.front_img}
+                      name="back_img"
+                      value={cards[cardIdxById].back_img || card.back_img}
                       onChange={(e) => handleCardsInputs(e, c.card_id)}
                     />
                   </Col>
 
-                  <Col md={'auto'} className={'my-3'} controlId="formGridButtons">
+                  <Col md={"auto"} className={"my-3"} controlId="formGridButtons">
                     <Button
                       className="deleteButton"
                       variant="secondary"
@@ -272,7 +272,7 @@ const CreateCards = () => {
                     </Button>
                   </Col>
                   {index === cards.length - 1 && (
-                    <Col md={'auto'} className={'my-3'} controlId="addCard">
+                    <Col md={"auto"} className={"my-3"} controlId="addCard">
                       <Button className="addCard" onClick={() => addCard()}>
                         {" "}
                         {loading.card ? loadingSpinner : "Save Card"}
